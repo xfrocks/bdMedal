@@ -1,3 +1,4 @@
 .DS_Store
 *.devhelper
 library/bdMedal/DevHelper/Generated
+library/bdMedal/FileSums.php
