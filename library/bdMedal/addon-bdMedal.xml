@@ -733,9 +733,9 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <template title="bdmedal_member_view_tabs_heading" version_id="16" version_string="1.3.7"><![CDATA[<xen:if is="{$user.xf_bdmedal_awarded_cached} AND {xen:property bdMedal_showTab}">
 <li><a href="{$requestPaths.requestUri}#medals">{xen:phrase bdmedal_awarded_medals}</a></li>
 </xen:if>]]></template>
-    <template title="bdmedal_message_medals" version_id="17" version_string="1.4"><![CDATA[<xen:if is="is_array({$user.xf_bdmedal_awarded_cached})">
+    <template title="bdmedal_message_medals" version_id="20" version_string="1.4.3"><![CDATA[<xen:if is="is_array({$user.xf_bdmedal_awarded_cached})">
 	<xen:foreach loop="$user.xf_bdmedal_awarded_cached" i="$i" value="$medal">
-		<xen:if is="{xen:property bdMedal_messageMax} == 0 OR {xen:property bdMedal_messageMax} > {$i}">
+		<xen:if is="{xen:property bdMedal_messageMax} == 0 OR {xen:property bdMedal_messageMax} >= {$i}">
 			<a href="{xen:link 'members/medals', {$user}}"
 				class="OverlayTrigger Tooltip"
 				title="<xen:if is="{$medal.hackableCustomTitle}"><xen:else />{$medal.name}<xen:if is="{$medal.award_date} AND {xen:property bdMedal_messageShowDate}">. {xen:phrase awarded}: {xen:datetime {$medal.award_date}}</xen:if></xen:if>"
