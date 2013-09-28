@@ -5,7 +5,7 @@
 		__construct: function($li) {
 			this.$li = $li;
 			this.$a = $li.find('a');
-			this.$hidden = $($li.data('hiddenSelector'));
+			this.$hidden = $($li.data('selector'));
 			
 			this.$li.show();
 			this.$hidden.hide();

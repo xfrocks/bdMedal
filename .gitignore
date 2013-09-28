@@ -2,3 +2,4 @@
 *.devhelper
 library/bdMedal/DevHelper/Generated
 library/bdMedal/FileSums.php
+js/bdMedal/frontend.js

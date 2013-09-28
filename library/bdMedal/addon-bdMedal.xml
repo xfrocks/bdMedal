@@ -614,7 +614,7 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 	<div class="section">{xen:phrase bdmedal_no_medals_have_been_created_yet}</div>
 </xen:if>]]></template>
     <template title="bdmedal_help_sidebar_links" version_id="14" version_string="1.3.5"><![CDATA[<li><a href="{xen:link help/medals}" class="{xen:if "{$selected} == 'bdmedal_medals'", 'secondaryContent', 'primaryContent'}">{xen:phrase bdmedal_medals}</a></li>]]></template>
-    <template title="bdmedal_medal" version_id="15" version_string="1.3.6"><![CDATA[<xen:require js="js/bdMedal/frontend.js" />
+    <template title="bdmedal_medal" version_id="21" version_string="1.4.3b"><![CDATA[<xen:require js="js/bdMedal/frontend.js" />
 <xen:require css="bdmedal.css" />
 
 <div class="Medal" id="medal-{$medal.medal_id}">
@@ -640,7 +640,7 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 						</xen:foreach>
 						<xen:if is="{xen:count {$awardedsGrouped.{$medal.medal_id}.hidden}} > 0">
 							<xen:comment>this value is always larger than 1, we pre-processed in the view</xen:comment>
-							<li class="bdMedal_ShowHiddenTrigger" data-hiddenSelector=".bdMedal_Hidden-{$medal.medal_id}" style="display: none">
+							<li class="bdMedal_ShowHiddenTrigger" data-selector=".bdMedal_Hidden-{$medal.medal_id}" style="display: none">
 								<a href="{xen:link 'help/medals', '', 'show=all'}">
 									{xen:phrase bdmedal_x_others, 'count={xen:number {xen:count {$awardedsGrouped.{$medal.medal_id}.hidden}}}'}...
 								</a>
