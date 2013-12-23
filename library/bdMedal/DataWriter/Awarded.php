@@ -21,7 +21,16 @@ class bdMedal_DataWriter_Awarded extends XenForo_DataWriter {
 		$visitor = XenForo_Visitor::getInstance();
 		
 		if ($visitor->get('user_id') != $this->get('user_id')) {
-			XenForo_Model_Alert::alert($this->get('user_id'), $visitor->get('user_id'), $visitor->get('username'), 'medal', $this->get('medal_id'), 'award');
+			$userId = $visitor->get('user_id');
+			$username = $visitor->get('username');
+
+			if ($userId == 0)
+			{
+				$userId = $this->get('user_id');
+				$username = $this->get('username');
+			}
+
+			XenForo_Model_Alert::alert($this->get('user_id'), $userId, $username, 'medal', $this->get('medal_id'), 'award');
 		}
 	}
 	

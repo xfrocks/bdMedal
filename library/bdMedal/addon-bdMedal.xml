@@ -451,7 +451,7 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <phrase title="bdmedal_x_have_been_awarded_medal_y" version_id="9" version_string="1.3"><![CDATA[{name} have been awarded with the medal {medal}.]]></phrase>
     <phrase title="bdmedal_x_others" version_id="8" version_string="1.2.1"><![CDATA[{count} others]]></phrase>
     <phrase title="bdmedal_x_was_awarded_y_medals" version_id="8" version_string="1.2.1"><![CDATA[{name} was awarded {count} medals.]]></phrase>
-    <phrase title="bdmedal_you_have_been_awarded_medal_x" version_id="22" version_string="1.4.3c"><![CDATA[You have been awarded a medal: {medal}]]></phrase>
+    <phrase title="bdmedal_you_have_been_awarded_medal_x" version_id="22" version_string="1.4.3c"><![CDATA[<strong class="subject">You</strong> have been awarded a medal: {medal}]]></phrase>
     <phrase title="option_bdMedal_awardedUsersMax" version_id="8" version_string="1.2.1"><![CDATA[Maximum Awarded Users]]></phrase>
     <phrase title="option_bdMedal_awardedUsersMax_explain" version_id="8" version_string="1.2.1"><![CDATA[If this option is set (larger than 0), the list of awarded users in the Help page will be limit to a maximum of this value.]]></phrase>
     <phrase title="option_bdMedal_imageSizeM" version_id="8" version_string="1.2.1"><![CDATA[Image Medium]]></phrase>
@@ -584,12 +584,12 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 			margin-right: 4px;
 			margin-top: 4px;
 		}]]></template>
-    <template title="bdmedal_alert_medal_award" version_id="22" version_string="1.4.3c"><![CDATA[<xen:if is="{$user.user_id} > 0">
+    <template title="bdmedal_alert_medal_award" version_id="22" version_string="1.4.3c"><![CDATA[<xen:if is="{$user.user_id} > 0 AND {$user.user_id} != {$visitor.user_id}">
 {xen:phrase bdmedal_x_awarded_medal_y,
 	'name={xen:helper username, $user, 'subject'}',
 	'medal=<a href="{xen:link 'members/medals', $visitor}" class="PopupItemLink">{$content.name}</a>'}
 <xen:else />
-{xen:phrase bdmedal_you_been_awarded_medal_x,
+{xen:phrase bdmedal_you_have_been_awarded_medal_x,
 	'medal=<a href="{xen:link 'members/medals', $visitor}" class="PopupItemLink">{$content.name}</a>'}
 </xen:if>]]></template>
     <template title="bdmedal_help_medals" version_id="0" version_string=""><![CDATA[<xen:title>{xen:phrase bdmedal_medals}</xen:title>
