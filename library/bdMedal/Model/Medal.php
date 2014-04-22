@@ -1,26 +1,32 @@
 <?php
-class bdMedal_Model_Medal extends XenForo_Model {
+
+class bdMedal_Model_Medal extends XenForo_Model
+{
 	const FETCH_CATEGORY = 0x01;
 	const FETCH_IMAGES = 0x02;
-	
-	public function getList(array $conditions = array(), array $fetchOptions = array()) {
+
+	public function getList(array $conditions = array(), array $fetchOptions = array())
+	{
 		$data = $this->getAllMedal($conditions, $fetchOptions);
 		$list = array();
-		
-		foreach ($data as $id => $row) {
+
+		foreach ($data as $id => $row)
+		{
 			$list[$id] = $row['name'];
 		}
-		
+
 		return $list;
 	}
 
-	public function getMedalById($id, array $fetchOptions = array()) {
-		$data = $this->getAllMedal(array ('medal_id' => $id), $fetchOptions);
-		
+	public function getMedalById($id, array $fetchOptions = array())
+	{
+		$data = $this->getAllMedal(array('medal_id' => $id), $fetchOptions);
+
 		return reset($data);
 	}
-	
-	public function getAllMedal(array $conditions = array(), array $fetchOptions = array()) {
+
+	public function getAllMedal(array $conditions = array(), array $fetchOptions = array())
+	{
 		$whereConditions = $this->prepareMedalConditions($conditions, $fetchOptions);
 
 		$orderClause = $this->prepareMedalOrderOptions($fetchOptions);
@@ -34,26 +40,31 @@ class bdMedal_Model_Medal extends XenForo_Model {
 					$joinOptions[joinTables]
 				WHERE $whereConditions
 					$orderClause
-			", $limitOptions['limit'], $limitOptions['offset']
-		), 'medal_id');
-		
-		foreach ($medals as &$medal) {
-			if (!empty($fetchOptions['join'])) {
-				if ($fetchOptions['join'] & self::FETCH_IMAGES) {
+			", $limitOptions['limit'], $limitOptions['offset']), 'medal_id');
+
+		foreach ($medals as &$medal)
+		{
+			if (!empty($fetchOptions['join']))
+			{
+				if ($fetchOptions['join'] & self::FETCH_IMAGES)
+				{
 					$medal['images'] = array();
-					if (!empty($medal['image_date'])) {
-						foreach (array_keys(bdMedal_DataWriter_Medal::getImageSizes()) as $size) {
+					if (!empty($medal['image_date']))
+					{
+						foreach (array_keys(bdMedal_DataWriter_Medal::getImageSizes()) as $size)
+						{
 							$medal['images'][$size] = self::getImageUrl($medal, $size);
 						}
 					}
 				}
 			}
 		}
-		
+
 		return $medals;
 	}
-		
-	public function countAllMedal(array $conditions = array(), array $fetchOptions = array()) {
+
+	public function countAllMedal(array $conditions = array(), array $fetchOptions = array())
+	{
 		$whereConditions = $this->prepareMedalConditions($conditions, $fetchOptions);
 
 		$orderClause = $this->prepareMedalOrderOptions($fetchOptions);
@@ -67,30 +78,39 @@ class bdMedal_Model_Medal extends XenForo_Model {
 			WHERE $whereConditions
 		");
 	}
-	
-	public function prepareMedalConditions(array $conditions, array &$fetchOptions) {
+
+	public function prepareMedalConditions(array $conditions, array &$fetchOptions)
+	{
 		$sqlConditions = array();
 		$db = $this->_getDb();
-		
-		foreach (array('0' => 'medal_id', '1' => 'category_id', '2' => 'display_order', '3' => 'user_count', '4' => 'last_award_date', '5' => 'last_award_user_id') as $intField) {
-			if (!isset($conditions[$intField])) continue;
-			
-			if (is_array($conditions[$intField])) {
+
+		foreach (array('0' => 'medal_id', '1' => 'category_id', '2' => 'display_order', '3' => 'user_count', '4' => 'last_award_date', '5' => 'last_award_user_id') as $intField)
+		{
+			if (!isset($conditions[$intField]))
+				continue;
+
+			if (is_array($conditions[$intField]))
+			{
 				$sqlConditions[] = "medal.$intField IN (" . $db->quote($conditions[$intField]) . ")";
-			} else {
+			}
+			else
+			{
 				$sqlConditions[] = "medal.$intField = " . $db->quote($conditions[$intField]);
 			}
 		}
-		
+
 		return $this->getConditionsForClause($sqlConditions);
 	}
-	
-	public function prepareMedalFetchOptions(array $fetchOptions) {
+
+	public function prepareMedalFetchOptions(array $fetchOptions)
+	{
 		$selectFields = '';
 		$joinTables = '';
 
-		if (!empty($fetchOptions['join'])) {
-			if ($fetchOptions['join'] & self::FETCH_CATEGORY) {
+		if (!empty($fetchOptions['join']))
+		{
+			if ($fetchOptions['join'] & self::FETCH_CATEGORY)
+			{
 				$selectFields .= '
 					, category.name AS category_name, category.description AS category_description
 				';
@@ -103,72 +123,92 @@ class bdMedal_Model_Medal extends XenForo_Model {
 
 		return array(
 			'selectFields' => $selectFields,
-			'joinTables'   => $joinTables
+			'joinTables' => $joinTables
 		);
 	}
-	
-	public function prepareMedalOrderOptions(array &$fetchOptions) {
-		$choices = array(
-			'category' => 'category.display_order',
-		);
+
+	public function prepareMedalOrderOptions(array &$fetchOptions)
+	{
+		$choices = array('category' => 'category.display_order', );
 		$orderSql = $this->getOrderByClause($choices, $fetchOptions);
-		
-		if (!empty($fetchOptions['order']) AND $fetchOptions['order'] == 'category') {
-			if (empty($fetchOptions['join'])) $fetchOptions['join'] = 0;
-			
+
+		if (!empty($fetchOptions['order']) AND $fetchOptions['order'] == 'category')
+		{
+			if (empty($fetchOptions['join']))
+				$fetchOptions['join'] = 0;
+
 			$fetchOptions['join'] |= self::FETCH_CATEGORY;
 		}
-		
+
 		return (empty($orderSql) ? 'ORDER BY ' : $orderSql . ',') . 'medal.display_order ASC';
 	}
-	
-	public static function getImageFilePath(array $medal, $size = 'l') {
+
+	public static function getImageFilePath(array $medal, $size = 'l')
+	{
 		$internal = self::_getImageInternal($medal, $size);
-		
-		if (!empty($internal)) {
+
+		if (!empty($internal))
+		{
 			return XenForo_Helper_File::getExternalDataPath() . $internal;
-		} else {
+		}
+		else
+		{
 			return '';
 		}
 	}
-	
-	public static function getImageUrl(array $medal, $size = 'l') {
+
+	public static function getImageUrl(array $medal, $size = 'l')
+	{
 		$internal = self::_getImageInternal($medal, $size);
-		
-		if (!empty($internal)) {
+
+		if (!empty($internal))
+		{
 			return XenForo_Application::$externalDataPath . $internal;
-		} else {
+		}
+		else
+		{
 			return '';
 		}
 	}
-	
-	public static function helperMedalImage($medal, $size = 's') {
+
+	public static function helperMedalImage($medal, $size = 's')
+	{
 		$url = self::getImageUrl($medal, $size);
-		
-		if (!empty($url)) {
+
+		if (!empty($url))
+		{
 			return "<img src=\"$url\" />";
-		} else {
+		}
+		else
+		{
 			return '';
 		}
 	}
-	
-	public static function helperMedalImageSize($size) {
+
+	public static function helperMedalImageSize($size)
+	{
 		$imageSizes = bdMedal_DataWriter_Medal::getImageSizes();
 		$size = strtolower($size);
 
-		if (isset($imageSizes[$size])) {
+		if (isset($imageSizes[$size]))
+		{
 			return $imageSizes[$size];
-		} else {
+		}
+		else
+		{
 			return 0;
 		}
 	}
-	
-	protected static function _getImageInternal(array $medal, $size) {
-		if (empty($medal['medal_id']) OR empty($medal['image_date'])) return '';
+
+	protected static function _getImageInternal(array $medal, $size)
+	{
+		if (empty($medal['medal_id']) OR empty($medal['image_date']))
+			return '';
 		$size = strtolower($size);
 		// we should check size with bdMedal_DataWriter_Medal::getImageSizes() but that's
 		// too strictly I guess...
 
 		return "/medal/{$medal['medal_id']}_{$medal['image_date']}{$size}.jpg";
 	}
+
 }

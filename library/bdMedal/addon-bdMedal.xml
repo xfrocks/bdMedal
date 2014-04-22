@@ -98,6 +98,8 @@
 		<xen:options source="$allMedal" />
 	</xen:selectunit>
 
+	<xen:textboxunit label="{xen:phrase bdmedal_award_reason}:" name="reason" value="{$reason}" rows="5" hint="{xen:phrase you_may_use_html}" />
+
 	<xen:submitunit save="{xen:phrase bdmedal_medal_award}">
 	</xen:submitunit>
 	
@@ -129,8 +131,8 @@
 				<xen:listitem
 					id="{$user.user_id}"
 					label="{$user.username}"
-					snippet="{xen:datetime {$user.award_date}}"
-					delete="{xen:adminlink 'medal-medals/reverse-award', $medal, 'user_id={$user.user_id}'}"
+					snippet="{xen:helper snippet, $user.award_reason, 140} {xen:datetime {$user.award_date}}"
+					delete="{xen:adminlink 'medal-medals/reverse-award', $medal, 'awarded_id={$user.awarded_id}'}"
 					deletehint="{xen:phrase bdmedal_reverse_award}...">
 					<xen:popup title="{xen:phrase controls}" ctrlclass="toolsCtrl">
 						<xen:link href="{xen:adminlink 'users/awarded-medals', {$user}}">{xen:phrase bdmedal_awarded_medals}</xen:link>
@@ -177,10 +179,6 @@
 	</xen:selectunit>
 	<xen:textboxunit label="{xen:phrase bdmedal_description}:" name="description" value="{$medal.description}"  rows="5" hint="{xen:phrase you_may_use_html}"/>
 	<xen:spinboxunit label="{xen:phrase bdmedal_display_order}:" name="display_order" value="{$medal.display_order}" />
-	<xen:textboxunit label="{xen:phrase bdmedal_user_count}:" name="user_count" value="{$medal.user_count}" />
-	<xen:textboxunit label="{xen:phrase bdmedal_last_award_date}:" name="last_award_date" value="{$medal.last_award_date}" />
-	<xen:textboxunit label="{xen:phrase bdmedal_last_award_user_id}:" name="last_award_user_id" value="{$medal.last_award_user_id}" />
-	<xen:textboxunit label="{xen:phrase bdmedal_last_award_username}:" name="last_award_username" value="{$medal.last_award_username}" />
 	
 	<xen:uploadunit label="{xen:phrase bdmedal_image}:" name="image" value="">
 		<div id="imageHtml"><xen:if is="{$medal.images}"><xen:foreach loop="$medal.images" key="$imageSizeCode" value="$image"><img src="{$image}" alt="{$imageSizeCode}" title="{$imageSizeCode}"/> </xen:foreach></xen:if></div>
@@ -262,7 +260,7 @@
 
 	<xen:submitunit save="{xen:phrase bdmedal_reverse_award}" />
 	
-	<input type="hidden" name="user_id" value="{$user.user_id}" />
+	<input type="hidden" name="awarded_id" value="{$awarded.awarded_id}" />
 	<input type="hidden" name="_xfConfirm" value="1" />
 </xen:form>]]></template>
     <template title="bdmedal_tools_rebuild"><![CDATA[<xen:form action="{xen:adminlink 'tools/cache-rebuild'}">
@@ -393,6 +391,7 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <phrase title="admin_permission_bdMedal" version_id="17" version_string="1.4"><![CDATA[[bd] Medal - Manage medals]]></phrase>
     <phrase title="bdmedal_awarded_medals" version_id="2" version_string="0.9.1"><![CDATA[Awarded Medals]]></phrase>
     <phrase title="bdmedal_awarded_users" version_id="2" version_string="0.9.1"><![CDATA[Awarded Users]]></phrase>
+    <phrase title="bdmedal_award_reason" version_id="23" version_string="1.4.3d"><![CDATA[Reason]]></phrase>
     <phrase title="bdmedal_category" version_id="1" version_string="0.9"><![CDATA[Category]]></phrase>
     <phrase title="bdmedal_category_add" version_id="1" version_string="0.9"><![CDATA[Add New Category]]></phrase>
     <phrase title="bdmedal_category_confirm_deletion" version_id="1" version_string="0.9"><![CDATA[Confirm Deletion of Category]]></phrase>
@@ -407,9 +406,6 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <phrase title="bdmedal_display_order" version_id="1" version_string="0.9"><![CDATA[Display Order]]></phrase>
     <phrase title="bdmedal_image" version_id="2" version_string="0.9.1"><![CDATA[Image]]></phrase>
     <phrase title="bdmedal_last_awarded" version_id="2" version_string="0.9.1"><![CDATA[Last Awarded]]></phrase>
-    <phrase title="bdmedal_last_award_date" version_id="1" version_string="0.9"><![CDATA[Last Award Date]]></phrase>
-    <phrase title="bdmedal_last_award_username" version_id="1" version_string="0.9"><![CDATA[Last Award Username]]></phrase>
-    <phrase title="bdmedal_last_award_user_id" version_id="1" version_string="0.9"><![CDATA[Last Award User Id]]></phrase>
     <phrase title="bdmedal_list_order_award_date" version_id="16" version_string="1.3.7"><![CDATA[Reversed Chronological]]></phrase>
     <phrase title="bdmedal_list_order_display_order" version_id="16" version_string="1.3.7"><![CDATA[Display Order]]></phrase>
     <phrase title="bdmedal_list_order_random" version_id="19" version_string="1.4.2"><![CDATA[Randomly]]></phrase>
@@ -434,6 +430,13 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <phrase title="bdmedal_name" version_id="1" version_string="0.9"><![CDATA[Name]]></phrase>
     <phrase title="bdmedal_no_medals_have_been_created_yet" version_id="2" version_string="0.9.1"><![CDATA[No medals have been created yet.]]></phrase>
     <phrase title="bdmedal_no_users_to_award" version_id="2" version_string="0.9.1"><![CDATA[No users have been found to award.]]></phrase>
+    <phrase title="bdmedal_organize_bottom" version_id="23" version_string="1.4.3d"><![CDATA[Bottom]]></phrase>
+    <phrase title="bdmedal_organize_down" version_id="23" version_string="1.4.3d"><![CDATA[Down]]></phrase>
+    <phrase title="bdmedal_organize_hide" version_id="23" version_string="1.4.3d"><![CDATA[Hide]]></phrase>
+    <phrase title="bdmedal_organize_medals" version_id="23" version_string="1.4.3d"><![CDATA[Organize Medals]]></phrase>
+    <phrase title="bdmedal_organize_show" version_id="23" version_string="1.4.3d"><![CDATA[Show]]></phrase>
+    <phrase title="bdmedal_organize_top" version_id="23" version_string="1.4.3d"><![CDATA[Top]]></phrase>
+    <phrase title="bdmedal_organize_up" version_id="23" version_string="1.4.3d"><![CDATA[Up]]></phrase>
     <phrase title="bdmedal_please_confirm_you_want_reverse_award" version_id="2" version_string="0.9.1"><![CDATA[Please confirm that you want to reverse award]]></phrase>
     <phrase title="bdmedal_position_manual" version_id="5" version_string="1.0.1"><![CDATA[Manual Position]]></phrase>
     <phrase title="bdmedal_position_message_user_info_extra_bottom" version_id="5" version_string="1.0.1"><![CDATA[Bottom of the User Info Extra section (containing register date, message count, etc.)]]></phrase>
@@ -443,7 +446,6 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <phrase title="bdmedal_rebuild_user_caches" version_id="16" version_string="1.3.7"><![CDATA[Rebuild Medal Information]]></phrase>
     <phrase title="bdmedal_requested_award_not_found" version_id="2" version_string="0.9.1"><![CDATA[The requested award record could not be found.]]></phrase>
     <phrase title="bdmedal_reverse_award" version_id="2" version_string="0.9.1"><![CDATA[Reverse Award]]></phrase>
-    <phrase title="bdmedal_user_count" version_id="1" version_string="0.9"><![CDATA[User Count]]></phrase>
     <phrase title="bdmedal_user_no_awarded_medals" version_id="2" version_string="0.9.1"><![CDATA[This user has not been awarded any medals yet.]]></phrase>
     <phrase title="bdmedal_view_all_medals" version_id="2" version_string="0.9.1"><![CDATA[View all medals]]></phrase>
     <phrase title="bdmedal_x_awarded_medal_y" version_id="8" version_string="1.2.1"><![CDATA[{name} awarded you with the medal {medal}.]]></phrase>
@@ -584,6 +586,24 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 			margin-right: 4px;
 			margin-top: 4px;
 		}]]></template>
+    <template title="bdmedal_account_medals" version_id="23" version_string="1.4.3d"><![CDATA[<xen:title>{xen:phrase bdmedal_medals}</xen:title>
+
+<form action="{xen:link account/medals}" class="xenForm section">
+	<ol>
+		<xen:foreach loop="$medals" value="$medal">
+			<li class="primaryContent">
+				<xen:include template="bdmedal_medal">
+					<xen:set var="$controls">
+						<a href="{xen:link account/medals, '', 'top={$medal.awarded_id}'}">{xen:phrase bdmedal_organize_top}</a>
+						<a href="{xen:link account/medals, '', 'up={$medal.awarded_id}'}">{xen:phrase bdmedal_organize_up}</a>
+						<a href="{xen:link account/medals, '', 'down={$medal.awarded_id}'}">{xen:phrase bdmedal_organize_down}</a>
+						<a href="{xen:link account/medals, '', 'bottom={$medal.awarded_id}'}">{xen:phrase bdmedal_organize_bottom}</a>
+					</xen:set>
+				</xen:include>
+			</li>
+		</xen:foreach>
+	</ol>
+</form>]]></template>
     <template title="bdmedal_alert_medal_award" version_id="22" version_string="1.4.3c"><![CDATA[<xen:if is="{$user.user_id} > 0 AND {$user.user_id} != {$visitor.user_id}">
 {xen:phrase bdmedal_x_awarded_medal_y,
 	'name={xen:helper username, $user, 'subject'}',
@@ -619,14 +639,18 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 	<div class="section">{xen:phrase bdmedal_no_medals_have_been_created_yet}</div>
 </xen:if>]]></template>
     <template title="bdmedal_help_sidebar_links" version_id="14" version_string="1.3.5"><![CDATA[<li><a href="{xen:link help/medals}" class="{xen:if "{$selected} == 'bdmedal_medals'", 'secondaryContent', 'primaryContent'}">{xen:phrase bdmedal_medals}</a></li>]]></template>
-    <template title="bdmedal_medal" version_id="21" version_string="1.4.3b"><![CDATA[<xen:require js="js/bdMedal/frontend.js" />
+    <template title="bdmedal_medal" version_id="23" version_string="1.4.3d"><![CDATA[<xen:require js="js/bdMedal/frontend.js" />
 <xen:require css="bdmedal.css" />
 
 <div class="Medal" id="medal-{$medal.medal_id}">
 	<div class="image">{xen:helper bdMedal_image, {$medal}, 'L'}</div>
-	<xen:if is="{$medal.award_date}">
+
+	<xen:if is="{$controls}">
+		<div class="awarded">{xen:raw $controls}</div>
+	<xen:elseif is="{$medal.award_date}" />
 		<div class="awarded">{xen:phrase awarded}: <xen:datetime time="$medal.award_date" /></div>
 	</xen:if>
+
 	<div class="info">
 		<h3 class="name">
 			<xen:if is="{$medal.award_date}">
@@ -635,7 +659,13 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 				<a name="medal-{$medal.medal_id}"></a>{$medal.name}
 			</xen:if>
 		</h3>
-		<p class="description">{xen:raw $medal.description}</p>
+
+		<p class="description">
+			{xen:raw $medal.description}
+
+			<xen:if is="{$medal.award_reason}"><br /><span>{xen:phrase bdmedal_award_reason}: {xen:raw $medal.award_reason}</span></xen:if>
+		</p>
+
 		<xen:if is="{$awardedsGrouped.{$medal.medal_id}.awardeds} AND {$canViewAwardedUsers}">
 			<div class="users">
 				{xen:phrase bdmedal_awarded_users}:
@@ -659,7 +689,7 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 		</xen:if>
 	</div>
 </div>]]></template>
-    <template title="bdmedal_member_medals" version_id="17" version_string="1.4"><![CDATA[<xen:title>{xen:phrase bdmedal_awarded_medals}: {$user.username}</xen:title>
+    <template title="bdmedal_member_medals" version_id="23" version_string="1.4.3d"><![CDATA[<xen:title>{xen:phrase bdmedal_awarded_medals}: {$user.username}</xen:title>
 
 <xen:navigation>
 	<xen:breadcrumb href="{xen:link full:members, $user}">{$user.username}</xen:breadcrumb>
@@ -674,19 +704,20 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 			</li>
 		</xen:foreach>
 		</ol>
-		<div class="sectionFooter opposedOptions">
-			<div class="right">
-				<input type="button" class="button primary overlayOnly OverlayCloser" value="{xen:phrase close}" />
-				<a href="{xen:link help/medals}" class="button">{xen:phrase bdmedal_view_all_medals}</a>
-			</div>
-		</div>
 	<xen:else />
 		<div class="primaryContent">{xen:phrase bdmedal_x_has_not_been_awarded_any_medals_yet, 'name={$user.username}'}</div>
-		<div class="sectionFooter">
-			<input type="button" class="button primary overlayOnly OverlayCloser" value="{xen:phrase close}" />
-				<a href="{xen:link help/medals}" class="button">{xen:phrase bdmedal_view_all_medals}</a>
-		</div>
 	</xen:if>
+
+	<div class="sectionFooter">
+		<input type="button" class="button primary overlayOnly OverlayCloser" value="{xen:phrase close}" />
+
+		<a href="{xen:link help/medals}" class="button">{xen:phrase bdmedal_view_all_medals}</a>
+
+		<xen:if is="{$user.user_id} == {$visitor.user_id}">
+			<a href="{xen:link account/medals}" class="button">{xen:phrase bdmedal_organize_medals}</a>
+		</xen:if>
+	</div>
+
 </div>]]></template>
     <template title="bdmedal_member_view_sidebar_middle1" version_id="14" version_string="1.3.5"><![CDATA[<xen:if is="{$user.xf_bdmedal_awarded_cached} AND {xen:property bdMedal_showBlock}">
 <xen:require css="bdmedal.css" />
@@ -718,21 +749,10 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 	</xen:if>
 </div>
 </xen:if>]]></template>
-    <template title="bdmedal_member_view_tabs_content" version_id="17" version_string="1.4"><![CDATA[<xen:if is="{$user.xf_bdmedal_awarded_cached} AND {xen:property bdMedal_showTab}">
-<li id="medals" class="profileContent">
-	<div class="section">
-		<xen:if is="{$user.xf_bdmedal_awarded_cached}">
-			<ol>
-				<xen:foreach loop="$user.xf_bdmedal_awarded_cached" value="$medal">
-					<li class="primaryContent">
-						<xen:include template="bdmedal_medal" />
-					</li>
-				</xen:foreach>
-			</ol>
-		<xen:else />
-			<div class="primaryContent">{xen:phrase bdmedal_x_has_not_been_awarded_any_medals_yet, 'name={$user.username}'}</div>
-		</xen:if>
-	</div>
+    <template title="bdmedal_member_view_tabs_content" version_id="23" version_string="1.4.3d"><![CDATA[<xen:if is="{$user.xf_bdmedal_awarded_cached} AND {xen:property bdMedal_showTab}">
+<li id="medals" class="profileContent" data-loadUrl="{xen:link members/medals, $user}">
+	{xen:phrase loading}...
+	<noscript><a href="{xen:link members/medals, $user}">{xen:phrase view}</a></noscript>
 </li>
 </xen:if>]]></template>
     <template title="bdmedal_member_view_tabs_heading" version_id="16" version_string="1.3.7"><![CDATA[<xen:if is="{$user.xf_bdmedal_awarded_cached} AND {xen:property bdMedal_showTab}">
@@ -781,4 +801,5 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
   </templates>
   <public_template_modifications/>
   <bb_code_media_sites/>
+  <bb_codes/>
 </addon>
