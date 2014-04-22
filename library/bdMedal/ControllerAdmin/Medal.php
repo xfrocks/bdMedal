@@ -63,6 +63,18 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
 		}
 		$dw->bulkSet($dwInput);
 
+		$imageM = XenForo_Upload::getUploadedFile('image_m');
+		if (!empty($imageM))
+		{
+			$dw->setImage($imageM, 'm');
+		}
+
+		$imageS = XenForo_Upload::getUploadedFile('image_s');
+		if (!empty($imageS))
+		{
+			$dw->setImage($imageS, 's');
+		}
+
 		$image = XenForo_Upload::getUploadedFile('image');
 		if (!empty($image))
 		{

@@ -180,9 +180,11 @@
 	<xen:textboxunit label="{xen:phrase bdmedal_description}:" name="description" value="{$medal.description}"  rows="5" hint="{xen:phrase you_may_use_html}"/>
 	<xen:spinboxunit label="{xen:phrase bdmedal_display_order}:" name="display_order" value="{$medal.display_order}" />
 	
-	<xen:uploadunit label="{xen:phrase bdmedal_image}:" name="image" value="">
-		<div id="imageHtml"><xen:if is="{$medal.images}"><xen:foreach loop="$medal.images" key="$imageSizeCode" value="$image"><img src="{$image}" alt="{$imageSizeCode}" title="{$imageSizeCode}"/> </xen:foreach></xen:if></div>
+	<xen:uploadunit label="{xen:phrase bdmedal_image}:" name="image">
+		<div id="imageHtml"><xen:if is="{$medal.images}"><xen:foreach loop="$medal.images" key="$imageSizeCode" value="$image"><img src="{$image}" alt="{$imageSizeCode}" title="{$imageSizeCode}" style="max-height: 48px" /> </xen:foreach></xen:if></div>
 	</xen:uploadunit>
+	<xen:if is="{xen:helper bdMedal_imageSize, m} > 0"><xen:uploadunit label="{xen:phrase bdmedal_image_m}:" name="image_m" hint="{xen:phrase optional}" explain="{xen:phrase bdmedal_image_m_s_explain}" /></xen:if>
+	<xen:if is="{xen:helper bdMedal_imageSize, s} > 0"><xen:uploadunit label="{xen:phrase bdmedal_image_s}:" name="image_s" hint="{xen:phrase optional}" explain="{xen:phrase bdmedal_image_m_s_explain}" /></xen:if>
 
 	<xen:submitunit save="{xen:phrase bdmedal_medal_save}">
 		<input type="button" name="delete" value="{xen:phrase bdmedal_medal_delete}"
@@ -405,6 +407,9 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <phrase title="bdmedal_description" version_id="1" version_string="0.9"><![CDATA[Description]]></phrase>
     <phrase title="bdmedal_display_order" version_id="1" version_string="0.9"><![CDATA[Display Order]]></phrase>
     <phrase title="bdmedal_image" version_id="2" version_string="0.9.1"><![CDATA[Image]]></phrase>
+    <phrase title="bdmedal_image_m" version_id="23" version_string="1.4.3d"><![CDATA[Medium Image]]></phrase>
+    <phrase title="bdmedal_image_m_s_explain" version_id="23" version_string="1.4.3d"><![CDATA[If you want to use a special fine-tuned image for this size, upload your file here. Otherwise you can leave it blank to have the system automatically generate it.]]></phrase>
+    <phrase title="bdmedal_image_s" version_id="23" version_string="1.4.3d"><![CDATA[Small Image]]></phrase>
     <phrase title="bdmedal_last_awarded" version_id="2" version_string="0.9.1"><![CDATA[Last Awarded]]></phrase>
     <phrase title="bdmedal_list_order_award_date" version_id="16" version_string="1.3.7"><![CDATA[Reversed Chronological]]></phrase>
     <phrase title="bdmedal_list_order_display_order" version_id="16" version_string="1.3.7"><![CDATA[Display Order]]></phrase>
