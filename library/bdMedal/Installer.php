@@ -27,7 +27,7 @@ class bdMedal_Installer
 				,`user_count` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
 				,`last_award_date` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
 				,`last_award_user_id` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
-				,`last_award_username` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
+				,`last_award_username` VARCHAR(50) NOT NULL DEFAULT \'\'
 				,`image_date` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
 				, PRIMARY KEY (`medal_id`)
 				, INDEX `category_id` (`category_id`)
@@ -39,7 +39,7 @@ class bdMedal_Installer
 				`awarded_id` INT(10) UNSIGNED AUTO_INCREMENT
 				,`medal_id` INT(10) UNSIGNED NOT NULL
 				,`user_id` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
-				,`username` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
+				,`username` VARCHAR(50) NOT NULL DEFAULT \'0\'
 				,`award_date` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
 				,`award_reason` TEXT
 				,`adjusted_display_order` INT(11) NOT NULL DEFAULT \'0\'
@@ -99,7 +99,7 @@ class bdMedal_Installer
 				$db->query($patch['alterTableAddColumnQuery']);
 			}
 		}
-		
+
 		self::installCustomized($existingAddOn, $addOnData);
 	}
 
@@ -170,7 +170,7 @@ class bdMedal_Installer
 			$categories = array('only' => array(
 					'name' => 'Category 1',
 					'description' => 'HTML description goes here!'
-				), );
+				));
 			$medals = array(
 				array(
 					'name' => 'Medal 1',
