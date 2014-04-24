@@ -163,7 +163,7 @@ class bdMedal_Model_Medal extends XenForo_Model
 
 		if (!empty($internal))
 		{
-			return XenForo_Application::$externalDataPath . $internal;
+			return XenForo_Application::$externalDataUrl . $internal;
 		}
 		else
 		{
