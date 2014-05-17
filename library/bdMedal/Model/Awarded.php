@@ -56,7 +56,7 @@ class bdMedal_Model_Awarded extends XenForo_Model
 				$cached = array();
 			}
 		}
-		
+
 		$this->applyOrganizedOrder($cached);
 
 		return $cached;
@@ -77,13 +77,18 @@ class bdMedal_Model_Awarded extends XenForo_Model
 				// no need to sort
 				break;
 		}
-		
+
 		$organized = array();
 		$notOrganized = array();
 
 		foreach ($awardeds as $key => $awarded)
 		{
-			if ($awarded['adjusted_display_order'] < 0)
+			if (!isset($awarded['adjusted_display_order']))
+			{
+				// old version
+				$notOrganized[$key] = $awarded;
+			}
+			elseif ($awarded['adjusted_display_order'] < 0)
 			{
 				// hidden
 			}
