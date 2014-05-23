@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="bdMedal" title="[bd] Medal" version_string="1.4.4c" version_id="27" url="" install_callback_class="bdMedal_Installer" install_callback_method="install" uninstall_callback_class="bdMedal_Installer" uninstall_callback_method="uninstall">
+<addon addon_id="bdMedal" title="[bd] Medal" version_string="1.4.5b" version_id="29" url="" install_callback_class="bdMedal_Installer" install_callback_method="install" uninstall_callback_class="bdMedal_Installer" uninstall_callback_method="uninstall">
   <admin_navigation>
     <navigation navigation_id="bdMedal" parent_navigation_id="applications" display_order="9999" link="medal-medals" admin_permission_id="bdMedal" debug_only="0" hide_no_children="0"/>
     <navigation navigation_id="bdMedal_Category" parent_navigation_id="bdMedal" display_order="10" link="medal-categories" admin_permission_id="bdMedal" debug_only="0" hide_no_children="0"/>
@@ -99,6 +99,10 @@
 	</xen:selectunit>
 
 	<xen:textboxunit label="{xen:phrase bdmedal_award_reason}:" name="reason" value="{$reason}" rows="5" hint="{xen:phrase you_may_use_html}" />
+
+	<xen:checkboxunit label="" explain="{xen:phrase bdmedal_avoid_duplicated_explain}">
+		<xen:option name="avoid_duplicated" value="1" selected="{xen:helper bdMedal_getOption, defaultAvoidDuplicated}">{xen:phrase bdmedal_avoid_duplicated}</xen:option>
+	</xen:checkboxunit>
 
 	<xen:submitunit save="{xen:phrase bdmedal_medal_award}">
 	</xen:submitunit>
@@ -338,6 +342,12 @@
       <sub_options></sub_options>
       <relation group_id="bdMedal" display_order="2010"/>
     </option>
+    <option option_id="bdMedal_defaultAvoidDuplicated" edit_format="onoff" data_type="unsigned_integer" can_backup="1">
+      <default_value>1</default_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="bdMedal" display_order="100"/>
+    </option>
     <option option_id="bdMedal_imageSizeM" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
       <default_value>0</default_value>
       <edit_format_params></edit_format_params>
@@ -391,6 +401,8 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <phrase title="admin_navigation_bdMedal_Category" version_id="1" version_string="0.9"><![CDATA[Categories]]></phrase>
     <phrase title="admin_navigation_bdMedal_Medal" version_id="1" version_string="0.9"><![CDATA[Medals]]></phrase>
     <phrase title="admin_permission_bdMedal" version_id="17" version_string="1.4"><![CDATA[[bd] Medal - Manage medals]]></phrase>
+    <phrase title="bdmedal_avoid_duplicated" version_id="27" version_string="1.4.4c"><![CDATA[Avoid Duplicated]]></phrase>
+    <phrase title="bdmedal_avoid_duplicated_explain" version_id="28" version_string="1.4.5"><![CDATA[Enable this option to avoid awarding a medal to an user more than once. Any users who have been awarded the medal before will be silently ignored. You can control the default state of this option by editing the "Default to Avoid Duplicated" option in <a href="admin.php?options/list/bdMedal" target="_blank" tabindex="-1">[bd] Medal option page</a>.]]></phrase>
     <phrase title="bdmedal_awarded_medals" version_id="2" version_string="0.9.1"><![CDATA[Awarded Medals]]></phrase>
     <phrase title="bdmedal_awarded_users" version_id="2" version_string="0.9.1"><![CDATA[Awarded Users]]></phrase>
     <phrase title="bdmedal_award_reason" version_id="23" version_string="1.4.3d"><![CDATA[Reason]]></phrase>
@@ -461,6 +473,8 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <phrase title="bdmedal_you_have_been_awarded_medal_x" version_id="22" version_string="1.4.3c"><![CDATA[<strong class="subject">You</strong> have been awarded a medal: {medal}]]></phrase>
     <phrase title="option_bdMedal_awardedUsersMax" version_id="8" version_string="1.2.1"><![CDATA[Maximum Awarded Users]]></phrase>
     <phrase title="option_bdMedal_awardedUsersMax_explain" version_id="8" version_string="1.2.1"><![CDATA[If this option is set (larger than 0), the list of awarded users in the Help page will be limit to a maximum of this value.]]></phrase>
+    <phrase title="option_bdMedal_defaultAvoidDuplicated" version_id="28" version_string="1.4.5"><![CDATA[Default to Avoid Duplicated]]></phrase>
+    <phrase title="option_bdMedal_defaultAvoidDuplicated_explain" version_id="28" version_string="1.4.5"><![CDATA[Enable this option to turn on "Avoid Duplicated" option in manual medal award form in AdminCP.]]></phrase>
     <phrase title="option_bdMedal_imageSizeM" version_id="8" version_string="1.2.1"><![CDATA[Image Medium]]></phrase>
     <phrase title="option_bdMedal_imageSizeM_explain" version_id="8" version_string="1.2.1"><![CDATA[Normally, medal image will be store in 2 sizes: original size (code name "L") and tiny size (code name "T"). If you wish to use additional image size, you can specify the maximum width / height here. An image will be prepared with the code name "S" for all medals from now on (you will have to re-upload image for old medals). Leave it zero to disable this feature.]]></phrase>
     <phrase title="option_bdMedal_imageSizeS" version_id="8" version_string="1.2.1"><![CDATA[Image Small]]></phrase>

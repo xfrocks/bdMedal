@@ -133,7 +133,24 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
 				return $this->responseError(new XenForo_Phrase('bdmedal_no_users_to_award'));
 			}
 
-			$awardedModel->award($medal, $users, array('award_reason' => $reason));
+			$avoidDuplicated = $this->_input->filterSingle('avoid_duplicated', XenForo_Input::UINT);
+			if ($avoidDuplicated)
+			{
+				$allWwarded = $awardedModel->getAllAwarded(array(
+					'medal_id' => $medal['medal_id'],
+					'user_id' => array_keys($users)
+				));
+
+				foreach ($allWwarded as $awarded)
+				{
+					unset($users[$awarded['user_id']]);
+				}
+			}
+
+			if (!empty($users))
+			{
+				$awardedModel->award($medal, $users, array('award_reason' => $reason));
+			}
 
 			return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS, XenForo_Link::buildAdminLink('medal-medals/awarded-users', $medal));
 		}
