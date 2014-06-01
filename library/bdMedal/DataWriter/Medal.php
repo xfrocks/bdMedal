@@ -127,7 +127,7 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
 						unlink($filePath);
 					}
 
-					$success = @rename($tempFile, $filePath);
+					$success = XenForo_Helper_File::safeRename($tempFile, $filePath);
 					if ($success)
 					{
 						XenForo_Helper_File::makeWritableByFtpUser($filePath);
