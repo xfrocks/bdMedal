@@ -4,6 +4,11 @@ class bdMedal_Extend_ControllerPublic_Account extends XFCP_bdMedal_Extend_Contro
 {
 	public function actionMedals()
 	{
+		if (!XenForo_Visitor::getInstance()->hasPermission('general', 'bdMedal_organize'))
+		{
+			return $this->responseNoPermission();
+		}
+
 		$changed = false;
 		$input = $this->_input->filter(array(
 			'top' => XenForo_Input::UINT,
