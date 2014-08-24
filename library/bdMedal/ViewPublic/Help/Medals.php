@@ -22,8 +22,10 @@ class bdMedal_ViewPublic_Help_Medals extends XenForo_ViewPublic_Base
 
 		$awardedUsersMax = bdMedal_Option::get('awardedUsersMax');
 		if ($this->_params['showAll'])
+		{
+			// show all, ignore the options
 			$awardedUsersMax = 0;
-		// show all, ignore the options
+		}
 
 		$this->_params['awardedsGrouped'] = array();
 		foreach ($this->_params['awardeds'] as $awardedId => $awarded)

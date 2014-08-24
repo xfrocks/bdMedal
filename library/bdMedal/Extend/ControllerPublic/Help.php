@@ -11,7 +11,24 @@ class bdMedal_Extend_ControllerPublic_Help extends XFCP_bdMedal_Extend_Controlle
 			'join' => bdMedal_Model_Medal::FETCH_CATEGORY,
 			'order' => 'category',
 		));
-		$awardeds = $awardedModel->getAllAwarded(array(), array('join' => bdMedal_Model_Awarded::FETCH_USER, ));
+
+		$awardedConditions = array();
+		$awardedFetchOptions = array('join' => bdMedal_Model_Awarded::FETCH_USER);
+		$awardedCount = $awardedModel->countAllAwarded($awardedConditions, $awardedFetchOptions);
+		$awardedUsersMax = max(50, bdMedal_Option::get('awardedUsersMax'));
+		if ($awardedCount < $awardedUsersMax * count($medals))
+		{
+			$awardeds = $awardedModel->getAllAwarded($awardedConditions, $awardedFetchOptions);
+		}
+		else
+		{
+			$awardeds = array();
+
+			foreach ($medals as $medal)
+			{
+				$awardeds = array_merge($awardeds, $awardedModel->getAllAwarded(array_merge($awardedConditions, array('medal_id' => $medal['medal_id'])), $awardedFetchOptions));
+			}
+		}
 
 		$viewParams = array(
 			'medals' => $medals,
