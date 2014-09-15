@@ -104,23 +104,25 @@ class bdMedal_Listener
 			$first = false;
 		}
 
-		if ($templateName == 'member_view')
+		switch ($templateName)
 		{
-			$template->preloadTemplate('bdmedal_member_view_sidebar_middle1');
-			$template->preloadTemplate('bdmedal_member_view_tabs_heading');
-			$template->preloadTemplate('bdmedal_member_view_tabs_content');
-		}
-		elseif ($templateName == 'help_wrapper')
-		{
-			$template->preloadTemplate('bdmedal_help_sidebar_links');
-		}
-		elseif ($templateName == 'PAGE_CONTAINER')
-		{
-			$template->preloadTemplate('bdmedal_navigation_tabs_help');
-		}
-		elseif ($templateName == 'tools_rebuild')
-		{
-			$template->preloadTemplate('bdmedal_tools_rebuild');
+			case 'member_view':
+				$template->preloadTemplate('bdmedal_member_view_sidebar_middle1');
+				$template->preloadTemplate('bdmedal_member_view_tabs_heading');
+				$template->preloadTemplate('bdmedal_member_view_tabs_content');
+				break;
+			case 'help_index':
+				$template->preloadTemplate('bdmedal_help_index_extra');
+				break;
+			case 'help_wrapper':
+				$template->preloadTemplate('bdmedal_help_sidebar_links');
+				break;
+			case 'PAGE_CONTAINER':
+				$template->preloadTemplate('bdmedal_navigation_tabs_help');
+				break;
+			case 'tools_rebuild':
+				$template->preloadTemplate('bdmedal_tools_rebuild');
+				break;
 		}
 	}
 
@@ -158,36 +160,18 @@ class bdMedal_Listener
 			}
 		}
 
-		if ($hookName == 'member_view_sidebar_middle1')
+		switch ($hookName)
 		{
-			$ourTemplate = $template->create('bdmedal_member_view_sidebar_middle1', $template->getParams());
-			$rendered = $ourTemplate->render();
-			$contents .= $rendered;
-		}
-		elseif ($hookName == 'member_view_tabs_heading')
-		{
-			$ourTemplate = $template->create('bdmedal_member_view_tabs_heading', $template->getParams());
-			$rendered = $ourTemplate->render();
-			$contents .= $rendered;
-		}
-		elseif ($hookName == 'member_view_tabs_content')
-		{
-			$ourTemplate = $template->create('bdmedal_member_view_tabs_content', $template->getParams());
-			$rendered = $ourTemplate->render();
-			$contents .= $rendered;
-		}
-		elseif ($hookName == 'help_sidebar_links')
-		{
-			$ourTemplate = $template->create('bdmedal_help_sidebar_links', $template->getParams());
-			$rendered = $ourTemplate->render();
-			$search = '<!-- slot: pre_tos_url -->';
-			$contents = str_replace($search, $rendered . $search, $contents);
-		}
-		elseif ($hookName == 'navigation_tabs_help')
-		{
-			$ourTemplate = $template->create('bdmedal_navigation_tabs_help');
-			$rendered = $ourTemplate->render();
-			$contents .= $rendered;
+			case 'member_view_sidebar_middle1':
+			case 'member_view_tabs_heading':
+			case 'member_view_tabs_content':
+			case 'help_index_extra':
+			case 'help_sidebar_links':
+			case 'navigation_tabs_help':
+				$ourTemplate = $template->create('bdmedal_' . $hookName, $template->getParams());
+				$rendered = $ourTemplate->render();
+				$contents .= $rendered;
+				break;
 		}
 	}
 

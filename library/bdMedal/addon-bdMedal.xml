@@ -419,6 +419,8 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <phrase title="bdmedal_confirm_award_reversal" version_id="2" version_string="0.9.1"><![CDATA[Confirm Reversal of Award]]></phrase>
     <phrase title="bdmedal_description" version_id="1" version_string="0.9"><![CDATA[Description]]></phrase>
     <phrase title="bdmedal_display_order" version_id="1" version_string="0.9"><![CDATA[Display Order]]></phrase>
+    <phrase title="bdmedal_help_page_explain" version_id="31" version_string="1.4.5d"><![CDATA[ This page shows a list of the medals that you can be awarded by doing good to the community.
+]]></phrase>
     <phrase title="bdmedal_image" version_id="2" version_string="0.9.1"><![CDATA[Image]]></phrase>
     <phrase title="bdmedal_image_m" version_id="23" version_string="1.4.3d"><![CDATA[Medium Image]]></phrase>
     <phrase title="bdmedal_image_m_s_explain" version_id="23" version_string="1.4.3d"><![CDATA[If you want to use a special fine-tuned image for this size, upload your file here. Otherwise you can leave it blank to have the system automatically generate it.]]></phrase>
@@ -633,6 +635,10 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 {xen:phrase bdmedal_you_have_been_awarded_medal_x,
 	'medal=<a href="{xen:link 'members/medals', $visitor}" class="PopupItemLink">{$content.name}</a>'}
 </xen:if>]]></template>
+    <template title="bdmedal_help_index_extra" version_id="31" version_string="1.4.5d"><![CDATA[<dl>
+	<dt><a href="{xen:link help/medals}">{xen:phrase bdmedal_medals}</a></dt>
+	<dd>{xen:phrase bdmedal_help_page_explain}</dd>
+</dl>]]></template>
     <template title="bdmedal_help_medals" version_id="0" version_string=""><![CDATA[<xen:title>{xen:phrase bdmedal_medals}</xen:title>
 
 <xen:require css="bdmedal.css" />
