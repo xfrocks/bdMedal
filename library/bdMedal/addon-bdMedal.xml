@@ -392,8 +392,9 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
   <permissions>
     <permission_groups/>
     <permissions>
+      <permission permission_group_id="general" permission_id="bdMedal_award" permission_type="flag" default_value="unset" interface_group_id="generalModeratorPermissions" display_order="9999"/>
       <permission permission_group_id="general" permission_id="bdMedal_organize" permission_type="flag" default_value="unset" interface_group_id="generalPermissions" display_order="9999"/>
-      <permission permission_group_id="general" permission_id="bdMedal_viewAwardedUsers" permission_type="flag" default_value="unset" interface_group_id="generalPermissions" display_order="9999"/>
+      <permission permission_group_id="general" permission_id="bdMedal_viewAwardedUsers" permission_type="flag" default_value="unset" interface_group_id="generalModeratorPermissions" display_order="9999"/>
     </permissions>
     <interface_groups/>
   </permissions>
@@ -406,6 +407,7 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <phrase title="bdmedal_avoid_duplicated_explain" version_id="28" version_string="1.4.5"><![CDATA[Enable this option to avoid awarding a medal to an user more than once. Any users who have been awarded the medal before will be silently ignored. You can control the default state of this option by editing the "Default to Avoid Duplicated" option in <a href="admin.php?options/list/bdMedal" target="_blank" tabindex="-1">[bd] Medal option page</a>.]]></phrase>
     <phrase title="bdmedal_awarded_medals" version_id="2" version_string="0.9.1"><![CDATA[Awarded Medals]]></phrase>
     <phrase title="bdmedal_awarded_users" version_id="2" version_string="0.9.1"><![CDATA[Awarded Users]]></phrase>
+    <phrase title="bdmedal_award_medal" version_id="32" version_string="1.4.6"><![CDATA[Award Medal]]></phrase>
     <phrase title="bdmedal_award_reason" version_id="23" version_string="1.4.3d"><![CDATA[Reason]]></phrase>
     <phrase title="bdmedal_category" version_id="1" version_string="0.9"><![CDATA[Category]]></phrase>
     <phrase title="bdmedal_category_add" version_id="1" version_string="0.9"><![CDATA[Add New Category]]></phrase>
@@ -471,6 +473,7 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <phrase title="bdmedal_x_awarded_medal_y" version_id="8" version_string="1.2.1"><![CDATA[{name} awarded you with the medal {medal}.]]></phrase>
     <phrase title="bdmedal_x_has_not_been_awarded_any_medals_yet" version_id="2" version_string="0.9.1"><![CDATA[{name} has not been awarded any medals yet.]]></phrase>
     <phrase title="bdmedal_x_have_been_awarded_medal_y" version_id="9" version_string="1.3"><![CDATA[{name} have been awarded with the medal {medal}.]]></phrase>
+    <phrase title="bdmedal_x_have_been_awarded_medal_y_already" version_id="32" version_string="1.4.6"><![CDATA[{name} have been awarded with the medal {medal} already.]]></phrase>
     <phrase title="bdmedal_x_others" version_id="8" version_string="1.2.1"><![CDATA[{count} others]]></phrase>
     <phrase title="bdmedal_x_was_awarded_y_medals" version_id="8" version_string="1.2.1"><![CDATA[{name} was awarded {count} medals.]]></phrase>
     <phrase title="bdmedal_you_have_been_awarded_medal_x" version_id="22" version_string="1.4.3c"><![CDATA[<strong class="subject">You</strong> have been awarded a medal: {medal}]]></phrase>
@@ -490,7 +493,8 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <phrase title="option_bdMedal_positionInPost_explain" version_id="18" version_string="1.4.1"><![CDATA[[bd] Medal System: Select the position you want the medals to show up. If you want to display the medal elsewhere, please select the manual option and edit the template yourself, simply adding &lt;xen:include template="bdmedal_message_medals_manual" /&gt; to your "message_user_info" template.]]></phrase>
     <phrase title="option_group_bdMedal" version_id="8" version_string="1.2.1"><![CDATA[[bd] Medal]]></phrase>
     <phrase title="option_group_bdMedal_description" version_id="12" version_string="1.3.3"><![CDATA[Options for [bd] Medal add-on.]]></phrase>
-    <phrase title="permission_general_bdMedal_organize" version_id="29" version_string="1.4.5b"><![CDATA[Organize awarded medals]]></phrase>
+    <phrase title="permission_general_bdMedal_award" version_id="32" version_string="1.4.6"><![CDATA[Award medals]]></phrase>
+    <phrase title="permission_general_bdMedal_organize" version_id="32" version_string="1.4.6"><![CDATA[Organize own medals]]></phrase>
     <phrase title="permission_general_bdMedal_viewAwardedUsers" version_id="15" version_string="1.3.6"><![CDATA[View awarded users in medals list]]></phrase>
     <phrase title="style_property_bdMedal_messageImageSize_description_master" version_id="8" version_string="1.2.1"><![CDATA[The size of the medal images. By default, there is only 2 sizes available: L (original) and T (tiny, 12px). You can render medium and small images by configure the options. Be sure to double check here if medals do not show up in messages.]]></phrase>
     <phrase title="style_property_bdMedal_messageImageSize_master" version_id="10" version_string="1.3.1"><![CDATA[[bd] Medal - Image Size]]></phrase>
@@ -716,8 +720,50 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 		</xen:if>
 	</div>
 </div>]]></template>
-    <template title="bdmedal_member_medals" version_id="29" version_string="1.4.5b"><![CDATA[<xen:title>{xen:phrase bdmedal_awarded_medals}: {$user.username}</xen:title>
+    <template title="bdmedal_member_award_medal" version_id="32" version_string="1.4.6"><![CDATA[<xen:title>{xen:phrase bdmedal_award_medal}: {$user.username}</xen:title>
+<xen:h1>{xen:phrase bdmedal_award_medal}</xen:h1>
+<xen:navigation>
+	<xen:breadcrumb href="{xen:link full:members, $user}">{$user.username}</xen:breadcrumb>
+</xen:navigation>
 
+<form action="{xen:link 'members/award-medal', $user}" method="post"
+	  class="xenForm formOverlay AutoValidator" data-redirect="yes">
+
+	<dl class="ctrlUnit">
+		<dt><label for="ctrl_medal_id">{xen:phrase bdmedal_medal}:</label></dt>
+		<dd>
+			<select id="ctrl_medal_id" name="medal_id" class="textCtrl">
+				<xen:foreach loop="$medalsGrouped" key="$categoryName" value="$categoryMedals">
+					<optgroup label="{$categoryName}">
+						<xen:foreach loop="$categoryMedals" value="$medal">
+							<option value="{$medal.value}"{xen:if '{$medal.disabled}', ' disabled="disabled"'}>{$medal.label}</option>
+						</xen:foreach>
+					</optgroup>
+				</xen:foreach>
+			</select>
+		</dd>
+	</dl>
+
+	<dl class="ctrlUnit">
+		<dt><label for="ctrl_reason">{xen:phrase bdmedal_award_reason}:</label></dt>
+		<dd>
+			<textarea id="ctrl_reason" name="reason" class="textCtrl Elastic"></textarea>
+		</dd>
+	</dl>
+
+	<dl class="ctrlUnit submitUnit">
+		<dt></dt>
+		<dd>
+			<input type="submit" value="{xen:phrase save}" class="button primary" />
+		</dd>
+	</dl>
+
+	<input type="hidden" name="_xfToken" value="{$visitor.csrf_token_page}" />
+	<input type="hidden" name="_xfConfirm" value="1" />
+</form>
+]]></template>
+    <template title="bdmedal_member_medals" version_id="32" version_string="1.4.6"><![CDATA[<xen:title>{xen:phrase bdmedal_awarded_medals}: {$user.username}</xen:title>
+<xen:h1>{xen:phrase bdmedal_awarded_medals}</xen:h1>
 <xen:navigation>
 	<xen:breadcrumb href="{xen:link full:members, $user}">{$user.username}</xen:breadcrumb>
 </xen:navigation>
@@ -743,9 +789,15 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 		<xen:if is="{$canOrganize} AND {$user.user_id} == {$visitor.user_id}">
 			<a href="{xen:link account/medals}" class="button">{xen:phrase bdmedal_organize_medals}</a>
 		</xen:if>
+		<xen:if is="{$canAwardUser}">
+			<a href="{xen:link members/award-medal, $user}" class="button">{xen:phrase bdmedal_award_medal}</a>
+		</xen:if>
 	</div>
 
 </div>]]></template>
+    <template title="bdmedal_member_view_award_medal_link" version_id="32" version_string="1.4.6"><![CDATA[<xen:if is="{$bdMedal_canAwardUser}">
+	<li><a href="{xen:link members/award-medal, $user}" class="awardMedal OverlayTrigger">{xen:phrase bdmedal_award_medal}</a></li>
+</xen:if>]]></template>
     <template title="bdmedal_member_view_sidebar_middle1" version_id="14" version_string="1.3.5"><![CDATA[<xen:if is="{$user.xf_bdmedal_awarded_cached} AND {xen:property bdMedal_showBlock}">
 <xen:require css="bdmedal.css" />
 
@@ -826,7 +878,14 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 	{xen:helper bdMedal_image, {$content}, 'L'}
 </a>]]></template>
   </templates>
-  <public_template_modifications/>
+  <public_template_modifications>
+    <modification template="member_view" modification_key="bdmedal_member_view_award_medal_link" description="Insert &quot;Award Medal&quot; link into moderator tools menu." execution_order="10" enabled="1" action="preg_replace">
+      <find><![CDATA[#(<a rel="Menu">{xen:phrase moderator_tools}</a>.+?)(</xen:contentcheck>)#s]]></find>
+      <replace><![CDATA[$1
+<xen:include template="bdmedal_member_view_award_medal_link" />
+$2]]></replace>
+    </modification>
+  </public_template_modifications>
   <bb_code_media_sites/>
   <bb_codes/>
 </addon>

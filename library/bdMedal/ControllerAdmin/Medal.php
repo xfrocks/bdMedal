@@ -125,12 +125,12 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
 
             $avoidDuplicated = $this->_input->filterSingle('avoid_duplicated', XenForo_Input::UINT);
             if ($avoidDuplicated) {
-                $allWwarded = $awardedModel->getAllAwarded(array(
+                $allAwarded = $awardedModel->getAllAwarded(array(
                     'medal_id' => $medal['medal_id'],
                     'user_id' => array_keys($users)
                 ));
 
-                foreach ($allWwarded as $awarded) {
+                foreach ($allAwarded as $awarded) {
                     unset($users[$awarded['user_id']]);
                 }
             }

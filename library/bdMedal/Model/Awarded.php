@@ -6,6 +6,17 @@ class bdMedal_Model_Awarded extends XenForo_Model
     const FETCH_MEDAL = 0x02;
     const FETCH_CATEGORY = 0x04;
 
+    public function canAwardUser(array $user, array $viewingUser = null)
+    {
+        $this->standardizeViewingUserReference($viewingUser);
+
+        if ($user['user_id'] == $viewingUser['user_id']) {
+            return false;
+        }
+
+        return XenForo_Permission::hasPermission($viewingUser['permissions'], 'general', 'bdMedal_award');
+    }
+
     public function canViewAwardedUsers($viewingUser = null)
     {
         $this->standardizeViewingUserReference($viewingUser);
