@@ -105,4 +105,47 @@ class bdMedal_Extend_ControllerPublic_Member extends XFCP_bdMedal_Extend_Control
         return $this->responseView('bdMedal_ViewPublic_Member_Medals', 'bdmedal_member_medals', $viewParams);
     }
 
+    public function actionMedalsAwarded()
+    {
+        $medalId = $this->_input->filterSingle('medal_id', XenForo_Input::UINT);
+
+        /** @var bdMedal_Model_Medal $medalModel */
+        $medalModel = $this->getModelFromCache('bdMedal_Model_Medal');
+        /** @var bdMedal_Model_Awarded $awardedModel */
+        $awardedModel = $this->getModelFromCache('bdMedal_Model_Awarded');
+
+        $medal = $medalModel->getMedalById($medalId);
+        if (empty($medal)) {
+            return $this->responseError(new XenForo_Phrase('bdmedal_medal_not_found'), 404);
+        }
+
+        $page = $this->_input->filterSingle('page', XenForo_Input::UINT);
+        $usersPerPage = XenForo_Application::get('options')->membersPerPage;
+
+        $awardedConditions = array(
+            'medal_id' => $medal['medal_id'],
+        );
+        $awardedFetchOptions = array(
+            'join' => bdMedal_Model_Awarded::FETCH_USER,
+            'perPage' => $usersPerPage,
+            'page' => $page,
+        );
+
+        $totalUsers = $awardedModel->countAllAwarded($awardedConditions, $awardedFetchOptions);
+        $this->canonicalizePageNumber($page, $usersPerPage, $totalUsers, 'members/medals/awarded');
+
+        $users = $awardedModel->getAllAwarded($awardedConditions, $awardedFetchOptions);
+
+        $viewParams = array(
+            'medal' => $medal,
+            'users' => $users,
+
+            'totalUsers' => $totalUsers,
+            'page' => $page,
+            'usersPerPage' => $usersPerPage,
+        );
+
+        return $this->responseView('bdMedal_ViewPublic_Member_Medals_Awarded', 'bdmedal_member_medals_awarded', $viewParams);
+    }
+
 }

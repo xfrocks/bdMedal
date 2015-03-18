@@ -220,9 +220,11 @@ class bdMedal_Model_Awarded extends XenForo_Model
         if (!empty($fetchOptions['join'])) {
             if ($fetchOptions['join'] & self::FETCH_USER) {
                 $selectFields .= ',
-					user.*';
+					user.*,
+					awarded.user_id as user_id,
+					awarded.username as username';
                 $joinTables .= '
-					INNER JOIN `xf_user` AS user
+					LEFT JOIN `xf_user` AS user
 						ON (user.user_id = awarded.user_id)';
             }
 

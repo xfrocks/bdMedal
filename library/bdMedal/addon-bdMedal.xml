@@ -643,7 +643,7 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 	<dt><a href="{xen:link help/medals}">{xen:phrase bdmedal_medals}</a></dt>
 	<dd>{xen:phrase bdmedal_help_page_explain}</dd>
 </dl>]]></template>
-    <template title="bdmedal_help_medals" version_id="0" version_string=""><![CDATA[<xen:title>{xen:phrase bdmedal_medals}</xen:title>
+    <template title="bdmedal_help_medals" version_id="32" version_string="1.4.6"><![CDATA[<xen:title>{xen:phrase bdmedal_medals}</xen:title>
 
 <xen:require css="bdmedal.css" />
 
@@ -659,7 +659,11 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 				<ol>
 					<xen:foreach loop="$category.medals" value="$medal">
 						<li class="primaryContent">
-							<xen:include template="bdmedal_medal" />
+							<xen:include template="bdmedal_medal">
+								<xen:set var="$controls"><xen:if is="{$noAwardeds}">
+									<a href="{xen:link 'members/medals/awarded', '', 'medal_id={$medal.medal_id}'}" target="_blank" class="OverlayTrigger">{xen:phrase bdmedal_awarded_users}</a>
+								</xen:if></xen:set>
+							</xen:include>
 						</li>
 					</xen:foreach>
 				</ol>
@@ -794,6 +798,33 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 		</xen:if>
 	</div>
 
+</div>]]></template>
+    <template title="bdmedal_member_medals_awarded" version_id="32" version_string="1.4.6"><![CDATA[<xen:title>{$medal.name} - {xen:phrase bdmedal_awarded_users}{xen:helper pagenumber, $page}</xen:title>
+<xen:h1>{xen:phrase bdmedal_awarded_users}</xen:h1>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:link help/medals}">{xen:phrase bdmedal_medals}</xen:breadcrumb>
+	<xen:breadcrumb href="{xen:link help/medals}#medal-{$medal.medal_id}">{$medal.name}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:container var="$head.canonical">
+	<link rel="canonical" href="{xen:link 'canonical:members/medals/awarded', '', 'page={$page}', 'medal_id={$medal.medal_id}'}" /></xen:container>
+
+<xen:require css="member_list.css" />
+<xen:require css="xenforo_member_list_item.css" />
+
+<div class="section overlayScroll">
+	<ol class="memberList">
+		<xen:foreach loop="$users" value="$user">
+			<xen:include template="member_list_item">
+				<xen:set var="$noOverlay">1</xen:set>
+			</xen:include>
+		</xen:foreach>
+	</ol>
+
+	<div class="pageNavLinkGroup primaryContent">
+		<xen:pagenav link="members/medals/awarded" page="{$page}" perpage="{$usersPerPage}" total="{$totalUsers}" linkparams="{xen:array 'medal_id={$medal.medal_id}'}" />
+	</div>
 </div>]]></template>
     <template title="bdmedal_member_view_award_medal_link" version_id="32" version_string="1.4.6"><![CDATA[<xen:if is="{$bdMedal_canAwardUser}">
 	<li><a href="{xen:link members/award-medal, $user}" class="awardMedal OverlayTrigger">{xen:phrase bdmedal_award_medal}</a></li>

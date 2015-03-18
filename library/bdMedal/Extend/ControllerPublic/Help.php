@@ -14,6 +14,7 @@ class bdMedal_Extend_ControllerPublic_Help extends XFCP_bdMedal_Extend_Controlle
             'order' => 'category',
         ));
 
+        $awardeds = array();
         $awardedConditions = array();
         $awardedFetchOptions = array('join' => bdMedal_Model_Awarded::FETCH_USER);
         $awardedCount = $awardedModel->countAllAwarded($awardedConditions, $awardedFetchOptions);
@@ -21,16 +22,13 @@ class bdMedal_Extend_ControllerPublic_Help extends XFCP_bdMedal_Extend_Controlle
         if ($awardedCount < $awardedUsersMax * count($medals)) {
             $awardeds = $awardedModel->getAllAwarded($awardedConditions, $awardedFetchOptions);
         } else {
-            $awardeds = array();
-
-            foreach ($medals as $medal) {
-                $awardeds = array_merge($awardeds, $awardedModel->getAllAwarded(array_merge($awardedConditions, array('medal_id' => $medal['medal_id'])), $awardedFetchOptions));
-            }
+            $noAwardeds = true;
         }
 
         $viewParams = array(
             'medals' => $medals,
             'awardeds' => $awardeds,
+            'noAwardeds' => !empty($noAwardeds),
 
             'canViewAwardedUsers' => $awardedModel->canViewAwardedUsers(),
             'showAll' => $this->_input->filterSingle('show', XenForo_Input::STRING) == 'all',
