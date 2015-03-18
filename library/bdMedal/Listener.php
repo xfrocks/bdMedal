@@ -29,23 +29,23 @@ class bdMedal_Listener
 
     public static function init_dependencies(XenForo_Dependencies_Abstract $dependencies, array $data)
     {
-        XenForo_Template_Helper_Core::$helperCallbacks['bdmedal_image'] = array(
+        XenForo_Template_Helper_Core::$helperCallbacks[strtolower('bdMedal_image')] = array(
             'bdMedal_Model_Medal',
             'helperMedalImage'
         );
-        XenForo_Template_Helper_Core::$helperCallbacks['bdmedal_imagesize'] = array(
+        XenForo_Template_Helper_Core::$helperCallbacks[strtolower('bdMedal_imageSize')] = array(
             'bdMedal_Model_Medal',
             'helperMedalImageSize'
         );
-        XenForo_Template_Helper_Core::$helperCallbacks['bdmedal_getoption'] = array(
+        XenForo_Template_Helper_Core::$helperCallbacks[strtolower('bdMedal_getOption')] = array(
             'bdMedal_Option',
             'get'
         );
 
         // sondh@2012-10-18
         // these two helper is kept for legacy reason only
-        XenForo_Template_Helper_Core::$helperCallbacks['medalimage'] = XenForo_Template_Helper_Core::$helperCallbacks['bdmedal_image'];
-        XenForo_Template_Helper_Core::$helperCallbacks['medalimagesize'] = XenForo_Template_Helper_Core::$helperCallbacks['bdmedal_imagesize'];
+        XenForo_Template_Helper_Core::$helperCallbacks[strtolower('medalImage')] = XenForo_Template_Helper_Core::$helperCallbacks['bdmedal_image'];
+        XenForo_Template_Helper_Core::$helperCallbacks[strtolower('medalImageSize')] = XenForo_Template_Helper_Core::$helperCallbacks['bdmedal_imagesize'];
 
         // sondh@2012-11-04
         // add rebuilder
@@ -87,35 +87,6 @@ class bdMedal_Listener
         }
     }
 
-    public static function template_create($templateName, array &$params, XenForo_Template_Abstract $template)
-    {
-        static $first = true;
-        if ($first === true) {
-            $template->preloadTemplate('bdmedal_message_medals');
-            $first = false;
-        }
-
-        switch ($templateName) {
-            case 'member_view':
-                $template->preloadTemplate('bdmedal_member_view_sidebar_middle1');
-                $template->preloadTemplate('bdmedal_member_view_tabs_heading');
-                $template->preloadTemplate('bdmedal_member_view_tabs_content');
-                break;
-            case 'help_index':
-                $template->preloadTemplate('bdmedal_help_index_extra');
-                break;
-            case 'help_wrapper':
-                $template->preloadTemplate('bdmedal_help_sidebar_links');
-                break;
-            case 'PAGE_CONTAINER':
-                $template->preloadTemplate('bdmedal_navigation_tabs_help');
-                break;
-            case 'tools_rebuild':
-                $template->preloadTemplate('bdmedal_tools_rebuild');
-                break;
-        }
-    }
-
     public static function template_hook($hookName, &$contents, array $hookParams, XenForo_Template_Abstract $template)
     {
         $positionInPost = XenForo_Application::get('options')->get('bdMedal_positionInPost');
@@ -142,29 +113,6 @@ class bdMedal_Listener
                 $ourTemplate = $template->create('bdmedal_message_medals', $hookParams);
                 $contents .= $ourTemplate->render();
             }
-        }
-
-        switch ($hookName) {
-            case 'member_view_sidebar_middle1':
-            case 'member_view_tabs_heading':
-            case 'member_view_tabs_content':
-            case 'help_index_extra':
-            case 'help_sidebar_links':
-            case 'navigation_tabs_help':
-                $ourTemplate = $template->create('bdmedal_' . $hookName, $template->getParams());
-                $rendered = $ourTemplate->render();
-                $contents .= $rendered;
-                break;
-        }
-    }
-
-    public static function template_post_render($templateName, &$content, array &$containerData, XenForo_Template_Abstract $template)
-    {
-        if ($templateName == 'tools_rebuild') {
-            $ourTemplate = $template->create('bdmedal_tools_rebuild', $template->getParams());
-            $html = $ourTemplate->render();
-
-            $content .= $html;
         }
     }
 

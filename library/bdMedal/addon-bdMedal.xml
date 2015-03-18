@@ -319,7 +319,13 @@
 	</xen:if>
 </xen:form>]]></template>
   </admin_templates>
-  <admin_template_modifications/>
+  <admin_template_modifications>
+    <modification template="tools_rebuild" modification_key="bdmedal_tools_rebuild" description="Insert rebuild cache forms." execution_order="10" enabled="1" action="preg_replace">
+      <find><![CDATA[#^.+$#s]]></find>
+      <replace><![CDATA[$0
+<xen:include template="bdmedal_tools_rebuild" />]]></replace>
+    </modification>
+  </admin_template_modifications>
   <code_events/>
   <code_event_listeners>
     <listener event_id="init_dependencies" execute_order="10" callback_class="bdMedal_Listener" callback_method="init_dependencies" active="1" hint="" description=""/>
@@ -327,9 +333,7 @@
     <listener event_id="load_class_importer" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class_importer" active="1" hint="" description=""/>
     <listener event_id="load_class_model" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class" active="1" hint="" description=""/>
     <listener event_id="navigation_tabs" execute_order="10" callback_class="bdMedal_Listener" callback_method="navigation_tabs" active="1" hint="" description=""/>
-    <listener event_id="template_create" execute_order="10" callback_class="bdMedal_Listener" callback_method="template_create" active="1" hint="" description=""/>
     <listener event_id="template_hook" execute_order="10" callback_class="bdMedal_Listener" callback_method="template_hook" active="1" hint="" description=""/>
-    <listener event_id="template_post_render" execute_order="10" callback_class="bdMedal_Listener" callback_method="template_post_render" active="1" hint="" description=""/>
   </code_event_listeners>
   <cron/>
   <email_templates/>
@@ -522,7 +526,7 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
   <style_properties>
     <property property_name="bdMedal_messageImageSize" property_type="scalar" definition="1" group_name="message" title="[bd] Medal - Image Size" description="The size of the medal images. By default, there is only 2 sizes available: L (original) and T (tiny, 12px). You can render medium and small images by configure the options. Be sure to double check here if medals do not show up in messages." css_components="" scalar_type="" scalar_parameters="" display_order="11010" sub_group="[bd] Medal"><![CDATA[L]]></property>
     <property property_name="bdMedal_messageMax" property_type="scalar" definition="1" group_name="message" title="[bd] Medal - Maximum" description="You can limit the maximum number of medals to display in messages here. If this property is set, only the latest X medals will show up." css_components="" scalar_type="number" scalar_parameters="" display_order="11020" sub_group="[bd] Medal"><![CDATA[0]]></property>
-    <property property_name="bdMedal_showBlock" property_type="scalar" definition="1" group_name="memberProfile" title="Show Medals Block" description="Display a block of awarded medals in the left sidebar." css_components="" scalar_type="boolean" scalar_parameters="" display_order="11000" sub_group="Sidebar"><![CDATA[0]]></property>
+    <property property_name="bdMedal_showBlock" property_type="scalar" definition="1" group_name="memberProfile" title="Show Medals Block" description="Display a block of awarded medals in the left sidebar." css_components="" scalar_type="boolean" scalar_parameters="" display_order="11000" sub_group="Sidebar"><![CDATA[1]]></property>
     <property property_name="bdMedal_profileBlockImageSize" property_type="scalar" definition="1" group_name="memberProfile" title="Medal Block Image Size" description="The size of the medal images. By default, there is only 2 sizes available: L (original) and T (tiny, 12px). You can render medium and small images by configure the options. Be sure to double check here if medals do not show up in profiles." css_components="" scalar_type="" scalar_parameters="" display_order="11001" sub_group="Sidebar"><![CDATA[L]]></property>
     <property property_name="bdMedal_profileBlockMax" property_type="scalar" definition="1" group_name="memberProfile" title="Block Maximum Medals" description="You can limit the maximum number of medals to display in messages here. If this property is set, only the latest X medals will show up." css_components="" scalar_type="number" scalar_parameters="" display_order="11002" sub_group="Sidebar"><![CDATA[0]]></property>
     <property property_name="bdMedal_showTab" property_type="scalar" definition="1" group_name="memberProfile" title="Show Medals Tab" description="Display a tab of awarded medals." css_components="" scalar_type="boolean" scalar_parameters="" display_order="11000" sub_group="Tabs"><![CDATA[1]]></property>
@@ -885,7 +889,6 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 	</xen:foreach>
 </xen:if>]]></template>
     <template title="bdmedal_message_medals_manual" version_id="18" version_string="1.4.1"><![CDATA[<xen:hook name="bdmedal_message_medals_manual" params="{xen:array 'user={$user}'}" />]]></template>
-    <template title="bdmedal_navigation_tabs_help" version_id="14" version_string="1.3.5"><![CDATA[<xen:if is="{xen:helper bdMedal_getOption, listPage} == 'help'"><li><a href="{xen:link help/medals}">{xen:phrase bdmedal_medals}</a></li></xen:if>]]></template>
     <template title="bdmedal_news_feed_item_medal_awarded" version_id="14" version_string="1.3.5"><![CDATA[<h3 class="description">
 
 	<xen:if is="{$content.user_id} == {$visitor.user_id}">
@@ -910,11 +913,37 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 </a>]]></template>
   </templates>
   <public_template_modifications>
+    <modification template="help_index" modification_key="bdmedal_help_index_extra" description="Insert help index link." execution_order="10" enabled="1" action="preg_replace">
+      <find><![CDATA[#<xen:hook name="help_index_extra"[^/]+/>#]]></find>
+      <replace><![CDATA[$0
+<xen:include template="bdmedal_help_index_extra" />]]></replace>
+    </modification>
+    <modification template="help_wrapper" modification_key="bdmedal_help_sidebar_links" description="Insert help sidebar link." execution_order="10" enabled="1" action="preg_replace">
+      <find><![CDATA[#(<xen:hook name="help_sidebar_links"[^>]*>.+?)(</xen:hook>)#s]]></find>
+      <replace><![CDATA[$1
+<xen:include template="bdmedal_help_sidebar_links" />
+$2]]></replace>
+    </modification>
     <modification template="member_view" modification_key="bdmedal_member_view_award_medal_link" description="Insert &quot;Award Medal&quot; link into moderator tools menu." execution_order="10" enabled="1" action="preg_replace">
       <find><![CDATA[#(<a rel="Menu">{xen:phrase moderator_tools}</a>.+?)(</xen:contentcheck>)#s]]></find>
       <replace><![CDATA[$1
 <xen:include template="bdmedal_member_view_award_medal_link" />
 $2]]></replace>
+    </modification>
+    <modification template="member_view" modification_key="bdmedal_member_view_sidebar_middle1" description="Insert sidebar block." execution_order="10" enabled="1" action="preg_replace">
+      <find><![CDATA[#<xen:hook name="member_view_sidebar_middle1"[^/]+/>#]]></find>
+      <replace><![CDATA[$0
+<xen:include template="bdmedal_member_view_sidebar_middle1" />]]></replace>
+    </modification>
+    <modification template="member_view" modification_key="bdmedal_member_view_tabs_content" description="Insert tab content." execution_order="10" enabled="1" action="preg_replace">
+      <find><![CDATA[#<xen:hook name="member_view_tabs_content"[^/]+/>#]]></find>
+      <replace><![CDATA[$0
+<xen:include template="bdmedal_member_view_tabs_content" />]]></replace>
+    </modification>
+    <modification template="member_view" modification_key="bdmedal_member_view_tabs_heading" description="Insert tab heading." execution_order="10" enabled="1" action="preg_replace">
+      <find><![CDATA[#<xen:hook name="member_view_tabs_heading"[^/]+/>#]]></find>
+      <replace><![CDATA[$0
+<xen:include template="bdmedal_member_view_tabs_heading" />]]></replace>
     </modification>
   </public_template_modifications>
   <bb_code_media_sites/>
