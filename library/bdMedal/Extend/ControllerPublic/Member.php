@@ -114,6 +114,10 @@ class bdMedal_Extend_ControllerPublic_Member extends XFCP_bdMedal_Extend_Control
         /** @var bdMedal_Model_Awarded $awardedModel */
         $awardedModel = $this->getModelFromCache('bdMedal_Model_Awarded');
 
+        if (!$awardedModel->canViewAwardedUsers()) {
+            return $this->responseNoPermission();
+        }
+
         $medal = $medalModel->getMedalById($medalId);
         if (empty($medal)) {
             return $this->responseError(new XenForo_Phrase('bdmedal_medal_not_found'), 404);
