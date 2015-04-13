@@ -87,35 +87,6 @@ class bdMedal_Listener
         }
     }
 
-    public static function template_hook($hookName, &$contents, array $hookParams, XenForo_Template_Abstract $template)
-    {
-        $positionInPost = XenForo_Application::get('options')->get('bdMedal_positionInPost');
-
-        if ($positionInPost != 'manual') {
-            if (strpos($positionInPost, $hookName) === 0) {
-                // found the position
-                $ourTemplate = $template->create('bdmedal_message_medals', $hookParams);
-                $rendered = $ourTemplate->render();
-
-                // output
-                $positionInternal = trim(str_replace($hookName, '', $positionInPost), '_');
-                switch ($positionInternal) {
-                    case 'top':
-                        $contents = $rendered . $contents;
-                        break;
-                    case 'bottom':
-                        $contents .= $rendered;
-                        break;
-                }
-            }
-        } else {
-            if ($hookName == 'bdmedal_message_medals_manual') {
-                $ourTemplate = $template->create('bdmedal_message_medals', $hookParams);
-                $contents .= $ourTemplate->render();
-            }
-        }
-    }
-
     public static function file_health_check(XenForo_ControllerAdmin_Abstract $controller, array &$hashes)
     {
         $hashes += bdMedal_FileSums::getHashes();

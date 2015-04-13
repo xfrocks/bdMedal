@@ -333,7 +333,6 @@
     <listener event_id="load_class_importer" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class_importer" active="1" hint="" description=""/>
     <listener event_id="load_class_model" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class" active="1" hint="" description=""/>
     <listener event_id="navigation_tabs" execute_order="10" callback_class="bdMedal_Listener" callback_method="navigation_tabs" active="1" hint="" description=""/>
-    <listener event_id="template_hook" execute_order="10" callback_class="bdMedal_Listener" callback_method="template_hook" active="1" hint="" description=""/>
   </code_event_listeners>
   <cron/>
   <email_templates/>
@@ -946,6 +945,23 @@ $2]]></replace>
       <find><![CDATA[#<xen:hook name="member_view_tabs_heading"[^/]+/>#]]></find>
       <replace><![CDATA[$0
 <xen:include template="bdmedal_member_view_tabs_heading" />]]></replace>
+    </modification>
+    <modification template="message_user_info" modification_key="bdmedal_message_user_info_bottom" description="Insert medals at bottoms positions." execution_order="10" enabled="1" action="preg_replace">
+      <find><![CDATA[#(<xen:hook name="([^"]+)".+?)(</xen:hook>)#s]]></find>
+      <replace><![CDATA[$1
+
+<xen:if is="{xen:helper bdMedal_getOption, positionInPost} == '$2_bottom'">
+	<xen:include template="bdmedal_message_medals" />
+</xen:if>
+
+$3]]></replace>
+    </modification>
+    <modification template="message_user_info" modification_key="bdmedal_message_user_info_top" description="Insert medals at top positions." execution_order="10" enabled="1" action="preg_replace">
+      <find><![CDATA[#<xen:hook name="([^"]+)"#]]></find>
+      <replace><![CDATA[<xen:if is="{xen:helper bdMedal_getOption, positionInPost} == '$1_top'">
+	<xen:include template="bdmedal_message_medals" />
+</xen:if>
+$0]]></replace>
     </modification>
   </public_template_modifications>
   <bb_code_media_sites/>
