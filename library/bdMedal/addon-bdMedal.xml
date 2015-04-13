@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="bdMedal" title="[bd] Medal" version_string="1.5.0" version_id="36" url="" install_callback_class="bdMedal_Installer" install_callback_method="install" uninstall_callback_class="bdMedal_Installer" uninstall_callback_method="uninstall">
+<addon addon_id="bdMedal" title="[bd] Medal" version_string="1.5.0b" version_id="37" url="" install_callback_class="bdMedal_Installer" install_callback_method="install" uninstall_callback_class="bdMedal_Installer" uninstall_callback_method="uninstall">
   <admin_navigation>
     <navigation navigation_id="bdMedal" parent_navigation_id="applications" display_order="9999" link="medal-medals" admin_permission_id="bdMedal" debug_only="0" hide_no_children="0"/>
     <navigation navigation_id="bdMedal_Category" parent_navigation_id="bdMedal" display_order="10" link="medal-categories" admin_permission_id="bdMedal" debug_only="0" hide_no_children="0"/>
@@ -494,7 +494,7 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <phrase title="option_bdMedal_listPage" version_id="15" version_string="1.3.6"><![CDATA[List Page Location]]></phrase>
     <phrase title="option_bdMedal_listPage_explain" version_id="15" version_string="1.3.6"><![CDATA[You can choose to have the medals list page a sub-page in the Help page or let it have a dedicated navigation tab.]]></phrase>
     <phrase title="option_bdMedal_positionInPost" version_id="5" version_string="1.0.1"><![CDATA[Medal Position]]></phrase>
-    <phrase title="option_bdMedal_positionInPost_explain" version_id="18" version_string="1.4.1"><![CDATA[[bd] Medal System: Select the position you want the medals to show up. If you want to display the medal elsewhere, please select the manual option and edit the template yourself, simply adding &lt;xen:include template="bdmedal_message_medals_manual" /&gt; to your "message_user_info" template.]]></phrase>
+    <phrase title="option_bdMedal_positionInPost_explain" version_id="36" version_string="1.5.0"><![CDATA[[bd] Medal System: Select the position you want the medals to show up. If you want to display the medal elsewhere, please select the manual option and edit the template yourself, simply adding &lt;xen:include template="bdmedal_message_medals" /&gt; to your "message_user_info" template. You may also use &lt;xen:include template="bdmedal_post_medals" /&gt; in "post" template.]]></phrase>
     <phrase title="option_group_bdMedal" version_id="8" version_string="1.2.1"><![CDATA[[bd] Medal]]></phrase>
     <phrase title="option_group_bdMedal_description" version_id="12" version_string="1.3.3"><![CDATA[Options for [bd] Medal add-on.]]></phrase>
     <phrase title="permission_general_bdMedal_award" version_id="32" version_string="1.4.6"><![CDATA[Award medals]]></phrase>
@@ -890,7 +890,6 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 	</xen:foreach>
 	</div>
 </xen:if>]]></template>
-    <template title="bdmedal_message_medals_manual" version_id="18" version_string="1.4.1"><![CDATA[<xen:hook name="bdmedal_message_medals_manual" params="{xen:array 'user={$user}'}" />]]></template>
     <template title="bdmedal_news_feed_item_medal_awarded" version_id="14" version_string="1.3.5"><![CDATA[<h3 class="description">
 
 	<xen:if is="{$content.user_id} == {$visitor.user_id}">
@@ -913,6 +912,9 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
 <a href="{xen:link 'help/medals'}#medal-{$content.medal_id}" class="attachedImages">
 	{xen:helper bdMedal_image, {$content}, 'L'}
 </a>]]></template>
+    <template title="bdmedal_post_medals" version_id="36" version_string="1.5.0"><![CDATA[<xen:include template="bdmedal_message_medals">
+	<xen:map from="$post" to="$user" />
+</xen:include>]]></template>
   </templates>
   <public_template_modifications>
     <modification template="help_index" modification_key="bdmedal_help_index_extra" description="Insert help index link." execution_order="10" enabled="1" action="preg_replace">
