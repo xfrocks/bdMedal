@@ -4,19 +4,7 @@ class bdMedal_Listener
 {
     public static function load_class($class, array &$extend)
     {
-        static $classes = array(
-            'XenForo_ControllerAdmin_User',
-
-            'XenForo_ControllerPublic_Account',
-            'XenForo_ControllerPublic_Member',
-            'XenForo_ControllerPublic_Help',
-
-            'XenForo_Model_Import',
-        );
-
-        if (in_array($class, $classes)) {
-            $extend[] = str_replace('XenForo_', 'bdMedal_Extend_', $class);
-        }
+        $extend[] = str_replace('XenForo_', 'bdMedal_Extend_', $class);
     }
 
     public static function load_class_importer($class, array &$extend)
