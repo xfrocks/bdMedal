@@ -8,44 +8,45 @@ class bdMedal_Installer
     protected static $_tables = array(
         'category' => array(
             'createQuery' => 'CREATE TABLE IF NOT EXISTS `xf_bdmedal_category` (
-				`category_id` INT(10) UNSIGNED AUTO_INCREMENT
-				,`name` VARCHAR(255) NOT NULL
-				,`description` TEXT
-				,`display_order` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
-				, PRIMARY KEY (`category_id`)
-				
-			) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;',
+                `category_id` INT(10) UNSIGNED AUTO_INCREMENT
+                ,`name` VARCHAR(255) NOT NULL
+                ,`description` TEXT
+                ,`display_order` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
+                , PRIMARY KEY (`category_id`)
+                
+            ) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;',
             'dropQuery' => 'DROP TABLE IF EXISTS `xf_bdmedal_category`',
         ),
         'medal' => array(
             'createQuery' => 'CREATE TABLE IF NOT EXISTS `xf_bdmedal_medal` (
-				`medal_id` INT(10) UNSIGNED AUTO_INCREMENT
-				,`name` VARCHAR(255) NOT NULL
-				,`category_id` INT(10) UNSIGNED NOT NULL
-				,`description` TEXT
-				,`display_order` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
-				,`user_count` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
-				,`last_award_date` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
-				,`last_award_user_id` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
-				,`last_award_username` VARCHAR(50) NOT NULL DEFAULT \'\'
-				,`image_date` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
-				, PRIMARY KEY (`medal_id`)
-				, INDEX `category_id` (`category_id`)
-			) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;',
+                `medal_id` INT(10) UNSIGNED AUTO_INCREMENT
+                ,`name` VARCHAR(255) NOT NULL
+                ,`category_id` INT(10) UNSIGNED NOT NULL
+                ,`description` TEXT
+                ,`display_order` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
+                ,`user_count` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
+                ,`last_award_date` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
+                ,`last_award_user_id` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
+                ,`last_award_username` VARCHAR(50) NOT NULL DEFAULT \'\'
+                ,`image_date` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
+                ,`is_svg` TINYINT(4) UNSIGNED NOT NULL DEFAULT \'0\'
+                , PRIMARY KEY (`medal_id`)
+                , INDEX `category_id` (`category_id`)
+            ) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;',
             'dropQuery' => 'DROP TABLE IF EXISTS `xf_bdmedal_medal`',
         ),
         'awarded' => array(
             'createQuery' => 'CREATE TABLE IF NOT EXISTS `xf_bdmedal_awarded` (
-				`awarded_id` INT(10) UNSIGNED AUTO_INCREMENT
-				,`medal_id` INT(10) UNSIGNED NOT NULL
-				,`user_id` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
-				,`username` VARCHAR(50) NOT NULL DEFAULT \'0\'
-				,`award_date` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
-				,`award_reason` TEXT
-				,`adjusted_display_order` INT(11) NOT NULL DEFAULT \'0\'
-				, PRIMARY KEY (`awarded_id`)
-				, INDEX `medal_id` (`medal_id`)
-			) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;',
+                `awarded_id` INT(10) UNSIGNED AUTO_INCREMENT
+                ,`medal_id` INT(10) UNSIGNED NOT NULL
+                ,`user_id` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
+                ,`username` VARCHAR(50) NOT NULL DEFAULT \'0\'
+                ,`award_date` INT(10) UNSIGNED NOT NULL DEFAULT \'0\'
+                ,`award_reason` TEXT
+                ,`adjusted_display_order` INT(11) NOT NULL DEFAULT \'0\'
+                , PRIMARY KEY (`awarded_id`)
+                , INDEX `medal_id` (`medal_id`)
+            ) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;',
             'dropQuery' => 'DROP TABLE IF EXISTS `xf_bdmedal_awarded`',
         ),
     );
@@ -73,6 +74,14 @@ class bdMedal_Installer
             'showColumnsQuery' => 'SHOW COLUMNS FROM `xf_bdmedal_awarded` LIKE \'adjusted_display_order\'',
             'alterTableAddColumnQuery' => 'ALTER TABLE `xf_bdmedal_awarded` ADD COLUMN `adjusted_display_order` INT(11) NOT NULL DEFAULT \'0\'',
             'alterTableDropColumnQuery' => 'ALTER TABLE `xf_bdmedal_awarded` DROP COLUMN `adjusted_display_order`',
+        ),
+        array(
+            'table' => 'xf_bdmedal_medal',
+            'field' => 'is_svg',
+            'showTablesQuery' => 'SHOW TABLES LIKE \'xf_bdmedal_medal\'',
+            'showColumnsQuery' => 'SHOW COLUMNS FROM `xf_bdmedal_medal` LIKE \'is_svg\'',
+            'alterTableAddColumnQuery' => 'ALTER TABLE `xf_bdmedal_medal` ADD COLUMN `is_svg` TINYINT(4) UNSIGNED NOT NULL DEFAULT \'0\'',
+            'alterTableDropColumnQuery' => 'ALTER TABLE `xf_bdmedal_medal` DROP COLUMN `is_svg`',
         ),
     );
 

@@ -151,10 +151,22 @@ class bdMedal_Model_Medal extends XenForo_Model
 
     public static function helperMedalImage($medal, $size = 's')
     {
+        $size = strtolower($size);
         $url = self::getImageUrl($medal, $size);
+        $imageSize = self::helperMedalImageSize($size);
 
-        if (!empty($url)) {
-            return "<img src=\"$url\" />";
+        if (!empty($url) && $imageSize !== 0) {
+            $attr = '';
+            if ($imageSize > 0) {
+                $attr = "width=\"$imageSize\" height=\"$imageSize\" ";
+            }
+
+            $classIsSvg = '';
+            if (!empty($medal['is_svg'])) {
+                $classIsSvg = ' medal-svg';
+            }
+
+            return "<img src=\"$url\" class=\"size-$size$classIsSvg\" $attr/>";
         } else {
             return '';
         }
@@ -174,12 +186,15 @@ class bdMedal_Model_Medal extends XenForo_Model
 
     protected static function _getImageInternal(array $medal, $size)
     {
-        if (empty($medal['medal_id']) OR empty($medal['image_date']))
+        if (empty($medal['medal_id']) OR empty($medal['image_date'])) {
             return '';
-        $size = strtolower($size);
-        // we should check size with bdMedal_DataWriter_Medal::getImageSizes() but that's
-        // too strictly I guess...
+        }
 
+        if (!empty($medal['is_svg'])) {
+            return "/medal/{$medal['medal_id']}_{$medal['image_date']}.svg";
+        }
+
+        $size = strtolower($size);
         return "/medal/{$medal['medal_id']}_{$medal['image_date']}{$size}.jpg";
     }
 

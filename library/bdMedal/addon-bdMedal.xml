@@ -185,7 +185,16 @@
 	<xen:spinboxunit label="{xen:phrase bdmedal_display_order}:" name="display_order" value="{$medal.display_order}" />
 	
 	<xen:uploadunit label="{xen:phrase bdmedal_image}:" name="image">
-		<div id="imageHtml"><xen:if is="{$medal.images}"><xen:foreach loop="$medal.images" key="$imageSizeCode" value="$image"><img src="{$image}" alt="{$imageSizeCode}" title="{$imageSizeCode}" style="max-height: 48px" /> </xen:foreach></xen:if></div>
+		<xen:if hascontent="true">
+			<div id="imageHtml">
+				<xen:contentcheck>
+					{xen:helper bdMedal_image, $medal, l}
+					{xen:helper bdMedal_image, $medal, m}
+					{xen:helper bdMedal_image, $medal, s}
+					{xen:helper bdMedal_image, $medal, t}
+				</xen:contentcheck>
+			</div>
+		</xen:if>
 	</xen:uploadunit>
 	<xen:if is="{xen:helper bdMedal_imageSize, m} > 0"><xen:uploadunit label="{xen:phrase bdmedal_image_m}:" name="image_m" hint="{xen:phrase optional}" explain="{xen:phrase bdmedal_image_m_s_explain}" /></xen:if>
 	<xen:if is="{xen:helper bdMedal_imageSize, s} > 0"><xen:uploadunit label="{xen:phrase bdmedal_image_s}:" name="image_s" hint="{xen:phrase optional}" explain="{xen:phrase bdmedal_image_m_s_explain}" /></xen:if>
@@ -486,7 +495,7 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <phrase title="option_bdMedal_defaultAvoidDuplicated" version_id="28" version_string="1.4.5"><![CDATA[Default to Avoid Duplicated]]></phrase>
     <phrase title="option_bdMedal_defaultAvoidDuplicated_explain" version_id="28" version_string="1.4.5"><![CDATA[Enable this option to turn on "Avoid Duplicated" option in manual medal award form in AdminCP.]]></phrase>
     <phrase title="option_bdMedal_imageSizeM" version_id="8" version_string="1.2.1"><![CDATA[Image Medium]]></phrase>
-    <phrase title="option_bdMedal_imageSizeM_explain" version_id="8" version_string="1.2.1"><![CDATA[Normally, medal image will be store in 2 sizes: original size (code name "L") and tiny size (code name "T"). If you wish to use additional image size, you can specify the maximum width / height here. An image will be prepared with the code name "S" for all medals from now on (you will have to re-upload image for old medals). Leave it zero to disable this feature.]]></phrase>
+    <phrase title="option_bdMedal_imageSizeM_explain" version_id="37" version_string="1.5.0b"><![CDATA[Normally, medal image will be store in 2 sizes: original size (code name "L") and tiny size (code name "T"). If you wish to use additional image size, you can specify the maximum width / height here. An image will be prepared with the code name "M" for all medals from now on (you will have to re-upload image for old medals). Leave it zero to disable this feature.]]></phrase>
     <phrase title="option_bdMedal_imageSizeS" version_id="8" version_string="1.2.1"><![CDATA[Image Small]]></phrase>
     <phrase title="option_bdMedal_imageSizeS_explain" version_id="8" version_string="1.2.1"><![CDATA[Normally, medal image will be store in 2 sizes: original size (code name "L") and tiny size (code name "T"). If you wish to use additional image size, you can specify the maximum width / height here. An image will be prepared with the code name "S" for all medals from now on (you will have to re-upload image for old medals). Leave it zero to disable this feature.]]></phrase>
     <phrase title="option_bdMedal_listOrder" version_id="16" version_string="1.3.7"><![CDATA[List Order]]></phrase>

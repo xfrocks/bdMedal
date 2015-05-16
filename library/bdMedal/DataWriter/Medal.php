@@ -13,21 +13,27 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
             throw new XenForo_Exception($upload->getErrors(), true);
         }
 
-        if (!$upload->isImage()) {
-            throw new XenForo_Exception(new XenForo_Phrase('uploaded_file_is_not_valid_image'), true);
-        };
+        if ($upload->isImage()) {
+            $imageType = $upload->getImageInfoField('type');
 
-        $imageType = $upload->getImageInfoField('type');
-        if (!in_array($imageType, array(
-            IMAGETYPE_GIF,
-            IMAGETYPE_JPEG,
-            IMAGETYPE_PNG
-        ))
-        ) {
+            if (!in_array($imageType, array(
+                IMAGETYPE_GIF,
+                IMAGETYPE_JPEG,
+                IMAGETYPE_PNG,
+            ))
+            ) {
+                throw new XenForo_Exception(new XenForo_Phrase('uploaded_file_is_not_valid_image'), true);
+            }
+
+            $this->set('is_svg', 0);
+            $this->setExtraData(self::IMAGE_PREPARED, $this->_prepareImage($upload, $uploadSizeCode));
+        } elseif (bdMedal_Helper_Svg::isSvg($upload)) {
+            $this->set('is_svg', 1);
+            $this->setExtraData(self::IMAGE_PREPARED, $this->_prepareSvg($upload));
+        } else {
             throw new XenForo_Exception(new XenForo_Phrase('uploaded_file_is_not_valid_image'), true);
         }
 
-        $this->setExtraData(self::IMAGE_PREPARED, $this->_prepareImage($upload, $uploadSizeCode));
         $this->set('image_date', XenForo_Application::$time);
     }
 
@@ -53,7 +59,7 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
                     continue;
                 }
 
-                $newTempFile = tempnam(XenForo_Helper_File::getTempDir(), 'xfa');
+                $newTempFile = tempnam(XenForo_Helper_File::getTempDir(), 'bdMedal');
 
                 if ($maxDimensions == self::SIZE_ORIGINAL) {
                     copy($fileName, $newTempFile);
@@ -72,7 +78,7 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
                 $outputFiles[$sizeCode] = $newTempFile;
             }
         } else {
-            $newTempFile = tempnam(XenForo_Helper_File::getTempDir(), 'xfa');
+            $newTempFile = tempnam(XenForo_Helper_File::getTempDir(), 'bdMedal');
             copy($fileName, $newTempFile);
             $outputFiles[$uploadSizeCode] = $newTempFile;
         }
@@ -85,6 +91,20 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
             }
 
             throw new XenForo_Exception('Non-image passed in to _prepareImage');
+        }
+
+        return $outputFiles;
+    }
+
+    protected function _prepareSvg(XenForo_Upload $upload)
+    {
+        $outputFiles = array();
+
+        $fileName = $upload->getTempFile();
+        foreach (array_keys(self::getImageSizes()) as $sizeCode) {
+            $newTempFile = tempnam(XenForo_Helper_File::getTempDir(), 'bdMedal');
+            copy($fileName, $newTempFile);
+            $outputFiles[$sizeCode] = $newTempFile;
         }
 
         return $outputFiles;
@@ -129,8 +149,8 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
                 }
 
                 $filePath = bdMedal_Model_Medal::getImageFilePath($existingData, $sizeCode);
-                if (!empty($filePath)) {
-                    $newTempFile = tempnam(XenForo_Helper_File::getTempDir(), 'xfa');
+                if (!empty($filePath) && file_exists($filePath)) {
+                    $newTempFile = tempnam(XenForo_Helper_File::getTempDir(), 'bdMedal');
                     copy($filePath, $newTempFile);
                     $uploaded[$sizeCode] = $newTempFile;
                     $this->setExtraData(self::IMAGE_PREPARED, $uploaded);
@@ -198,45 +218,46 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
     {
         return array('xf_bdmedal_medal' => array(
             'medal_id' => array(
-                'type' => 'uint',
+                'type' => XenForo_DataWriter::TYPE_UINT,
                 'autoIncrement' => true
             ),
             'name' => array(
-                'type' => 'string',
+                'type' => XenForo_DataWriter::TYPE_STRING,
                 'length' => 255,
                 'required' => true
             ),
             'category_id' => array(
-                'type' => 'uint',
+                'type' => XenForo_DataWriter::TYPE_UINT,
                 'required' => true,
                 'verification' => array(
                     '$this',
                     '_verifyCategoryId'
                 )
             ),
-            'description' => array('type' => 'string'),
+            'description' => array('type' => XenForo_DataWriter::TYPE_STRING),
             'display_order' => array(
-                'type' => 'uint',
+                'type' => XenForo_DataWriter::TYPE_UINT,
                 'default' => 0
             ),
             'user_count' => array(
-                'type' => 'uint',
+                'type' => XenForo_DataWriter::TYPE_UINT,
                 'default' => 0
             ),
             'last_award_date' => array(
-                'type' => 'uint',
+                'type' => XenForo_DataWriter::TYPE_UINT,
                 'default' => 0
             ),
             'last_award_user_id' => array(
-                'type' => 'uint',
+                'type' => XenForo_DataWriter::TYPE_UINT,
                 'default' => 0
             ),
             'last_award_username' => array(
-                'type' => 'string',
+                'type' => XenForo_DataWriter::TYPE_STRING,
                 'length' => 50,
                 'default' => ''
             ),
-            'image_date' => array('type' => 'uint'),
+            'image_date' => array('type' => XenForo_DataWriter::TYPE_UINT),
+            'is_svg' => array('type' => XenForo_DataWriter::TYPE_BOOLEAN),
         ));
     }
 

@@ -39,6 +39,7 @@ class bdMedal_DevHelper_Config extends DevHelper_Config_Base
                 'last_award_user_id' => array('name' => 'last_award_user_id', 'type' => 'uint', 'required' => true, 'default' => 0),
                 'last_award_username' => array('name' => 'last_award_username', 'type' => 'string', 'length' => 50, 'required' => true, 'default' => ''),
                 'image_date' => array('name' => 'image_date', 'type' => 'uint', 'required' => true, 'default' => 0),
+                'is_svg' => array('name' => 'is_svg', 'type' => 'boolean', 'required' => true, 'default' => 0),
             ),
             'phrases' => array(),
             'id_field' => 'medal_id',
@@ -81,6 +82,9 @@ class bdMedal_DevHelper_Config extends DevHelper_Config_Base
         'xf_bdmedal_awarded' => array(
             'award_reason' => array('name' => 'award_reason', 'type' => 'string'),
             'adjusted_display_order' => array('name' => 'adjusted_display_order', 'type' => 'int', 'required' => true, 'default' => 0),
+        ),
+        'xf_bdmedal_medal' => array(
+            'is_svg' => array('name' => 'is_svg', 'type' => 'boolean', 'required' => true, 'default' => 0),
         ),
     );
     protected $_exportPath = '/Users/sondh/XenForo/bdMedal';
