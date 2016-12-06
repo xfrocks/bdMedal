@@ -207,7 +207,7 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
             foreach ($users as $user) {
                 $dw = XenForo_DataWriter::create('bdMedal_DataWriter_Awarded');
                 $dw->setExistingData($user, true);
-                $dw->setExtraData(bdMedal_DataWriter_Awarded::OPTION_DISABLE_REBUILD_MEDAL, 1);
+                $dw->setOption(bdMedal_DataWriter_Awarded::OPTION_DISABLE_REBUILD_MEDAL, true);
                 $dw->delete();
             }
         }

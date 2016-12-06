@@ -3,6 +3,7 @@
 class bdMedal_DataWriter_Awarded extends XenForo_DataWriter
 {
     const OPTION_DISABLE_REBUILD_MEDAL = 'disableRebuildMedal';
+    const OPTION_DISABLE_REBUILD_USER = 'disableRebuildUser';
 
     protected function _postSave()
     {
@@ -47,32 +48,36 @@ class bdMedal_DataWriter_Awarded extends XenForo_DataWriter
 
     protected function _rebuildMedal($lastAwarded = null)
     {
-        $disableRebuildMedal = $this->getExtraData(self::OPTION_DISABLE_REBUILD_MEDAL);
-
-        if (empty($disableRebuildMedal)) {
-            $awardedModel = $this->_getAwardedModel();
-            if (empty($lastAwarded)) {
-                $awardeds = $awardedModel->getAllAwarded(array('medal_id' => $this->get('medal_id')), array(
-                    'order' => 'award_date',
-                    'direction' => 'desc',
-                    'limit' => 1
-                ));
-                $lastAwarded = reset($awardeds);
-            }
-            $count = $awardedModel->countAllAwarded(array('medal_id' => $this->get('medal_id')));
-
-            $dw = XenForo_DataWriter::create('bdMedal_DataWriter_Medal');
-            $dw->setExistingData($this->get('medal_id'));
-            $dw->set('user_count', $count);
-            $dw->set('last_award_date', $lastAwarded['award_date']);
-            $dw->set('last_award_user_id', $lastAwarded['user_id']);
-            $dw->set('last_award_username', $lastAwarded['username']);
-            $dw->save();
+        if ($this->getOption(self::OPTION_DISABLE_REBUILD_MEDAL)) {
+            return;
         }
+
+        $awardedModel = $this->_getAwardedModel();
+        if (empty($lastAwarded)) {
+            $awardeds = $awardedModel->getAllAwarded(array('medal_id' => $this->get('medal_id')), array(
+                'order' => 'award_date',
+                'direction' => 'desc',
+                'limit' => 1
+            ));
+            $lastAwarded = reset($awardeds);
+        }
+        $count = $awardedModel->countAllAwarded(array('medal_id' => $this->get('medal_id')));
+
+        $dw = XenForo_DataWriter::create('bdMedal_DataWriter_Medal');
+        $dw->setExistingData($this->get('medal_id'));
+        $dw->set('user_count', $count);
+        $dw->set('last_award_date', $lastAwarded['award_date']);
+        $dw->set('last_award_user_id', $lastAwarded['user_id']);
+        $dw->set('last_award_username', $lastAwarded['username']);
+        $dw->save();
     }
 
     protected function _rebuildUser()
     {
+        if ($this->getOption(self::OPTION_DISABLE_REBUILD_USER)) {
+            return;
+        }
+
         $this->_getAwardedModel()->rebuildUser($this->get('user_id'));
     }
 
@@ -107,6 +112,17 @@ class bdMedal_DataWriter_Awarded extends XenForo_DataWriter
             ),
         ));
     }
+
+    protected function _getDefaultOptions()
+    {
+        $options = parent::_getDefaultOptions();
+
+        $options[self::OPTION_DISABLE_REBUILD_MEDAL] = false;
+        $options[self::OPTION_DISABLE_REBUILD_USER] = false;
+
+        return $options;
+    }
+
 
     protected function _getExistingData($data)
     {
