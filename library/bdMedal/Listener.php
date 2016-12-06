@@ -47,10 +47,10 @@ class bdMedal_Listener
         XenForo_Template_Helper_Core::$helperCallbacks[strtolower('medalImage')] = XenForo_Template_Helper_Core::$helperCallbacks['bdmedal_image'];
         XenForo_Template_Helper_Core::$helperCallbacks[strtolower('medalImageSize')] = XenForo_Template_Helper_Core::$helperCallbacks['bdmedal_imagesize'];
 
-        // sondh@2012-11-04
-        // add rebuilder
-        if ($dependencies instanceof XenForo_Dependencies_Admin) {
+        if (isset($data['routesAdmin'])) {
             XenForo_CacheRebuilder_Abstract::$builders['bdMedal_User'] = 'bdMedal_CacheRebuilder_User';
+
+            bdMedal_ShippableHelper_Updater::onInitDependencies($dependencies);
         }
     }
 
