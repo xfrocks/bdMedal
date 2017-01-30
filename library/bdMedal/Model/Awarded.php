@@ -6,6 +6,25 @@ class bdMedal_Model_Awarded extends XenForo_Model
     const FETCH_MEDAL = 0x02;
     const FETCH_CATEGORY = 0x04;
 
+    public function prepareAwardedMedalForOutput(array $user, array $awardedMedal, array $options)
+    {
+        $prepared = array();
+        $prepared['{link}'] = XenForo_Link::buildPublicLink('members/medals', $user);
+        $prepared['{medalName}'] = $awardedMedal['name'];
+
+        $prepared['{preparedAwardDate}'] = '';
+        if (!empty($options['awardDateTemplate'])
+            && !empty($awardedMedal['award_date'])
+        ) {
+            $prepared['{preparedAwardDate}'] = str_replace(
+                '{medalAwardDate}',
+                XenForo_Template_Helper_Core::date($awardedMedal['award_date']),
+                $options['awardDateTemplate']);
+        }
+
+        return $prepared;
+    }
+
     public function canAwardUser(array $user, array $viewingUser = null)
     {
         $this->standardizeViewingUserReference($viewingUser);
@@ -54,20 +73,6 @@ class bdMedal_Model_Awarded extends XenForo_Model
         $awardeds = $this->getAllAwarded($conditions, $fetchOptions);
 
         $this->_db->update('xf_user', array('xf_bdmedal_awarded_cached' => serialize($awardeds)), array('user_id = ?' => $userId));
-    }
-
-    public function prepareCachedData(&$cached)
-    {
-        if (!is_array($cached)) {
-            $cached = @unserialize($cached);
-            if (empty($cached)) {
-                $cached = array();
-            }
-        }
-
-        $this->applyOrganizedOrder($cached);
-
-        return $cached;
     }
 
     public function applyOrganizedOrder(array &$awardeds)

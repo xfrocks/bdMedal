@@ -149,7 +149,7 @@ class bdMedal_Model_Medal extends XenForo_Model
         }
     }
 
-    public static function helperMedalImage($medal, $size = 's')
+    public static function helperMedalImage($medal, $size = 'l')
     {
         $size = strtolower($size);
         $url = self::getImageUrl($medal, $size);

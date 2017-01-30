@@ -11,7 +11,6 @@ class bdMedal_Extend_ControllerPublic_Member extends XFCP_bdMedal_Extend_Control
         ) {
             /** @var bdMedal_Model_Awarded $awardedModel */
             $awardedModel = $this->getModelFromCache('bdMedal_Model_Awarded');
-            $awardedModel->prepareCachedData($response->params['user']['xf_bdmedal_awarded_cached']);
             $response->params['bdMedal_canAwardUser'] = $awardedModel->canAwardUser($response->params['user']);
         }
 

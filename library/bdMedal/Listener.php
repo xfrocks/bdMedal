@@ -10,7 +10,6 @@ class bdMedal_Listener
             'XenForo_ControllerPublic_Account',
             'XenForo_ControllerPublic_Member',
             'XenForo_ControllerPublic_Help',
-            'XenForo_ControllerPublic_Thread',
 
             'XenForo_Model_Import',
         );

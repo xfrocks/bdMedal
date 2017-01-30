@@ -881,22 +881,26 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <template title="bdmedal_member_view_tabs_heading" version_id="16" version_string="1.3.7"><![CDATA[<xen:if is="{$user.xf_bdmedal_awarded_cached} AND {xen:property bdMedal_showTab}">
 <li><a href="{$requestPaths.requestUri}#medals">{xen:phrase bdmedal_awarded_medals}</a></li>
 </xen:if>]]></template>
-    <template title="bdmedal_message_medals" version_id="34" version_string="1.5.0-BETA"><![CDATA[<xen:if is="is_array({$user.xf_bdmedal_awarded_cached}) && !empty({$user.xf_bdmedal_awarded_cached})">
+    <template title="bdmedal_message_medals" version_id="1050200" version_string="1.5.2"><![CDATA[<xen:if hascontent="true">
 	<div class="medals">
-	<xen:foreach loop="$user.xf_bdmedal_awarded_cached" i="$i" value="$medal">
-		<xen:if is="{xen:property bdMedal_messageMax} == 0 OR {xen:property bdMedal_messageMax} >= {$i}">
-			<a href="{xen:link 'members/medals', {$user}}"
-				class="OverlayTrigger Tooltip"
-				title="<xen:if is="{$medal.hackableCustomTitle}"><xen:else />{$medal.name}<xen:if is="{$medal.award_date} AND {xen:property bdMedal_messageShowDate}">. {xen:phrase awarded}: {xen:datetime {$medal.award_date}}</xen:if></xen:if>"
-				data-offsetX="{xen:calc '-{xen:helper bdMedal_imageSize, {xen:property bdMedal_messageImageSize}}'}"
-				data-offsetY="{xen:calc '{xen:helper bdMedal_imageSize, {xen:property bdMedal_messageImageSize}} / -2'}"
-				style="display: inline-block"
-				>
-				<xen:comment>style="display: inline-block" has been suggested by Mathis Neumann http://xenforo.com/community/posts/407564</xen:comment>
-				{xen:helper bdMedal_image, {$medal}, {xen:property bdMedal_messageImageSize}}
-			</a>
-		</xen:if>
-	</xen:foreach>
+		<xen:contentcheck>
+		<xen:set var="$awardDateTemplate"><xen:if is="{xen:property bdMedal_messageShowDate}">, {xen:phrase awarded}: {medalAwardDate}</xen:if></xen:set>
+		<xen:callback class="bdMedal_Helper_Template"
+					  method="renderCachedMedals"
+					  params="{xen:array
+							  'user={$user}',
+							  'awardDateTemplate={xen:raw $awardDateTemplate}',
+							  'imageSize={xen:property bdMedal_messageImageSize}',
+							  'max={xen:property bdMedal_messageMax}'
+							  }">
+			<a href="{link}"
+			   class="OverlayTrigger Tooltip"
+			   title="{medalName}{preparedAwardDate}"
+			   data-offsetX="{xen:calc '-{xen:helper bdMedal_imageSize, {xen:property bdMedal_messageImageSize}}'}"
+			   data-offsetY="{xen:calc '{xen:helper bdMedal_imageSize, {xen:property bdMedal_messageImageSize}} / -2'}"
+			   style="display: inline-block">{medalImage}</a>
+		</xen:callback>
+		</xen:contentcheck>
 	</div>
 </xen:if>]]></template>
     <template title="bdmedal_news_feed_item_medal_awarded" version_id="14" version_string="1.3.5"><![CDATA[<h3 class="description">
