@@ -17,22 +17,24 @@ class bdMedal_DataWriter_Category extends XenForo_DataWriter
 
     protected function _getFields()
     {
-        return array('xf_bdmedal_category' => array(
-            'category_id' => array(
-                'type' => 'uint',
-                'autoIncrement' => true
-            ),
-            'name' => array(
-                'type' => 'string',
-                'length' => 255,
-                'required' => true
-            ),
-            'description' => array('type' => 'string'),
-            'display_order' => array(
-                'type' => 'uint',
-                'default' => 0
+        return array(
+            'xf_bdmedal_category' => array(
+                'category_id' => array(
+                    'type' => 'uint',
+                    'autoIncrement' => true
+                ),
+                'name' => array(
+                    'type' => 'string',
+                    'length' => 255,
+                    'required' => true
+                ),
+                'description' => array('type' => 'string'),
+                'display_order' => array(
+                    'type' => 'uint',
+                    'default' => 0
+                )
             )
-        ));
+        );
     }
 
     protected function _getExistingData($data)

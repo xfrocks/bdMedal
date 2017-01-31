@@ -75,9 +75,17 @@ class bdMedal_Model_Medal extends XenForo_Model
         $sqlConditions = array();
         $db = $this->_getDb();
 
-        foreach (array('0' => 'medal_id', '1' => 'category_id', '2' => 'display_order', '3' => 'user_count', '4' => 'last_award_date', '5' => 'last_award_user_id') as $intField) {
-            if (!isset($conditions[$intField]))
+        foreach (array(
+                     '0' => 'medal_id',
+                     '1' => 'category_id',
+                     '2' => 'display_order',
+                     '3' => 'user_count',
+                     '4' => 'last_award_date',
+                     '5' => 'last_award_user_id'
+                 ) as $intField) {
+            if (!isset($conditions[$intField])) {
                 continue;
+            }
 
             if (is_array($conditions[$intField])) {
                 $sqlConditions[] = "medal.$intField IN (" . $db->quote($conditions[$intField]) . ")";
@@ -118,8 +126,9 @@ class bdMedal_Model_Medal extends XenForo_Model
         $orderSql = $this->getOrderByClause($choices, $fetchOptions);
 
         if (!empty($fetchOptions['order']) AND $fetchOptions['order'] == 'category') {
-            if (empty($fetchOptions['join']))
+            if (empty($fetchOptions['join'])) {
                 $fetchOptions['join'] = 0;
+            }
 
             $fetchOptions['join'] |= self::FETCH_CATEGORY;
         }
@@ -166,7 +175,9 @@ class bdMedal_Model_Medal extends XenForo_Model
                 $classIsSvg = ' medal-svg';
             }
 
-            return "<img src=\"$url\" class=\"size-$size$classIsSvg\" $attr/>";
+            /** @noinspection HtmlUnknownTarget */
+            /** @noinspection HtmlUnknownAttribute */
+            return sprintf('<img src="%s" class="size-%s%s" %s/>', $url, $size, $classIsSvg, $attr);
         } else {
             return '';
         }

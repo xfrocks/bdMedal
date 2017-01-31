@@ -140,12 +140,17 @@ class bdMedal_Extend_ControllerPublic_Account extends XFCP_bdMedal_Extend_Contro
         if ($changed) {
             $awardedModel->rebuildUser(XenForo_Visitor::getUserId());
 
-            return $this->responseRedirect(XenForo_ControllerResponse_Redirect::RESOURCE_UPDATED, XenForo_Link::buildPublicLink('account/medals'));
+            return $this->responseRedirect(
+                XenForo_ControllerResponse_Redirect::RESOURCE_UPDATED,
+                XenForo_Link::buildPublicLink('account/medals')
+            );
         }
 
         $viewParams = array('medals' => $medals);
 
-        return $this->_getWrapper('account', 'medals', $this->responseView('bdMedal_ViewPublic_Member_Medals', 'bdmedal_account_medals', $viewParams));
+        return $this->_getWrapper('account', 'medals',
+            $this->responseView('bdMedal_ViewPublic_Member_Medals', 'bdmedal_account_medals', $viewParams)
+        );
     }
 
     protected function _bdMedal_filterOrganizedMedals($medals)

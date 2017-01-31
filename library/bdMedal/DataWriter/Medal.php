@@ -216,49 +216,51 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
 
     protected function _getFields()
     {
-        return array('xf_bdmedal_medal' => array(
-            'medal_id' => array(
-                'type' => XenForo_DataWriter::TYPE_UINT,
-                'autoIncrement' => true
-            ),
-            'name' => array(
-                'type' => XenForo_DataWriter::TYPE_STRING,
-                'length' => 255,
-                'required' => true
-            ),
-            'category_id' => array(
-                'type' => XenForo_DataWriter::TYPE_UINT,
-                'required' => true,
-                'verification' => array(
-                    '$this',
-                    '_verifyCategoryId'
-                )
-            ),
-            'description' => array('type' => XenForo_DataWriter::TYPE_STRING),
-            'display_order' => array(
-                'type' => XenForo_DataWriter::TYPE_UINT,
-                'default' => 0
-            ),
-            'user_count' => array(
-                'type' => XenForo_DataWriter::TYPE_UINT,
-                'default' => 0
-            ),
-            'last_award_date' => array(
-                'type' => XenForo_DataWriter::TYPE_UINT,
-                'default' => 0
-            ),
-            'last_award_user_id' => array(
-                'type' => XenForo_DataWriter::TYPE_UINT,
-                'default' => 0
-            ),
-            'last_award_username' => array(
-                'type' => XenForo_DataWriter::TYPE_STRING,
-                'length' => 50,
-                'default' => ''
-            ),
-            'image_date' => array('type' => XenForo_DataWriter::TYPE_UINT),
-            'is_svg' => array('type' => XenForo_DataWriter::TYPE_BOOLEAN),
-        ));
+        return array(
+            'xf_bdmedal_medal' => array(
+                'medal_id' => array(
+                    'type' => XenForo_DataWriter::TYPE_UINT,
+                    'autoIncrement' => true
+                ),
+                'name' => array(
+                    'type' => XenForo_DataWriter::TYPE_STRING,
+                    'length' => 255,
+                    'required' => true
+                ),
+                'category_id' => array(
+                    'type' => XenForo_DataWriter::TYPE_UINT,
+                    'required' => true,
+                    'verification' => array(
+                        '$this',
+                        '_verifyCategoryId'
+                    )
+                ),
+                'description' => array('type' => XenForo_DataWriter::TYPE_STRING),
+                'display_order' => array(
+                    'type' => XenForo_DataWriter::TYPE_UINT,
+                    'default' => 0
+                ),
+                'user_count' => array(
+                    'type' => XenForo_DataWriter::TYPE_UINT,
+                    'default' => 0
+                ),
+                'last_award_date' => array(
+                    'type' => XenForo_DataWriter::TYPE_UINT,
+                    'default' => 0
+                ),
+                'last_award_user_id' => array(
+                    'type' => XenForo_DataWriter::TYPE_UINT,
+                    'default' => 0
+                ),
+                'last_award_username' => array(
+                    'type' => XenForo_DataWriter::TYPE_STRING,
+                    'length' => 50,
+                    'default' => ''
+                ),
+                'image_date' => array('type' => XenForo_DataWriter::TYPE_UINT),
+                'is_svg' => array('type' => XenForo_DataWriter::TYPE_BOOLEAN),
+            )
+        );
     }
 
     protected function _getExistingData($data)

@@ -40,11 +40,11 @@ class bdMedal_Extend_Importer_vBulletin extends XFCP_bdMedal_Extend_Importer_vBu
         }
 
         $categories = $sDb->fetchAll('
-			SELECT *
-			FROM ' . $prefix . 'award_cat
-			WHERE award_cat_id >= ' . $sDb->quote($start) . '
-			ORDER BY award_cat_id
-		');
+            SELECT *
+            FROM ' . $prefix . 'award_cat
+            WHERE award_cat_id >= ' . $sDb->quote($start) . '
+            ORDER BY award_cat_id
+        ');
 
         if (!$categories) {
             return true;
@@ -89,11 +89,11 @@ class bdMedal_Extend_Importer_vBulletin extends XFCP_bdMedal_Extend_Importer_vBu
         }
 
         $medals = $sDb->fetchAll('
-			SELECT *
-			FROM ' . $prefix . 'award
-			WHERE award_id >= ' . $sDb->quote($start) . '
-			ORDER BY award_id
-		');
+            SELECT *
+            FROM ' . $prefix . 'award
+            WHERE award_id >= ' . $sDb->quote($start) . '
+            ORDER BY award_id
+        ');
 
         if (!$medals) {
             return true;
@@ -163,10 +163,10 @@ class bdMedal_Extend_Importer_vBulletin extends XFCP_bdMedal_Extend_Importer_vBu
             $existed = $sDb->fetchOne("SHOW TABLES LIKE '{$prefix}award_user'");
             if (!empty($existed)) {
                 $data = $sDb->fetchRow('
-					SELECT MAX(issue_id) AS max, COUNT(issue_id) AS rows
-					FROM ' . $prefix . 'award_user
-					WHERE issue_id >= 0
-				');
+                    SELECT MAX(issue_id) AS max, COUNT(issue_id) AS rows
+                    FROM ' . $prefix . 'award_user
+                    WHERE issue_id >= 0
+                ');
 
                 $options = array_merge($options, $data);
             } else {
@@ -176,11 +176,11 @@ class bdMedal_Extend_Importer_vBulletin extends XFCP_bdMedal_Extend_Importer_vBu
         }
 
         $awardeds = $sDb->fetchAll($sDb->limit('
-				SELECT *
-				FROM ' . $prefix . 'award_user
-				WHERE issue_id >= ' . $sDb->quote($start) . '
-				ORDER BY issue_id
-			', $options['limit']));
+                SELECT *
+                FROM ' . $prefix . 'award_user
+                WHERE issue_id >= ' . $sDb->quote($start) . '
+                ORDER BY issue_id
+            ', $options['limit']));
 
         if (!$awardeds) {
             return true;
@@ -208,7 +208,13 @@ class bdMedal_Extend_Importer_vBulletin extends XFCP_bdMedal_Extend_Importer_vBu
             $userId = $this->_mapLookUp($userIdMap, $awarded['userid']);
 
             if ($medalId > 0 && $userId > 0) {
-                $model->bdMedal_importAwarded($medalId, $userId, $users[$userId]['username'], $awarded['issue_time'], $awarded['issue_reason']);
+                $model->bdMedal_importAwarded(
+                    $medalId,
+                    $userId,
+                    $users[$userId]['username'],
+                    $awarded['issue_time'],
+                    $awarded['issue_reason']
+                );
             }
 
             $total++;

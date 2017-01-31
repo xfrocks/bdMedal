@@ -4,7 +4,13 @@ class bdMedal_Extend_Model_Import extends XFCP_bdMedal_Extend_Model_Import
 {
     public function bdMedal_importCategory($oldId, array $info)
     {
-        $categoryId = $this->_importData($oldId, 'bdMedal_DataWriter_Category', 'medalCategories', 'category_id', $info);
+        $categoryId = $this->_importData(
+            $oldId,
+            'bdMedal_DataWriter_Category',
+            'medalCategories',
+            'category_id',
+            $info
+        );
 
         return $categoryId;
     }

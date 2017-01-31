@@ -33,7 +33,8 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
     public function actionEdit()
     {
         $medalId = $this->_input->filterSingle('medal_id', XenForo_Input::UINT);
-        $medal = $this->_getMedalHelper()->getMedalOrError($medalId, array('join' => bdMedal_Model_Medal::FETCH_IMAGES));
+        $medal = $this->_getMedalHelper()->getMedalOrError($medalId,
+            array('join' => bdMedal_Model_Medal::FETCH_IMAGES));
 
         $viewParams = array(
             'medal' => $medal,
@@ -205,7 +206,11 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
                 'awarded' => $awarded,
             );
 
-            return $this->responseView('bdMedal_ViewAdmin_Medal_ReverseAward', 'bdmedal_medal_reverse_award', $viewParams);
+            return $this->responseView(
+                'bdMedal_ViewAdmin_Medal_ReverseAward',
+                'bdmedal_medal_reverse_award',
+                $viewParams
+            );
         }
     }
 

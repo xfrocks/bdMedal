@@ -35,7 +35,14 @@ class bdMedal_DataWriter_Awarded extends XenForo_DataWriter
                 $username = $this->get('username');
             }
 
-            XenForo_Model_Alert::alert($this->get('user_id'), $userId, $username, 'medal', $this->get('medal_id'), 'award');
+            XenForo_Model_Alert::alert(
+                $this->get('user_id'),
+                $userId,
+                $username,
+                'medal',
+                $this->get('medal_id'),
+                'award'
+            );
         }
     }
 
@@ -43,7 +50,13 @@ class bdMedal_DataWriter_Awarded extends XenForo_DataWriter
     {
         /** @var XenForo_Model_NewsFeed $newFeedModel */
         $newFeedModel = $this->getModelFromCache('XenForo_Model_NewsFeed');
-        $newFeedModel->publish($this->get('user_id'), $this->get('username'), 'medal', $this->get('medal_id'), 'awarded');
+        $newFeedModel->publish(
+            $this->get('user_id'),
+            $this->get('username'),
+            'medal',
+            $this->get('medal_id'),
+            'awarded'
+        );
     }
 
     protected function _rebuildMedal($lastAwarded = null)
@@ -83,34 +96,36 @@ class bdMedal_DataWriter_Awarded extends XenForo_DataWriter
 
     protected function _getFields()
     {
-        return array('xf_bdmedal_awarded' => array(
-            'awarded_id' => array(
-                'type' => XenForo_DataWriter::TYPE_UINT,
-                'autoIncrement' => true
-            ),
-            'medal_id' => array(
-                'type' => XenForo_DataWriter::TYPE_UINT,
-                'required' => true
-            ),
-            'user_id' => array(
-                'type' => XenForo_DataWriter::TYPE_UINT,
-                'required' => true
-            ),
-            'username' => array(
-                'type' => XenForo_DataWriter::TYPE_STRING,
-                'length' => 50,
-                'required' => true
-            ),
-            'award_date' => array(
-                'type' => XenForo_DataWriter::TYPE_UINT,
-                'default' => XenForo_Application::$time
-            ),
-            'award_reason' => array('type' => XenForo_DataWriter::TYPE_STRING),
-            'adjusted_display_order' => array(
-                'type' => XenForo_DataWriter::TYPE_UINT,
-                'default' => 0
-            ),
-        ));
+        return array(
+            'xf_bdmedal_awarded' => array(
+                'awarded_id' => array(
+                    'type' => XenForo_DataWriter::TYPE_UINT,
+                    'autoIncrement' => true
+                ),
+                'medal_id' => array(
+                    'type' => XenForo_DataWriter::TYPE_UINT,
+                    'required' => true
+                ),
+                'user_id' => array(
+                    'type' => XenForo_DataWriter::TYPE_UINT,
+                    'required' => true
+                ),
+                'username' => array(
+                    'type' => XenForo_DataWriter::TYPE_STRING,
+                    'length' => 50,
+                    'required' => true
+                ),
+                'award_date' => array(
+                    'type' => XenForo_DataWriter::TYPE_UINT,
+                    'default' => XenForo_Application::$time
+                ),
+                'award_reason' => array('type' => XenForo_DataWriter::TYPE_STRING),
+                'adjusted_display_order' => array(
+                    'type' => XenForo_DataWriter::TYPE_UINT,
+                    'default' => 0
+                ),
+            )
+        );
     }
 
     protected function _getDefaultOptions()

@@ -148,7 +148,11 @@ class bdMedal_Extend_ControllerPublic_Member extends XFCP_bdMedal_Extend_Control
             'usersPerPage' => $usersPerPage,
         );
 
-        return $this->responseView('bdMedal_ViewPublic_Member_Medals_Awarded', 'bdmedal_member_medals_awarded', $viewParams);
+        return $this->responseView(
+            'bdMedal_ViewPublic_Member_Medals_Awarded',
+            'bdmedal_member_medals_awarded',
+            $viewParams
+        );
     }
 
 }

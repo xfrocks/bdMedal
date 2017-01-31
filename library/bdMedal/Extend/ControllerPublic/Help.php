@@ -39,7 +39,8 @@ class bdMedal_Extend_ControllerPublic_Help extends XFCP_bdMedal_Extend_Controlle
             $this->_routeMatch->setSections(bdMedal_Option::get('navtabId'), '');
         }
 
-        return $this->_getWrapper('bdmedal_medals', $this->responseView('bdMedal_ViewPublic_Help_Medals', 'bdmedal_help_medals', $viewParams));
+        return $this->_getWrapper('bdmedal_medals',
+            $this->responseView('bdMedal_ViewPublic_Help_Medals', 'bdmedal_help_medals', $viewParams));
     }
 
 }

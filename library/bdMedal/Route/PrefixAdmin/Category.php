@@ -18,7 +18,13 @@ class bdMedal_Route_PrefixAdmin_Category implements XenForo_Route_Interface
     public function buildLink($originalPrefix, $outputPrefix, $action, $extension, $data, array &$extraParams)
     {
         if (is_array($data)) {
-            return XenForo_Link::buildBasicLinkWithIntegerParam($outputPrefix, $action, $extension, $data, 'category_id');
+            return XenForo_Link::buildBasicLinkWithIntegerParam(
+                $outputPrefix,
+                $action,
+                $extension,
+                $data,
+                'category_id'
+            );
         } else {
             return XenForo_Link::buildBasicLink($outputPrefix, $action, $extension);
         }

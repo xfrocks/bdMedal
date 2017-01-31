@@ -58,8 +58,9 @@ class bdMedal_Model_Category extends XenForo_Model
         $db = $this->_getDb();
 
         foreach (array('0' => 'category_id', '1' => 'display_order') as $intField) {
-            if (!isset($conditions[$intField]))
+            if (!isset($conditions[$intField])) {
                 continue;
+            }
 
             if (is_array($conditions[$intField])) {
                 $sqlConditions[] = "category.$intField IN (" . $db->quote($conditions[$intField]) . ")";

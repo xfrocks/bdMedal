@@ -176,10 +176,12 @@ class bdMedal_Installer
         $existed2 = $db->fetchOne('SELECT COUNT(*) FROM `xf_bdmedal_medal`');
 
         if (empty($existed) AND empty($existed2)) {
-            $categories = array('only' => array(
-                'name' => 'Category 1',
-                'description' => 'HTML description goes here!'
-            ));
+            $categories = array(
+                'only' => array(
+                    'name' => 'Category 1',
+                    'description' => 'HTML description goes here!'
+                )
+            );
             $medals = array(
                 array(
                     'name' => 'Medal 1',
