@@ -32,8 +32,8 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
 
     public function actionEdit()
     {
-        $id = $this->_input->filterSingle('medal_id', XenForo_Input::UINT);
-        $medal = $this->_getMedalOrError($id, array('join' => bdMedal_Model_Medal::FETCH_IMAGES));
+        $medalId = $this->_input->filterSingle('medal_id', XenForo_Input::UINT);
+        $medal = $this->_getMedalHelper()->getMedalOrError($medalId, array('join' => bdMedal_Model_Medal::FETCH_IMAGES));
 
         $viewParams = array(
             'medal' => $medal,
@@ -80,20 +80,22 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
 
         $dw->save();
 
-        return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS, XenForo_Link::buildAdminLink('medal-medals'));
+        return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS,
+            XenForo_Link::buildAdminLink('medal-medals'));
     }
 
     public function actionDelete()
     {
-        $id = $this->_input->filterSingle('medal_id', XenForo_Input::UINT);
-        $medal = $this->_getMedalOrError($id);
+        $medalId = $this->_input->filterSingle('medal_id', XenForo_Input::UINT);
+        $medal = $this->_getMedalHelper()->getMedalOrError($medalId);
 
         if ($this->isConfirmedPost()) {
             $dw = XenForo_DataWriter::create('bdMedal_DataWriter_Medal');
-            $dw->setExistingData($id);
+            $dw->setExistingData($medal, true);
             $dw->delete();
 
-            return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS, XenForo_Link::buildAdminLink('medal-medals'));
+            return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS,
+                XenForo_Link::buildAdminLink('medal-medals'));
         } else {
             $viewParams = array('medal' => $medal);
 
@@ -108,7 +110,7 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
         $reason = $this->_input->filterSingle('reason', XenForo_Input::STRING);
 
         if ($medalId OR $this->isConfirmedPost()) {
-            $medal = $this->_getMedalOrError($medalId);
+            $medal = $this->_getMedalHelper()->getMedalOrError($medalId);
         } else {
             $medal = array();
         }
@@ -139,7 +141,8 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
                 $awardedModel->award($medal, $users, array('award_reason' => $reason));
             }
 
-            return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS, XenForo_Link::buildAdminLink('medal-medals/awarded-users', $medal));
+            return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS,
+                XenForo_Link::buildAdminLink('medal-medals/awarded-users', $medal));
         } else {
             $allMedal = $this->_getMedalModel()->getList(array(), array(
                 'join' => bdMedal_Model_Medal::FETCH_CATEGORY,
@@ -158,35 +161,58 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
         }
     }
 
-    public function actionReverseAward()
+    public function actionEditAward()
     {
-        $awardedModel = $this->_getAwardedModel();
-
+        $medalId = $this->_input->filterSingle('medal_id', XenForo_Input::UINT);
         $awardedId = $this->_input->filterSingle('awarded_id', XenForo_Input::UINT);
-        $awarded = $awardedModel->getAwardedById($awardedId, array('join' => bdMedal_Model_Awarded::FETCH_MEDAL + bdMedal_Model_Awarded::FETCH_USER));
-        if (empty($awarded)) {
-            return $this->responseError(new XenForo_Phrase('bdmedal_requested_award_not_found'));
-        }
+        $awardReason = $this->_input->filterSingle('award_reason', XenForo_Input::STRING);
+        list($medal, $awarded) = $this->_getMedalHelper()->getAwardedMedalOrError($medalId, $awardedId);
 
         if ($this->isConfirmedPost()) {
-            $awardedModel->reverseAward($awarded);
+            $dw = XenForo_DataWriter::create('bdMedal_DataWriter_Awarded');
+            $dw->setExistingData($awarded, true);
+            $dw->set('award_reason', $awardReason);
+            $dw->save();
 
-            return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS, XenForo_Link::buildAdminLink('medal-medals/awarded-users', $awarded));
+            return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS,
+                XenForo_Link::buildAdminLink('medal-medals/awarded-users', $awarded));
         } else {
             $viewParams = array(
-                'medal' => $awarded,
+                'medal' => $medal,
                 'user' => $awarded,
                 'awarded' => $awarded,
             );
 
-            return $this->responseView('bdMedal_ViewAdmin_Medal_Award', 'bdmedal_medal_reverse_award', $viewParams);
+            return $this->responseView('bdMedal_ViewAdmin_Medal_EditAward', 'bdmedal_medal_edit_award', $viewParams);
+        }
+    }
+
+    public function actionReverseAward()
+    {
+        $medalId = $this->_input->filterSingle('medal_id', XenForo_Input::UINT);
+        $awardedId = $this->_input->filterSingle('awarded_id', XenForo_Input::UINT);
+        list($medal, $awarded) = $this->_getMedalHelper()->getAwardedMedalOrError($medalId, $awardedId);
+
+        if ($this->isConfirmedPost()) {
+            $this->_getAwardedModel()->reverseAward($awarded);
+
+            return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS,
+                XenForo_Link::buildAdminLink('medal-medals/awarded-users', $awarded));
+        } else {
+            $viewParams = array(
+                'medal' => $medal,
+                'user' => $awarded,
+                'awarded' => $awarded,
+            );
+
+            return $this->responseView('bdMedal_ViewAdmin_Medal_ReverseAward', 'bdmedal_medal_reverse_award', $viewParams);
         }
     }
 
     public function actionAwardedUsers()
     {
-        $id = $this->_input->filterSingle('medal_id', XenForo_Input::UINT);
-        $medal = $this->_getMedalOrError($id);
+        $medalId = $this->_input->filterSingle('medal_id', XenForo_Input::UINT);
+        $medal = $this->_getMedalHelper()->getMedalOrError($medalId);
         $users = $this->_getAwardedModel()->getAwardedUsers($medal['medal_id']);
 
         $viewParams = array(
@@ -197,15 +223,12 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
         return $this->responseView('bdMedal_ViewAdmin_Medal_AwardedUsers', 'bdmedal_medal_awarded_users', $viewParams);
     }
 
-    protected function _getMedalOrError($id, array $fetchOptions = array())
+    /**
+     * @return bdMedal_ControllerHelper_Medal
+     */
+    protected function _getMedalHelper()
     {
-        $info = $this->_getMedalModel()->getMedalById($id, $fetchOptions);
-
-        if (empty($info)) {
-            throw $this->responseException($this->responseError(new XenForo_Phrase('bdmedal_medal_not_found'), 404));
-        }
-
-        return $info;
+        return $this->getHelper('bdMedal_ControllerHelper_Medal');
     }
 
     /**

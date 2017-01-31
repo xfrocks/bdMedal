@@ -136,6 +136,7 @@
 					id="{$user.user_id}"
 					label="{$user.username}"
 					snippet="{xen:helper snippet, $user.award_reason, 140} {xen:datetime {$user.award_date}}"
+					href="{xen:adminlink 'medal-medals/edit-award', $medal, 'awarded_id={$user.awarded_id}'}"
 					delete="{xen:adminlink 'medal-medals/reverse-award', $medal, 'awarded_id={$user.awarded_id}'}"
 					deletehint="{xen:phrase bdmedal_reverse_award}...">
 					<xen:popup title="{xen:phrase controls}" ctrlclass="toolsCtrl">
@@ -209,6 +210,27 @@
 	
 	<input type="hidden" name="medal_id" value="{$medal.medal_id}" />
 </xen:form>]]></template>
+    <template title="bdmedal_medal_edit_award"><![CDATA[<xen:title>{xen:phrase bdmedal_edit_award}: {$medal.name}</xen:title>
+<xen:h1>{xen:phrase bdmedal_edit_award}</xen:h1>
+
+<xen:navigation>
+	<xen:breadcrumb href="{xen:adminlink 'medal-medals/edit', $medal}">{$medal.name}</xen:breadcrumb>
+	<xen:breadcrumb href="{xen:adminlink 'medal-medals/awarded-users', $medal}">{xen:phrase bdmedal_awarded_users}</xen:breadcrumb>
+</xen:navigation>
+
+<xen:form action="{xen:adminlink 'medal-medals/edit-award', $medal}" class="formOverlay">
+
+	<xen:textboxunit label="{xen:phrase bdmedal_award_reason}:"
+					 name="award_reason"
+					 value="{$awarded.award_reason}" />
+
+	<xen:submitunit save="{xen:phrase save}" />
+	
+	<input type="hidden" name="awarded_id" value="{$awarded.awarded_id}" />
+	<input type="hidden" name="_xfConfirm" value="1" />
+</xen:form>
+
+<xen:edithint template="bdmedal_medal_edit" />]]></template>
     <template title="bdmedal_medal_list"><![CDATA[<xen:title>{xen:phrase bdmedal_medal}</xen:title>
 
 <xen:topctrl>
@@ -311,8 +333,9 @@
 				<xen:listitem
 					id="{$medal.medal_id}"
 					label="{xen:helper medalimage, {$medal}, 't'} {$medal.name}"
-					snippet="{xen:datetime {$medal.award_date}}"
-					delete="{xen:adminlink 'medal-medals/reverse-award', $medal, 'user_id={$user.user_id}'}"
+					snippet="{xen:helper snippet, $medal.award_reason, 140} {xen:datetime {$medal.award_date}}"
+					href="{xen:adminlink 'medal-medals/edit-award', $medal, 'awarded_id={$medal.awarded_id}'}"
+					delete="{xen:adminlink 'medal-medals/reverse-award', $medal, 'awarded_id={$medal.awarded_id}'}"
 					deletehint="{xen:phrase bdmedal_reverse_award}...">
 					<xen:popup title="{xen:phrase controls}" ctrlclass="toolsCtrl">
 						<xen:link href="{xen:adminlink 'medal-medals/awarded-users', {$medal}}">{xen:phrase bdmedal_awarded_users}</xen:link>
@@ -434,6 +457,7 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <phrase title="bdmedal_confirm_award_reversal" version_id="2" version_string="0.9.1"><![CDATA[Confirm Reversal of Award]]></phrase>
     <phrase title="bdmedal_description" version_id="1" version_string="0.9"><![CDATA[Description]]></phrase>
     <phrase title="bdmedal_display_order" version_id="1" version_string="0.9"><![CDATA[Display Order]]></phrase>
+    <phrase title="bdmedal_edit_award" version_id="1050200" version_string="1.5.2"><![CDATA[Edit Award]]></phrase>
     <phrase title="bdmedal_help_page_explain" version_id="31" version_string="1.4.5d"><![CDATA[ This page shows a list of the medals that you can be awarded by doing good to the community.
 ]]></phrase>
     <phrase title="bdmedal_image" version_id="2" version_string="0.9.1"><![CDATA[Image]]></phrase>
