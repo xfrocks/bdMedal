@@ -509,22 +509,30 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <phrase title="permission_general_bdMedal_award" version_id="32" version_string="1.4.6"><![CDATA[Award medals]]></phrase>
     <phrase title="permission_general_bdMedal_organize" version_id="32" version_string="1.4.6"><![CDATA[Organize own medals]]></phrase>
     <phrase title="permission_general_bdMedal_viewAwardedUsers" version_id="15" version_string="1.3.6"><![CDATA[View awarded users in medals list]]></phrase>
-    <phrase title="style_property_bdMedal_messageImageSize_description_master" version_id="8" version_string="1.2.1"><![CDATA[The size of the medal images. By default, there is only 2 sizes available: L (original) and T (tiny, 12px). You can render medium and small images by configure the options. Be sure to double check here if medals do not show up in messages.]]></phrase>
-    <phrase title="style_property_bdMedal_messageImageSize_master" version_id="10" version_string="1.3.1"><![CDATA[[bd] Medal - Image Size]]></phrase>
+    <phrase title="style_property_bdMedal_messageImageSize_description_master" version_id="1050200" version_string="1.5.2"><![CDATA[The size of the medal images. By default, there is only 2 sizes available: L (original) and T (tiny, 12px). You can render medium and small images by configure the options. Be sure to double check here if medals do not show up in messages.]]></phrase>
+    <phrase title="style_property_bdMedal_messageImageSize_master" version_id="1050200" version_string="1.5.2"><![CDATA[Image Size]]></phrase>
     <phrase title="style_property_bdMedal_messageMax_description_master" version_id="8" version_string="1.2.1"><![CDATA[You can limit the maximum number of medals to display in messages here. If this property is set, only the latest X medals will show up.]]></phrase>
-    <phrase title="style_property_bdMedal_messageMax_master" version_id="10" version_string="1.3.1"><![CDATA[[bd] Medal - Maximum]]></phrase>
-    <phrase title="style_property_bdMedal_messageShowDate_description_master" version_id="10" version_string="1.3.1"><![CDATA[Show the awarded date in tooltip for each medal.]]></phrase>
-    <phrase title="style_property_bdMedal_messageShowDate_master" version_id="10" version_string="1.3.1"><![CDATA[[bd] Medal - Show Date]]></phrase>
-    <phrase title="style_property_bdMedal_profileBlockImageSize_description_master" version_id="8" version_string="1.2.1"><![CDATA[The size of the medal images. By default, there is only 2 sizes available: L (original) and T (tiny, 12px). You can render medium and small images by configure the options. Be sure to double check here if medals do not show up in profiles.]]></phrase>
-    <phrase title="style_property_bdMedal_profileBlockImageSize_master" version_id="8" version_string="1.2.1"><![CDATA[Medal Block Image Size]]></phrase>
-    <phrase title="style_property_bdMedal_profileBlockMax_description_master" version_id="8" version_string="1.2.1"><![CDATA[You can limit the maximum number of medals to display in messages here. If this property is set, only the latest X medals will show up.]]></phrase>
-    <phrase title="style_property_bdMedal_profileBlockMax_master" version_id="8" version_string="1.2.1"><![CDATA[Block Maximum Medals]]></phrase>
-    <phrase title="style_property_bdMedal_profileTabImageSize_description_master" version_id="8" version_string="1.2.1"><![CDATA[The size of the medal images. By default, there is only 2 sizes available: L (original) and T (tiny, 12px). You can render medium and small images by configure the options. Be sure to double check here if medals do not show up.]]></phrase>
-    <phrase title="style_property_bdMedal_profileTabImageSize_master" version_id="8" version_string="1.2.1"><![CDATA[Medal Tab Image Size]]></phrase>
-    <phrase title="style_property_bdMedal_showBlock_description_master" version_id="8" version_string="1.2.1"><![CDATA[Display a block of awarded medals in the left sidebar.]]></phrase>
-    <phrase title="style_property_bdMedal_showBlock_master" version_id="8" version_string="1.2.1"><![CDATA[Show Medals Block]]></phrase>
-    <phrase title="style_property_bdMedal_showTab_description_master" version_id="8" version_string="1.2.1"><![CDATA[Display a tab of awarded medals.]]></phrase>
-    <phrase title="style_property_bdMedal_showTab_master" version_id="8" version_string="1.2.1"><![CDATA[Show Medals Tab]]></phrase>
+    <phrase title="style_property_bdMedal_messageMax_master" version_id="1050200" version_string="1.5.2"><![CDATA[Max Medals]]></phrase>
+    <phrase title="style_property_bdMedal_messageShowDate_description_master" version_id="1050200" version_string="1.5.2"><![CDATA[Show the awarded date in tooltip for each medal.]]></phrase>
+    <phrase title="style_property_bdMedal_messageShowDate_master" version_id="1050200" version_string="1.5.2"><![CDATA[Show Date]]></phrase>
+    <phrase title="style_property_bdMedal_profileBlockImageSize_description_master" version_id="1050200" version_string="1.5.2"><![CDATA[The size of the medal images in profile page block.]]></phrase>
+    <phrase title="style_property_bdMedal_profileBlockImageSize_master" version_id="1050200" version_string="1.5.2"><![CDATA[Image Size]]></phrase>
+    <phrase title="style_property_bdMedal_profileBlockMax_description_master" version_id="1050200" version_string="1.5.2"><![CDATA[]]></phrase>
+    <phrase title="style_property_bdMedal_profileBlockMax_master" version_id="1050200" version_string="1.5.2"><![CDATA[Max Medals]]></phrase>
+    <phrase title="style_property_bdMedal_profileTabImageSize_description_master" version_id="1050200" version_string="1.5.2"><![CDATA[The size of the medal images in Medals profile page tab.]]></phrase>
+    <phrase title="style_property_bdMedal_profileTabImageSize_master" version_id="1050200" version_string="1.5.2"><![CDATA[Image Size]]></phrase>
+    <phrase title="style_property_bdMedal_showBlock_description_master" version_id="1050200" version_string="1.5.2"><![CDATA[]]></phrase>
+    <phrase title="style_property_bdMedal_showBlock_master" version_id="1050200" version_string="1.5.2"><![CDATA[Profile Page Block]]></phrase>
+    <phrase title="style_property_bdMedal_showTab_description_master" version_id="1050200" version_string="1.5.2"><![CDATA[]]></phrase>
+    <phrase title="style_property_bdMedal_showTab_master" version_id="1050200" version_string="1.5.2"><![CDATA[Profile Page Tab]]></phrase>
+    <phrase title="style_property_bdMedal_visitorPanelImageSize_description_master" version_id="1050200" version_string="1.5.2"><![CDATA[The size of the medal images in sidebar visitor panel.]]></phrase>
+    <phrase title="style_property_bdMedal_visitorPanelImageSize_master" version_id="1050200" version_string="1.5.2"><![CDATA[Image Size]]></phrase>
+    <phrase title="style_property_bdMedal_visitorPanelMax_description_master" version_id="1050200" version_string="1.5.2"><![CDATA[]]></phrase>
+    <phrase title="style_property_bdMedal_visitorPanelMax_master" version_id="1050200" version_string="1.5.2"><![CDATA[Max Medals]]></phrase>
+    <phrase title="style_property_bdMedal_visitorPanel_description_master" version_id="1050200" version_string="1.5.2"><![CDATA[]]></phrase>
+    <phrase title="style_property_bdMedal_visitorPanel_master" version_id="1050200" version_string="1.5.2"><![CDATA[Sidebar Visitor Panel]]></phrase>
+    <phrase title="style_property_group_bdMedal_master" version_id="1050200" version_string="1.5.2"><![CDATA[[bd] Medal]]></phrase>
+    <phrase title="style_property_group_bdMedal_master_desc" version_id="1050200" version_string="1.5.2"><![CDATA[]]></phrase>
   </phrases>
   <route_prefixes>
     <route_type type="admin">
@@ -533,14 +541,21 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     </route_type>
   </route_prefixes>
   <style_properties>
-    <property property_name="bdMedal_messageImageSize" property_type="scalar" definition="1" group_name="message" title="[bd] Medal - Image Size" description="The size of the medal images. By default, there is only 2 sizes available: L (original) and T (tiny, 12px). You can render medium and small images by configure the options. Be sure to double check here if medals do not show up in messages." css_components="" scalar_type="" scalar_parameters="" display_order="11010" sub_group="[bd] Medal"><![CDATA[L]]></property>
-    <property property_name="bdMedal_messageMax" property_type="scalar" definition="1" group_name="message" title="[bd] Medal - Maximum" description="You can limit the maximum number of medals to display in messages here. If this property is set, only the latest X medals will show up." css_components="" scalar_type="number" scalar_parameters="" display_order="11020" sub_group="[bd] Medal"><![CDATA[0]]></property>
-    <property property_name="bdMedal_showBlock" property_type="scalar" definition="1" group_name="memberProfile" title="Show Medals Block" description="Display a block of awarded medals in the left sidebar." css_components="" scalar_type="boolean" scalar_parameters="" display_order="11000" sub_group="Sidebar"><![CDATA[1]]></property>
-    <property property_name="bdMedal_profileBlockImageSize" property_type="scalar" definition="1" group_name="memberProfile" title="Medal Block Image Size" description="The size of the medal images. By default, there is only 2 sizes available: L (original) and T (tiny, 12px). You can render medium and small images by configure the options. Be sure to double check here if medals do not show up in profiles." css_components="" scalar_type="" scalar_parameters="" display_order="11001" sub_group="Sidebar"><![CDATA[L]]></property>
-    <property property_name="bdMedal_profileBlockMax" property_type="scalar" definition="1" group_name="memberProfile" title="Block Maximum Medals" description="You can limit the maximum number of medals to display in messages here. If this property is set, only the latest X medals will show up." css_components="" scalar_type="number" scalar_parameters="" display_order="11002" sub_group="Sidebar"><![CDATA[0]]></property>
-    <property property_name="bdMedal_showTab" property_type="scalar" definition="1" group_name="memberProfile" title="Show Medals Tab" description="Display a tab of awarded medals." css_components="" scalar_type="boolean" scalar_parameters="" display_order="11000" sub_group="Tabs"><![CDATA[1]]></property>
-    <property property_name="bdMedal_profileTabImageSize" property_type="scalar" definition="1" group_name="memberProfile" title="Medal Tab Image Size" description="The size of the medal images. By default, there is only 2 sizes available: L (original) and T (tiny, 12px). You can render medium and small images by configure the options. Be sure to double check here if medals do not show up." css_components="" scalar_type="" scalar_parameters="" display_order="11001" sub_group="Tabs"><![CDATA[L]]></property>
-    <property property_name="bdMedal_messageShowDate" property_type="scalar" definition="1" group_name="message" title="[bd] Medal - Show Date" description="Show the awarded date in tooltip for each medal." css_components="" scalar_type="boolean" scalar_parameters="" display_order="11000" sub_group="[bd] Medal"><![CDATA[1]]></property>
+    <property property_name="bdMedal_messageImageSize" property_type="scalar" definition="1" group_name="bdMedal" title="Image Size" description="The size of the medal images. By default, there is only 2 sizes available: L (original) and T (tiny, 12px). You can render medium and small images by configure the options. Be sure to double check here if medals do not show up in messages." css_components="" scalar_type="" scalar_parameters="" display_order="20" sub_group="message"><![CDATA[L]]></property>
+    <property property_name="bdMedal_messageMax" property_type="scalar" definition="1" group_name="bdMedal" title="Max Medals" description="You can limit the maximum number of medals to display in messages here. If this property is set, only the latest X medals will show up." css_components="" scalar_type="number" scalar_parameters="" display_order="30" sub_group="message"><![CDATA[0]]></property>
+    <property property_name="bdMedal_showBlock" property_type="scalar" definition="1" group_name="bdMedal" title="Profile Page Block" description="" css_components="" scalar_type="boolean" scalar_parameters="" display_order="110" sub_group="member_view_sidebar"><![CDATA[1]]></property>
+    <property property_name="bdMedal_profileBlockImageSize" property_type="scalar" definition="1" group_name="bdMedal" title="Image Size" description="The size of the medal images in profile page block." css_components="" scalar_type="" scalar_parameters="" display_order="120" sub_group="member_view_sidebar"><![CDATA[L]]></property>
+    <property property_name="bdMedal_profileBlockMax" property_type="scalar" definition="1" group_name="bdMedal" title="Max Medals" description="" css_components="" scalar_type="number" scalar_parameters="" display_order="130" sub_group="member_view_sidebar"><![CDATA[0]]></property>
+    <property property_name="bdMedal_showTab" property_type="scalar" definition="1" group_name="bdMedal" title="Profile Page Tab" description="" css_components="" scalar_type="boolean" scalar_parameters="" display_order="210" sub_group="member_view_tab"><![CDATA[1]]></property>
+    <property property_name="bdMedal_profileTabImageSize" property_type="scalar" definition="1" group_name="bdMedal" title="Image Size" description="The size of the medal images in Medals profile page tab." css_components="" scalar_type="" scalar_parameters="" display_order="220" sub_group="member_view_tab"><![CDATA[L]]></property>
+    <property property_name="bdMedal_messageShowDate" property_type="scalar" definition="1" group_name="bdMedal" title="Show Date" description="Show the awarded date in tooltip for each medal." css_components="" scalar_type="boolean" scalar_parameters="" display_order="10" sub_group="message"><![CDATA[1]]></property>
+    <property property_name="bdMedal_visitorPanel" property_type="scalar" definition="1" group_name="bdMedal" title="Sidebar Visitor Panel" description="" css_components="" scalar_type="boolean" scalar_parameters="" display_order="310" sub_group="sidebar_visitor_panel"><![CDATA[1]]></property>
+    <property property_name="bdMedal_visitorPanelImageSize" property_type="scalar" definition="1" group_name="bdMedal" title="Image Size" description="The size of the medal images in sidebar visitor panel." css_components="" scalar_type="" scalar_parameters="" display_order="320" sub_group="sidebar_visitor_panel"><![CDATA[T]]></property>
+    <property property_name="bdMedal_visitorPanelMax" property_type="scalar" definition="1" group_name="bdMedal" title="Max Medals" description="" css_components="" scalar_type="number" scalar_parameters="" display_order="330" sub_group="sidebar_visitor_panel"><![CDATA[0]]></property>
+    <group group_name="bdMedal" display_order="9999">
+      <title>[bd] Medal</title>
+      <description></description>
+    </group>
   </style_properties>
   <templates>
     <template title="bdmedal.css" version_id="12" version_string="1.3.3"><![CDATA[.Medal {
@@ -928,6 +943,28 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <template title="bdmedal_post_medals" version_id="36" version_string="1.5.0"><![CDATA[<xen:include template="bdmedal_message_medals">
 	<xen:map from="$post" to="$user" />
 </xen:include>]]></template>
+    <template title="bdmedal_sidebar_visitor_panel" version_id="1050200" version_string="1.5.2"><![CDATA[<xen:if is="{xen:property bdMedal_visitorPanel}">
+	<xen:if hascontent="true">
+		<div class="medals">
+			<xen:contentcheck>
+			<xen:callback class="bdMedal_Helper_Template"
+						  method="renderCachedMedals"
+						  params="{xen:array
+								  'user={$visitor}',
+								  'imageSize={xen:property bdMedal_visitorPanelImageSize}',
+								  'max={xen:property bdMedal_visitorPanelMax}'
+								  }">
+				<a href="{link}"
+				   class="Tooltip"
+				   title="{medalName}"
+				   data-offsetX="{xen:calc '-{xen:helper bdMedal_imageSize, {xen:property bdMedal_visitorPanelImageSize}}'}"
+				   data-offsetY="{xen:calc '{xen:helper bdMedal_imageSize, {xen:property bdMedal_visitorPanelImageSize}} / -2'}"
+				   style="display: inline-block">{medalImage}</a>
+			</xen:callback>
+			</xen:contentcheck>
+		</div>
+	</xen:if>
+</xen:if>]]></template>
   </templates>
   <public_template_modifications>
     <modification template="help_index" modification_key="bdmedal_help_index_extra" description="Insert help index link." execution_order="10" enabled="1" action="preg_replace">
@@ -978,6 +1015,12 @@ $3]]></replace>
 	<xen:include template="bdmedal_message_medals" />
 </xen:if>
 $0]]></replace>
+    </modification>
+    <modification template="sidebar_visitor_panel" modification_key="bdmedal_sidebar_visitor_panel" description="Insert medals to sidebar visitor panel." execution_order="10" enabled="1" action="preg_replace">
+      <find><![CDATA[#<xen:hook name="sidebar_visitor_panel_stats".+</xen:hook>#s]]></find>
+      <replace><![CDATA[$0
+
+<xen:include template="bdmedal_sidebar_visitor_panel" />]]></replace>
     </modification>
   </public_template_modifications>
   <bb_code_media_sites/>
