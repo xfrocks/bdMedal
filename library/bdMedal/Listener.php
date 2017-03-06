@@ -2,23 +2,6 @@
 
 class bdMedal_Listener
 {
-    public static function load_class($class, array &$extend)
-    {
-        static $classes = array(
-            'XenForo_ControllerAdmin_User',
-
-            'XenForo_ControllerPublic_Account',
-            'XenForo_ControllerPublic_Member',
-            'XenForo_ControllerPublic_Help',
-
-            'XenForo_Model_Import',
-        );
-
-        if (in_array($class, $classes)) {
-            $extend[] = str_replace('XenForo_', 'bdMedal_Extend_', $class);
-        }
-    }
-
     public static function load_class_importer($class, array &$extend)
     {
         if (strpos(strtolower($class), 'vbulletin') != false AND !defined('bdMedal_Extend_Importer_vBulletin_LOADED')) {
@@ -91,4 +74,38 @@ class bdMedal_Listener
         $hashes += bdMedal_FileSums::getHashes();
     }
 
+    public static function load_class_XenForo_ControllerAdmin_User($class, array &$extend)
+    {
+        if ($class === 'XenForo_ControllerAdmin_User') {
+            $extend[] = 'bdMedal_Extend_ControllerAdmin_User';
+        }
+    }
+
+    public static function load_class_XenForo_ControllerPublic_Account($class, array &$extend)
+    {
+        if ($class === 'XenForo_ControllerPublic_Account') {
+            $extend[] = 'bdMedal_Extend_ControllerPublic_Account';
+        }
+    }
+
+    public static function load_class_XenForo_ControllerPublic_Member($class, array &$extend)
+    {
+        if ($class === 'XenForo_ControllerPublic_Member') {
+            $extend[] = 'bdMedal_Extend_ControllerPublic_Member';
+        }
+    }
+
+    public static function load_class_XenForo_ControllerPublic_Help($class, array &$extend)
+    {
+        if ($class === 'XenForo_ControllerPublic_Help') {
+            $extend[] = 'bdMedal_Extend_ControllerPublic_Help';
+        }
+    }
+
+    public static function load_class_XenForo_Model_Import($class, array &$extend)
+    {
+        if ($class === 'XenForo_Model_Import') {
+            $extend[] = 'bdMedal_Extend_Model_Import';
+        }
+    }
 }

@@ -362,9 +362,12 @@
   <code_event_listeners>
     <listener event_id="file_health_check" execute_order="10" callback_class="bdMedal_Listener" callback_method="file_health_check" active="1" hint="" description=""/>
     <listener event_id="init_dependencies" execute_order="10" callback_class="bdMedal_Listener" callback_method="init_dependencies" active="1" hint="" description=""/>
-    <listener event_id="load_class_controller" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class" active="1" hint="" description=""/>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class_XenForo_ControllerAdmin_User" active="1" hint="XenForo_ControllerAdmin_User" description="XenForo_ControllerAdmin_User"/>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class_XenForo_ControllerPublic_Account" active="1" hint="XenForo_ControllerPublic_Account" description="XenForo_ControllerPublic_Account"/>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class_XenForo_ControllerPublic_Member" active="1" hint="XenForo_ControllerPublic_Member" description="XenForo_ControllerPublic_Member"/>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class_XenForo_ControllerPublic_Help" active="1" hint="XenForo_ControllerPublic_Help" description="XenForo_ControllerPublic_Help"/>
     <listener event_id="load_class_importer" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class_importer" active="1" hint="" description=""/>
-    <listener event_id="load_class_model" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class" active="1" hint="" description=""/>
+    <listener event_id="load_class_model" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class_XenForo_Model_Import" active="1" hint="XenForo_Model_Import" description="XenForo_Model_Import"/>
     <listener event_id="navigation_tabs" execute_order="10" callback_class="bdMedal_Listener" callback_method="navigation_tabs" active="1" hint="" description=""/>
   </code_event_listeners>
   <cron/>
