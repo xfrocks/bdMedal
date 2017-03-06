@@ -1,10 +1,10 @@
 <?php
 
-// updated by DevHelper_Helper_ShippableHelper at 2017-01-30T10:48:53+00:00
+// updated by DevHelper_Helper_ShippableHelper at 2017-03-06T03:58:51+00:00
 
 /**
  * Class bdMedal_ShippableHelper_TempFile
- * @version 8
+ * @version 11
  * @see DevHelper_Helper_ShippableHelper_TempFile
  */
 class bdMedal_ShippableHelper_TempFile
@@ -58,7 +58,7 @@ class bdMedal_ShippableHelper_TempFile
             'userAgent' => '',
             'timeOutInSeconds' => 0,
             'maxRedirect' => 3,
-            'maxDownloadSize' => 0,
+            'maxDownloadSize' => XenForo_Application::getOptions()->get('attachmentMaxFileSize') * 1024,
             'secured' => 0,
         );
 
@@ -66,19 +66,26 @@ class bdMedal_ShippableHelper_TempFile
         $managedTempFile = false;
         if (strlen($tempFile) === 0) {
             $tempFile = tempnam(XenForo_Helper_File::getTempDir(), self::_getPrefix());
-            self::cache($url, $tempFile);
             $managedTempFile = true;
+        }
+        if (strlen($tempFile) === 0) {
+            return false;
         }
 
         if (isset(self::$_cached[$url])
             && filesize(self::$_cached[$url]) > 0
         ) {
             if ($managedTempFile) {
+                unlink($tempFile);
                 return self::$_cached[$url];
             } else {
                 copy(self::$_cached[$url], $tempFile);
                 return $tempFile;
             }
+        }
+
+        if ($managedTempFile) {
+            self::cache($url, $tempFile);
         }
 
         self::$_maxDownloadSize = $options['maxDownloadSize'];
@@ -114,16 +121,15 @@ class bdMedal_ShippableHelper_TempFile
         $downloaded = intval(curl_getinfo($ch, CURLINFO_HTTP_CODE)) == 200;
 
         curl_close($ch);
-
         fclose($fh);
 
-        if (XenForo_Application::debugMode()) {
+        $fileSize = filesize($tempFile);
+        if ($downloaded && $fileSize === 0) {
+            clearstatcache();
             $fileSize = filesize($tempFile);
-            if ($downloaded && $fileSize === 0) {
-                clearstatcache();
-                $fileSize = filesize($tempFile);
-            }
+        }
 
+        if (XenForo_Application::debugMode()) {
             XenForo_Helper_File::log(__CLASS__, call_user_func_array('sprintf', array(
                 'download %s -> %s, %s, %d bytes%s',
                 $url,
