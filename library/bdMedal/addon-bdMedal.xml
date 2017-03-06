@@ -881,45 +881,56 @@ message_user_info_extra_bottom = {xen:phrase bdmedal_position_message_user_info_
     <template title="bdmedal_member_view_award_medal_link" version_id="32" version_string="1.4.6"><![CDATA[<xen:if is="{$bdMedal_canAwardUser}">
 	<li><a href="{xen:link members/award-medal, $user}" class="awardMedal OverlayTrigger">{xen:phrase bdmedal_award_medal}</a></li>
 </xen:if>]]></template>
-    <template title="bdmedal_member_view_sidebar_middle1" version_id="14" version_string="1.3.5"><![CDATA[<xen:if is="{$user.xf_bdmedal_awarded_cached} AND {xen:property bdMedal_showBlock}">
-<xen:require css="bdmedal.css" />
+    <template title="bdmedal_member_view_sidebar_middle1" version_id="1050300" version_string="1.5.3"><![CDATA[<xen:if is="{xen:property bdMedal_showBlock}"><xen:set
+	var="$_bdMedal_cachedMedalsCount"><xen:callback class="bdMedal_Helper_Template"
+	method="getCachedMedalsCount" params="{xen:array 'user={$user}'}" /></xen:set><xen:if
+		is="{$_bdMedal_cachedMedalsCount} > 0"><xen:require css="bdmedal.css" />
 
 <div class="section MedalsBlock">
-	<h3 class="subHeading textWithCount" title="{xen:phrase bdmedal_x_was_awarded_y_medals, 'name={$user.username}', 'count={xen:number {xen:count {$user.xf_bdmedal_awarded_cached}}}'}">
+	<h3 class="subHeading textWithCount" title="{xen:phrase bdmedal_x_was_awarded_y_medals, 'name={$user.username}', 'count={xen:number {$_bdMedal_cachedMedalsCount}}'}">
 		<span class="text">{xen:phrase bdmedal_awarded_medals}</span>
-		<a href="{xen:link 'members/medals', $user}" class="count OverlayTrigger">{xen:number {xen:count {$user.xf_bdmedal_awarded_cached}}}</a>
+		<a href="{xen:link 'members/medals', $user}" class="count OverlayTrigger">{xen:number {$_bdMedal_cachedMedalsCount}}</a>
 	</h3>
 	<div class="primaryContent MedalHeap">
 		<ol>
-			<xen:foreach loop="$user.xf_bdmedal_awarded_cached" key="$key" value="$medal">
-				<xen:if is="{xen:property bdMedal_profileBlockMax} == 0 OR {xen:property bdMedal_profileBlockMax} > {$key}">
-					<li>
-						<a href="{xen:link 'members/medals', {$user}}"
-							class="Tooltip"
-							title="{$medal.name}. {xen:phrase awarded}: {xen:datetime {$medal.award_date}}"
-							data-offsetY="-{xen:calc '{xen:helper bdMedal_imageSize, {xen:property bdMedal_profileBlockImageSize}} - 5'}"
-							>
-							{xen:helper bdMedal_image, {$medal}, {xen:property bdMedal_profileBlockImageSize}}
-						</a>
-					</li>
-				</xen:if>
-			</xen:foreach>
+			<xen:callback class="bdMedal_Helper_Template"
+						  method="renderCachedMedals"
+						  params="{xen:array
+								  'user={$user}',
+								  'awardDateTemplate=, {xen:phrase awarded}: {medalAwardDate}',
+								  'imageSize={xen:property bdMedal_profileBlockImageSize}',
+								  'max={xen:property bdMedal_profileBlockMax}'
+								  }">
+				<li>
+					<a href="{link}"
+						class="Tooltip"
+						title="{medalName}{preparedAwardDate}"
+						data-offsetY="-{xen:calc '{xen:helper bdMedal_imageSize, {xen:property bdMedal_profileBlockImageSize}} - 5'}"
+						style="display: inline-block">{medalImage}</a>
+					</a>
+				</li>
+			</xen:callback>
 		</ol>
 	</div>
-	<xen:if is="{xen:property bdMedal_profileBlockMax} > 0 AND {xen:count {$user.xf_bdmedal_awarded_cached}} > {xen:property bdMedal_profileBlockMax}">
-		<div class="sectionFooter"><a href="{xen:link 'members/medals', $user}" class="OverlayTrigger">{xen:phrase show_all}</a></div>
+	<xen:if is="{xen:property bdMedal_profileBlockMax} > 0 AND {$_bdMedal_cachedMedalsCount} > {xen:property bdMedal_profileBlockMax}">
+		<div class="sectionFooter"><a href="{xen:link members/medals, $user}" class="OverlayTrigger">{xen:phrase show_all}</a></div>
 	</xen:if>
-</div>
-</xen:if>]]></template>
-    <template title="bdmedal_member_view_tabs_content" version_id="23" version_string="1.4.3d"><![CDATA[<xen:if is="{$user.xf_bdmedal_awarded_cached} AND {xen:property bdMedal_showTab}">
-<li id="medals" class="profileContent" data-loadUrl="{xen:link members/medals, $user}">
+</div></xen:if></xen:if>]]></template>
+    <template title="bdmedal_member_view_tabs_content" version_id="1050300" version_string="1.5.3"><![CDATA[<xen:if is="{xen:property bdMedal_showTab}"><xen:set
+	var="$_bdMedal_cachedMedalsCount"><xen:callback class="bdMedal_Helper_Template"
+	method="getCachedMedalsCount" params="{xen:array 'user={$user}'}" /></xen:set><xen:if
+		is="{$_bdMedal_cachedMedalsCount} > 0"><li id="medals" class="profileContent" data-loadUrl="{xen:link members/medals, $user}">
 	{xen:phrase loading}...
 	<noscript><a href="{xen:link members/medals, $user}">{xen:phrase view}</a></noscript>
-</li>
-</xen:if>]]></template>
-    <template title="bdmedal_member_view_tabs_heading" version_id="16" version_string="1.3.7"><![CDATA[<xen:if is="{$user.xf_bdmedal_awarded_cached} AND {xen:property bdMedal_showTab}">
-<li><a href="{$requestPaths.requestUri}#medals">{xen:phrase bdmedal_awarded_medals}</a></li>
-</xen:if>]]></template>
+</li></xen:if></xen:if><xen:edithint template="bdmedal_member_view_tabs_heading" />]]></template>
+    <template title="bdmedal_member_view_tabs_heading" version_id="1050300" version_string="1.5.3"><![CDATA[<xen:if is="{xen:property bdMedal_showTab}"><xen:set
+	var="$_bdMedal_cachedMedalsCount"><xen:callback class="bdMedal_Helper_Template"
+	method="getCachedMedalsCount" params="{xen:array 'user={$user}'}" /></xen:set><xen:if
+		is="{$_bdMedal_cachedMedalsCount} > 0"><li>
+	<a href="{$requestPaths.requestUri}#medals">
+		{xen:phrase bdmedal_awarded_medals}
+	</a>
+</li></xen:if></xen:if>]]></template>
     <template title="bdmedal_message_medals" version_id="1050200" version_string="1.5.2"><![CDATA[<xen:if hascontent="true">
 	<div class="medals">
 		<xen:contentcheck>
