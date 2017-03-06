@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="bdMedal" title="[bd] Medal" version_string="1.5.4" version_id="1050400" url="https://xenforo.com/community/resources/bd-medal.964/" install_callback_class="bdMedal_Installer" install_callback_method="install" uninstall_callback_class="bdMedal_Installer" uninstall_callback_method="uninstall">
+<addon addon_id="bdMedal" title="[bd] Medal" version_string="1.5.3" version_id="1050300" url="" install_callback_class="bdMedal_Installer" install_callback_method="install" uninstall_callback_class="bdMedal_Installer" uninstall_callback_method="uninstall">
   <admin_navigation>
     <navigation navigation_id="bdMedal" parent_navigation_id="applications" display_order="9999" link="medal-medals" admin_permission_id="bdMedal" debug_only="0" hide_no_children="0"/>
     <navigation navigation_id="bdMedal_Category" parent_navigation_id="bdMedal" display_order="10" link="medal-categories" admin_permission_id="bdMedal" debug_only="0" hide_no_children="0"/>
@@ -362,12 +362,12 @@
   <code_event_listeners>
     <listener event_id="file_health_check" execute_order="10" callback_class="bdMedal_Listener" callback_method="file_health_check" active="1" hint="" description=""/>
     <listener event_id="init_dependencies" execute_order="10" callback_class="bdMedal_Listener" callback_method="init_dependencies" active="1" hint="" description=""/>
-    <listener event_id="load_class_controller" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class" active="1" hint="XenForo_ControllerAdmin_User" description=""/>
-    <listener event_id="load_class_controller" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class" active="1" hint="XenForo_ControllerPublic_Account" description=""/>
-    <listener event_id="load_class_controller" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class" active="1" hint="XenForo_ControllerPublic_Member" description=""/>
-    <listener event_id="load_class_controller" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class" active="1" hint="XenForo_ControllerPublic_Help" description=""/>
-    <listener event_id="load_class_model" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class" active="1" hint="XenForo_Model_Import" description=""/>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class_XenForo_ControllerAdmin_User" active="1" hint="XenForo_ControllerAdmin_User" description="XenForo_ControllerAdmin_User"/>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class_XenForo_ControllerPublic_Account" active="1" hint="XenForo_ControllerPublic_Account" description="XenForo_ControllerPublic_Account"/>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class_XenForo_ControllerPublic_Member" active="1" hint="XenForo_ControllerPublic_Member" description="XenForo_ControllerPublic_Member"/>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class_XenForo_ControllerPublic_Help" active="1" hint="XenForo_ControllerPublic_Help" description="XenForo_ControllerPublic_Help"/>
     <listener event_id="load_class_importer" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class_importer" active="1" hint="" description=""/>
+    <listener event_id="load_class_model" execute_order="10" callback_class="bdMedal_Listener" callback_method="load_class_XenForo_Model_Import" active="1" hint="XenForo_Model_Import" description="XenForo_Model_Import"/>
     <listener event_id="navigation_tabs" execute_order="10" callback_class="bdMedal_Listener" callback_method="navigation_tabs" active="1" hint="" description=""/>
   </code_event_listeners>
   <cron/>
