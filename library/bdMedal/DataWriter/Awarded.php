@@ -82,6 +82,7 @@ class bdMedal_DataWriter_Awarded extends XenForo_DataWriter
         $dw->set('last_award_date', $lastAwarded['award_date']);
         $dw->set('last_award_user_id', $lastAwarded['user_id']);
         $dw->set('last_award_username', $lastAwarded['username']);
+        $dw->setOption(bdMedal_DataWriter_Medal::OPTION_DISABLE_REBUILD_USERS, true);
         $dw->save();
     }
 

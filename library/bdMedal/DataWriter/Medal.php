@@ -3,6 +3,7 @@
 class bdMedal_DataWriter_Medal extends XenForo_DataWriter
 {
     const IMAGE_PREPARED = 'imagePrepared';
+    const OPTION_DISABLE_REBUILD_USERS = 'disableRebuildUsers';
     const SIZE_ORIGINAL = -1;
 
     public static $imageQuality = 85;
@@ -195,6 +196,10 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
 
     protected function _rebuildUsers($delete = false)
     {
+        if ($this->getOption(self::OPTION_DISABLE_REBUILD_USERS)) {
+            return;
+        }
+
         $awardedModel = $this->_getAwardedModel();
 
         $users = $awardedModel->getAllAwarded(array('medal_id' => $this->get('medal_id')));
@@ -261,6 +266,15 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
                 'is_svg' => array('type' => XenForo_DataWriter::TYPE_BOOLEAN),
             )
         );
+    }
+
+    protected function _getDefaultOptions()
+    {
+        $options = parent::_getDefaultOptions();
+
+        $options[self::OPTION_DISABLE_REBUILD_USERS] = false;
+
+        return $options;
     }
 
     protected function _getExistingData($data)
