@@ -80,11 +80,14 @@ class bdMedal_Model_Awarded extends XenForo_Model
     {
         switch (bdMedal_Option::get('listOrder')) {
             case 'award_date':
-                uasort($awardeds, create_function('$a, $b', 'return $b["award_date"] - $a["award_date"];'));
+                uasort($awardeds, function($a, $b) { 
+                    return $b["award_date"] - $a["award_date"]; 
+                });
                 break;
             case 'random':
-                uasort($awardeds, create_function('$a, $b',
-                    'return $b["award_date"] * $a["medal_id"] - $a["award_date"] * $b["medal_id"];'));
+                uasort($awardeds, function($a, $b) { 
+                    return $b["award_date"] * $a["medal_id"] - $a["award_date"] * $b["medal_id"];
+                });
                 break;
             case 'display_order':
             default:
@@ -108,8 +111,11 @@ class bdMedal_Model_Awarded extends XenForo_Model
             }
         }
 
-        uasort($organized,
-            create_function('$a, $b', 'return $a["adjusted_display_order"] - $b["adjusted_display_order"];'));
+        uasort(
+            $organized,
+            function($a, $b) {
+                return $a["adjusted_display_order"] - $b["adjusted_display_order"];
+        });
 
         $awardeds = $organized;
         $awardeds += $notOrganized;

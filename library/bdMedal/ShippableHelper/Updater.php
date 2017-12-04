@@ -75,8 +75,9 @@ class bdMedal_ShippableHelper_Updater
             = 'bdMedal_ShippableHelper_UpdaterCore';
 
         if (!isset($GLOBALS[self::KEY]['onPreRoute'][$apiUrl])) {
-            $GLOBALS[self::KEY]['onPreRoute'][$apiUrl] = create_function('$fc',
-                __CLASS__ . '::onPreRoute($fc, ' . var_export($config, true) . ');');
+            $GLOBALS[self::KEY]['onPreRoute'][$apiUrl] = function($fc) {
+                static::onPreRoute($fc, $config);
+            };
             XenForo_CodeEvent::addListener('front_controller_pre_route',
                 $GLOBALS[self::KEY]['onPreRoute'][$apiUrl]);
         }
