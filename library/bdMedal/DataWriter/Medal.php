@@ -55,7 +55,8 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
         reset($imageSizes);
 
         if ($uploadSizeCode == 'l') {
-            while (list($sizeCode, $maxDimensions) = each($imageSizes)) {
+            foreach($imageSizes as $imageSize) {
+                list($sizeCode, $maxDimensions) = $imageSize;
                 if (isset($outputFiles[$sizeCode])) {
                     continue;
                 }
