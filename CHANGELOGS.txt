@@ -1,5 +1,5 @@
-Version 1.5.5 (released 05-12-2017)
-	php 7.2 compatibility fixes 
+Version 1.5.5 (released 06-12-2017)
+	Fix PHP 7.2 compatibility issues
 
 Version 1.5.4 (released 06-03-2017)
 	Fix template error in member_view

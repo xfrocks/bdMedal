@@ -1,10 +1,10 @@
 <?php
 
-// updated by DevHelper_Helper_ShippableHelper at 2016-12-06T05:38:39+00:00
+// updated by DevHelper_Helper_ShippableHelper at 2017-12-05T22:45:13+00:00
 
 /**
  * Class bdMedal_ShippableHelper_Updater
- * @version 7
+ * @version 8
  * @see DevHelper_Helper_ShippableHelper_Updater
  */
 class bdMedal_ShippableHelper_Updater
@@ -75,8 +75,8 @@ class bdMedal_ShippableHelper_Updater
             = 'bdMedal_ShippableHelper_UpdaterCore';
 
         if (!isset($GLOBALS[self::KEY]['onPreRoute'][$apiUrl])) {
-            $GLOBALS[self::KEY]['onPreRoute'][$apiUrl] = function($fc) {
-                static::onPreRoute($fc, $config);
+            $GLOBALS[self::KEY]['onPreRoute'][$apiUrl] = function ($fc) use ($config) {
+                self::onPreRoute($fc, $config);
             };
             XenForo_CodeEvent::addListener('front_controller_pre_route',
                 $GLOBALS[self::KEY]['onPreRoute'][$apiUrl]);
@@ -91,6 +91,7 @@ class bdMedal_ShippableHelper_Updater
      * @param string|null $apiUrl
      * @param string|null $addOnId
      * @throws Zend_Exception
+     * @throws XenForo_Exception
      */
     public static function onUninstall($apiUrl = null, $addOnId = null)
     {
