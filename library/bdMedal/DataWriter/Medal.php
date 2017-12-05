@@ -52,11 +52,9 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
         $imageType = $upload->getImageInfoField('type');
         $outputType = $imageType;
         $imageSizes = self::getImageSizes();
-        reset($imageSizes);
 
         if ($uploadSizeCode == 'l') {
-            foreach($imageSizes as $imageSize) {
-                list($sizeCode, $maxDimensions) = $imageSize;
+            foreach ($imageSizes as $sizeCode => $maxDimensions) {
                 if (isset($outputFiles[$sizeCode])) {
                     continue;
                 }
