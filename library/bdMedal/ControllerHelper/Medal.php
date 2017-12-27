@@ -42,6 +42,7 @@ class bdMedal_ControllerHelper_Medal extends XenForo_ControllerHelper_Abstract
      */
     protected function _getMedalModel()
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->_controller->getModelFromCache('bdMedal_Model_Medal');
     }
 
@@ -50,6 +51,7 @@ class bdMedal_ControllerHelper_Medal extends XenForo_ControllerHelper_Abstract
      */
     protected function _getAwardedModel()
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->_controller->getModelFromCache('bdMedal_Model_Awarded');
     }
 }

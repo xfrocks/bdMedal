@@ -62,6 +62,7 @@ class bdMedal_DataWriter_Category extends XenForo_DataWriter
      */
     protected function _getCategoryModel()
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->getModelFromCache('bdMedal_Model_Category');
     }
 
@@ -70,7 +71,7 @@ class bdMedal_DataWriter_Category extends XenForo_DataWriter
      */
     protected function _getMedalModel()
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->getModelFromCache('bdMedal_Model_Medal');
     }
-
 }

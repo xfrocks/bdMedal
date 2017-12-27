@@ -165,7 +165,7 @@ class bdMedal_DataWriter_Awarded extends XenForo_DataWriter
      */
     protected function _getAwardedModel()
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->getModelFromCache('bdMedal_Model_Awarded');
     }
-
 }

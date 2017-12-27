@@ -4,7 +4,8 @@ class bdMedal_Listener
 {
     public static function load_class_importer($class, array &$extend)
     {
-        if (strpos(strtolower($class), 'vbulletin') != false AND !defined('bdMedal_Extend_Importer_vBulletin_LOADED')) {
+        if (strpos(strtolower($class), 'vbulletin') != false &&
+            !defined('BDMEDAL_EXTEND_IMPORTER_VBULLETIN_LOADED')) {
             $extend[] = 'bdMedal_Extend_Importer_vBulletin';
         }
     }
@@ -26,8 +27,10 @@ class bdMedal_Listener
 
         // sondh@2012-10-18
         // these two helper is kept for legacy reason only
-        XenForo_Template_Helper_Core::$helperCallbacks[strtolower('medalImage')] = XenForo_Template_Helper_Core::$helperCallbacks['bdmedal_image'];
-        XenForo_Template_Helper_Core::$helperCallbacks[strtolower('medalImageSize')] = XenForo_Template_Helper_Core::$helperCallbacks['bdmedal_imagesize'];
+        XenForo_Template_Helper_Core::$helperCallbacks[strtolower('medalImage')] =
+            XenForo_Template_Helper_Core::$helperCallbacks['bdmedal_image'];
+        XenForo_Template_Helper_Core::$helperCallbacks[strtolower('medalImageSize')] =
+            XenForo_Template_Helper_Core::$helperCallbacks['bdmedal_imagesize'];
 
         if (isset($data['routesAdmin'])) {
             XenForo_CacheRebuilder_Abstract::$builders['bdMedal_User'] = 'bdMedal_CacheRebuilder_User';

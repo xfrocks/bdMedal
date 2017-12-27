@@ -22,5 +22,4 @@ class bdMedal_NewsFeedHandler_Medal extends XenForo_NewsFeedHandler_Abstract
 
         return $item;
     }
-
 }

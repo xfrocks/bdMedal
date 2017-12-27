@@ -215,7 +215,6 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
                 $dw->delete();
             }
         }
-
     }
 
     protected function _getFields()
@@ -301,6 +300,7 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
      */
     protected function _getMedalModel()
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->getModelFromCache('bdMedal_Model_Medal');
     }
 
@@ -309,6 +309,7 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
      */
     protected function _getAwardedModel()
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->getModelFromCache('bdMedal_Model_Awarded');
     }
 
@@ -348,5 +349,4 @@ class bdMedal_DataWriter_Medal extends XenForo_DataWriter
 
         return $imageSizes;
     }
-
 }

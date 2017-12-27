@@ -208,5 +208,4 @@ class bdMedal_Model_Medal extends XenForo_Model
         $size = strtolower($size);
         return "/medal/{$medal['medal_id']}_{$medal['image_date']}{$size}.jpg";
     }
-
 }

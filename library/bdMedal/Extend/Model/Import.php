@@ -76,5 +76,4 @@ class bdMedal_Extend_Model_Import extends XFCP_bdMedal_Extend_Model_Import
 
         return $newId;
     }
-
 }

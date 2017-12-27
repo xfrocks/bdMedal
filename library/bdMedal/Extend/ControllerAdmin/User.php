@@ -18,5 +18,4 @@ class bdMedal_Extend_ControllerAdmin_User extends XFCP_bdMedal_Extend_Controller
 
         return $this->responseView('bdMedal_ViewAdmin_User_AwardedMedals', 'bdmedal_user_awarded_medals', $viewParams);
     }
-
 }

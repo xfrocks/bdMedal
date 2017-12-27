@@ -19,7 +19,8 @@ class bdMedal_Model_Awarded extends XenForo_Model
             $prepared['{preparedAwardDate}'] = str_replace(
                 '{medalAwardDate}',
                 XenForo_Template_Helper_Core::date($awardedMedal['award_date']),
-                $options['awardDateTemplate']);
+                $options['awardDateTemplate']
+            );
         }
 
         return $prepared;
@@ -72,20 +73,23 @@ class bdMedal_Model_Awarded extends XenForo_Model
 
         $awardeds = $this->getAllAwarded($conditions, $fetchOptions);
 
-        $this->_db->update('xf_user', array('xf_bdmedal_awarded_cached' => serialize($awardeds)),
-            array('user_id = ?' => $userId));
+        $this->_db->update(
+            'xf_user',
+            array('xf_bdmedal_awarded_cached' => serialize($awardeds)),
+            array('user_id = ?' => $userId)
+        );
     }
 
     public function applyOrganizedOrder(array &$awardeds)
     {
         switch (bdMedal_Option::get('listOrder')) {
             case 'award_date':
-                uasort($awardeds, function($a, $b) { 
-                    return $b["award_date"] - $a["award_date"]; 
+                uasort($awardeds, function ($a, $b) {
+                    return $b["award_date"] - $a["award_date"];
                 });
                 break;
             case 'random':
-                uasort($awardeds, function($a, $b) { 
+                uasort($awardeds, function ($a, $b) {
                     return $b["award_date"] * $a["medal_id"] - $a["award_date"] * $b["medal_id"];
                 });
                 break;
@@ -113,9 +117,10 @@ class bdMedal_Model_Awarded extends XenForo_Model
 
         uasort(
             $organized,
-            function($a, $b) {
+            function ($a, $b) {
                 return $a["adjusted_display_order"] - $b["adjusted_display_order"];
-        });
+            }
+        );
 
         $awardeds = $organized;
         $awardeds += $notOrganized;
@@ -274,5 +279,4 @@ class bdMedal_Model_Awarded extends XenForo_Model
         );
         return $this->getOrderByClause($choices, $fetchOptions, $defaultOrderSql);
     }
-
 }

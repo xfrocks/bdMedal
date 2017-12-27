@@ -11,5 +11,4 @@ class bdMedal_Option
 
         return XenForo_Application::get('options')->get('bdMedal_' . $key);
     }
-
 }

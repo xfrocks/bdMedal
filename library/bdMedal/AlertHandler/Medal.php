@@ -14,5 +14,4 @@ class bdMedal_AlertHandler_Medal extends XenForo_AlertHandler_Abstract
     {
         return 'bdmedal_' . parent::_getDefaultTemplateTitle($contentType, $action);
     }
-
 }

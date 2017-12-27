@@ -148,7 +148,9 @@ class bdMedal_Extend_ControllerPublic_Account extends XFCP_bdMedal_Extend_Contro
 
         $viewParams = array('medals' => $medals);
 
-        return $this->_getWrapper('account', 'medals',
+        return $this->_getWrapper(
+            'account',
+            'medals',
             $this->responseView('bdMedal_ViewPublic_Member_Medals', 'bdmedal_account_medals', $viewParams)
         );
     }
@@ -165,5 +167,4 @@ class bdMedal_Extend_ControllerPublic_Account extends XFCP_bdMedal_Extend_Contro
 
         return $organized;
     }
-
 }

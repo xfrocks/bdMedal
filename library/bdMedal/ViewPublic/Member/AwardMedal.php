@@ -26,5 +26,4 @@ class bdMedal_ViewPublic_Member_AwardMedal extends XenForo_ViewPublic_Base
         }
         $this->_params['medalsGrouped'] = $options;
     }
-
 }

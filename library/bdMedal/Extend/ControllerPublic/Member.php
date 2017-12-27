@@ -154,5 +154,4 @@ class bdMedal_Extend_ControllerPublic_Member extends XFCP_bdMedal_Extend_Control
             $viewParams
         );
     }
-
 }

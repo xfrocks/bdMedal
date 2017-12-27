@@ -49,5 +49,4 @@ class bdMedal_ViewPublic_Help_Medals extends XenForo_ViewPublic_Base
             }
         }
     }
-
 }

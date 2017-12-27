@@ -58,6 +58,7 @@ class bdMedal_Helper_Template
      */
     protected static function _getAwardedModel()
     {
+        /** @var bdMedal_Model_Awarded $model */
         $model = null;
 
         if ($model === null) {

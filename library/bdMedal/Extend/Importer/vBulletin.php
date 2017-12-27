@@ -1,6 +1,6 @@
 <?php
 
-define('bdMedal_Extend_Importer_vBulletin_LOADED', true);
+define('BDMEDAL_EXTEND_IMPORTER_VBULLETIN_LOADED', true);
 
 class bdMedal_Extend_Importer_vBulletin extends XFCP_bdMedal_Extend_Importer_vBulletin
 {
@@ -232,5 +232,4 @@ class bdMedal_Extend_Importer_vBulletin extends XFCP_bdMedal_Extend_Importer_vBu
             $this->_getProgressOutput($options['processed'], $options['rows'])
         );
     }
-
 }

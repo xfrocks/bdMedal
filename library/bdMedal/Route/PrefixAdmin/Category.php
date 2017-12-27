@@ -29,5 +29,4 @@ class bdMedal_Route_PrefixAdmin_Category implements XenForo_Route_Interface
             return XenForo_Link::buildBasicLink($outputPrefix, $action, $extension);
         }
     }
-
 }

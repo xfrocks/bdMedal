@@ -9,5 +9,4 @@ class bdMedal_ViewAdmin_Medal_List extends XenForo_ViewAdmin_Base
             $this->_params['medalsGrouped'][$medal['category_name']][$medalId] = $medal;
         }
     }
-
 }

@@ -88,5 +88,4 @@ class bdMedal_Model_Category extends XenForo_Model
         $choices = array();
         return $this->getOrderByClause($choices, $fetchOptions, 'category.display_order');
     }
-
 }

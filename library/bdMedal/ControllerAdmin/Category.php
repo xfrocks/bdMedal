@@ -53,8 +53,10 @@ class bdMedal_ControllerAdmin_Category extends XenForo_ControllerAdmin_Abstract
         $dw->bulkSet($dwInput);
         $dw->save();
 
-        return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS,
-            XenForo_Link::buildAdminLink('medal-categories'));
+        return $this->responseRedirect(
+            XenForo_ControllerResponse_Redirect::SUCCESS,
+            XenForo_Link::buildAdminLink('medal-categories')
+        );
     }
 
     public function actionDelete()
@@ -67,8 +69,10 @@ class bdMedal_ControllerAdmin_Category extends XenForo_ControllerAdmin_Abstract
             $dw->setExistingData($id);
             $dw->delete();
 
-            return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS,
-                XenForo_Link::buildAdminLink('medal-categories'));
+            return $this->responseRedirect(
+                XenForo_ControllerResponse_Redirect::SUCCESS,
+                XenForo_Link::buildAdminLink('medal-categories')
+            );
         } else {
             $viewParams = array('category' => $category);
 
@@ -92,7 +96,7 @@ class bdMedal_ControllerAdmin_Category extends XenForo_ControllerAdmin_Abstract
      */
     protected function _getCategoryModel()
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->getModelFromCache('bdMedal_Model_Category');
     }
-
 }

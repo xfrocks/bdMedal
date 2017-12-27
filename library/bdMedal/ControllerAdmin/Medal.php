@@ -33,8 +33,10 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
     public function actionEdit()
     {
         $medalId = $this->_input->filterSingle('medal_id', XenForo_Input::UINT);
-        $medal = $this->_getMedalHelper()->getMedalOrError($medalId,
-            array('join' => bdMedal_Model_Medal::FETCH_IMAGES));
+        $medal = $this->_getMedalHelper()->getMedalOrError(
+            $medalId,
+            array('join' => bdMedal_Model_Medal::FETCH_IMAGES)
+        );
 
         $viewParams = array(
             'medal' => $medal,
@@ -81,8 +83,10 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
 
         $dw->save();
 
-        return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS,
-            XenForo_Link::buildAdminLink('medal-medals'));
+        return $this->responseRedirect(
+            XenForo_ControllerResponse_Redirect::SUCCESS,
+            XenForo_Link::buildAdminLink('medal-medals')
+        );
     }
 
     public function actionDelete()
@@ -95,8 +99,10 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
             $dw->setExistingData($medal, true);
             $dw->delete();
 
-            return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS,
-                XenForo_Link::buildAdminLink('medal-medals'));
+            return $this->responseRedirect(
+                XenForo_ControllerResponse_Redirect::SUCCESS,
+                XenForo_Link::buildAdminLink('medal-medals')
+            );
         } else {
             $viewParams = array('medal' => $medal);
 
@@ -142,8 +148,10 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
                 $awardedModel->award($medal, $users, array('award_reason' => $reason));
             }
 
-            return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS,
-                XenForo_Link::buildAdminLink('medal-medals/awarded-users', $medal));
+            return $this->responseRedirect(
+                XenForo_ControllerResponse_Redirect::SUCCESS,
+                XenForo_Link::buildAdminLink('medal-medals/awarded-users', $medal)
+            );
         } else {
             $allMedal = $this->_getMedalModel()->getList(array(), array(
                 'join' => bdMedal_Model_Medal::FETCH_CATEGORY,
@@ -175,8 +183,10 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
             $dw->set('award_reason', $awardReason);
             $dw->save();
 
-            return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS,
-                XenForo_Link::buildAdminLink('medal-medals/awarded-users', $awarded));
+            return $this->responseRedirect(
+                XenForo_ControllerResponse_Redirect::SUCCESS,
+                XenForo_Link::buildAdminLink('medal-medals/awarded-users', $awarded)
+            );
         } else {
             $viewParams = array(
                 'medal' => $medal,
@@ -197,8 +207,10 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
         if ($this->isConfirmedPost()) {
             $this->_getAwardedModel()->reverseAward($awarded);
 
-            return $this->responseRedirect(XenForo_ControllerResponse_Redirect::SUCCESS,
-                XenForo_Link::buildAdminLink('medal-medals/awarded-users', $awarded));
+            return $this->responseRedirect(
+                XenForo_ControllerResponse_Redirect::SUCCESS,
+                XenForo_Link::buildAdminLink('medal-medals/awarded-users', $awarded)
+            );
         } else {
             $viewParams = array(
                 'medal' => $medal,
@@ -233,6 +245,7 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
      */
     protected function _getMedalHelper()
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->getHelper('bdMedal_ControllerHelper_Medal');
     }
 
@@ -241,6 +254,7 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
      */
     protected function _getCategoryModel()
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->getModelFromCache('bdMedal_Model_Category');
     }
 
@@ -249,6 +263,7 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
      */
     protected function _getMedalModel()
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->getModelFromCache('bdMedal_Model_Medal');
     }
 
@@ -257,7 +272,7 @@ class bdMedal_ControllerAdmin_Medal extends XenForo_ControllerAdmin_Abstract
      */
     protected function _getAwardedModel()
     {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return $this->getModelFromCache('bdMedal_Model_Awarded');
     }
-
 }

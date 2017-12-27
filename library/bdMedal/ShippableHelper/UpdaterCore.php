@@ -1,6 +1,6 @@
 <?php
 
-// updated by DevHelper_Helper_ShippableHelper at 2016-12-06T05:38:39+00:00
+// updated by DevHelper_Helper_ShippableHelper at 2017-12-27T04:03:37+00:00
 
 /**
  * Class bdMedal_ShippableHelper_UpdaterCore
@@ -268,9 +268,7 @@ var match = hash.match(regex);
 if (match) {
     var accessToken = match[1];
     var downloadLink = $downloadLinkJson;
-    var redirect = downloadLink + '&' + $accessTokenParamJson + '=' + encodeURIComponent(accessToken);
-
-    window.location = redirect;
+    window.location = downloadLink + '&' + $accessTokenParamJson + '=' + encodeURIComponent(accessToken);
 }
 </script>
 EOF;
