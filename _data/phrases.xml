@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phrases>
+  <phrase title="admin_navigation.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[[bd] Medal]]></phrase>
+  <phrase title="admin_navigation.bdMedalAwardeds" version_id="2000000" version_string="2.0.0"><![CDATA[Awarded Medals]]></phrase>
+  <phrase title="admin_navigation.bdMedalCategories" version_id="2000000" version_string="2.0.0"><![CDATA[Categories]]></phrase>
+  <phrase title="admin_navigation.bdMedalMedals" version_id="2000000" version_string="2.0.0"><![CDATA[Medals]]></phrase>
+  <phrase title="admin_permission.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[[bd] Medal - Manage medals]]></phrase>
+  <phrase title="bdmedal_award_reason" version_id="2000000" version_string="2.0.0"><![CDATA[Reason]]></phrase>
+  <phrase title="bdmedal_awarded_add" version_id="2000000" version_string="2.0.0"><![CDATA[Award medal]]></phrase>
+  <phrase title="bdmedal_awarded_edit" version_id="2000000" version_string="2.0.0"><![CDATA[Edit awarded medal]]></phrase>
+  <phrase title="bdmedal_awarded_entities" version_id="2000000" version_string="2.0.0"><![CDATA[Awarded medals]]></phrase>
+  <phrase title="bdmedal_awarded_entity" version_id="2000000" version_string="2.0.0"><![CDATA[Awarded medal]]></phrase>
+  <phrase title="bdmedal_awarded_medals" version_id="2000000" version_string="2.0.0"><![CDATA[Awarded medals]]></phrase>
+  <phrase title="bdmedal_category_add" version_id="2000000" version_string="2.0.0"><![CDATA[Add category]]></phrase>
+  <phrase title="bdmedal_category_edit" version_id="2000000" version_string="2.0.0"><![CDATA[Edit category]]></phrase>
+  <phrase title="bdmedal_category_entities" version_id="2000000" version_string="2.0.0"><![CDATA[Categories]]></phrase>
+  <phrase title="bdmedal_category_entity" version_id="2000000" version_string="2.0.0"><![CDATA[Category]]></phrase>
+  <phrase title="bdmedal_description" version_id="2000000" version_string="2.0.0"><![CDATA[Description]]></phrase>
+  <phrase title="bdmedal_medal_add" version_id="2000000" version_string="2.0.0"><![CDATA[Add medal]]></phrase>
+  <phrase title="bdmedal_medal_edit" version_id="2000000" version_string="2.0.0"><![CDATA[Edit medal]]></phrase>
+  <phrase title="bdmedal_medal_entities" version_id="2000000" version_string="2.0.0"><![CDATA[Medals]]></phrase>
+  <phrase title="bdmedal_medal_entity" version_id="2000000" version_string="2.0.0"><![CDATA[Medal]]></phrase>
+  <phrase title="bdmedal_medals" version_id="2000000" version_string="2.0.0"><![CDATA[Medals]]></phrase>
+  <phrase title="bdmedal_name" version_id="2000000" version_string="2.0.0"><![CDATA[Name]]></phrase>
+  <phrase title="option.bdMedal_imageSizeM" version_id="2000000" version_string="2.0.0"><![CDATA[Image Medium]]></phrase>
+  <phrase title="option.bdMedal_imageSizeS" version_id="2000000" version_string="2.0.0"><![CDATA[Image Small]]></phrase>
+  <phrase title="option_explain.bdMedal_imageSizeM" version_id="2000000" version_string="2.0.0"><![CDATA[Normally, medal image will be store in 2 sizes: original size (code name "L") and tiny size (code name "T"). If you wish to use additional image size, you can specify the maximum width / height here. An image will be prepared with the code name "M" for all medals from now on (you will have to re-upload image for old medals). Leave it zero to disable this feature.]]></phrase>
+  <phrase title="option_explain.bdMedal_imageSizeS" version_id="2000000" version_string="2.0.0"><![CDATA[Normally, medal image will be store in 2 sizes: original size (code name "L") and tiny size (code name "T"). If you wish to use additional image size, you can specify the maximum width / height here. An image will be prepared with the code name "S" for all medals from now on (you will have to re-upload image for old medals). Leave it zero to disable this feature.]]></phrase>
+  <phrase title="option_group.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[[bd] Medal]]></phrase>
+  <phrase title="option_group_description.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[]]></phrase>
+</phrases>
