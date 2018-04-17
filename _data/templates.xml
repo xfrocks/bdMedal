@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <templates>
-  <template type="admin" title="bdmedal_entity_delete" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('confirm_action') }}</xf:title>
+  <template type="admin" title="bdmedal_entity_delete" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:comment>2018-04-17T19:02:43+00:00</xf:comment>
+<xf:title>{{ phrase('confirm_action') }}</xf:title>
 
 <xf:form action="{{ link($links.delete, $entity) }}" ajax="true" class="block">
     <div class="block-container">
@@ -19,7 +20,8 @@
         <xf:submitrow rowtype="simple" icon="delete"/>
     </div>
 </xf:form>]]></template>
-  <template type="admin" title="bdmedal_entity_edit" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:if is="$entity.isInsert()">
+  <template type="admin" title="bdmedal_entity_edit" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:comment>2018-04-17T19:02:43+00:00</xf:comment>
+<xf:if is="$entity.isInsert()">
     <xf:title>{$phrases.add|raw}</xf:title>
     <xf:else/>
     <xf:title>{$phrases.edit|raw}: {$entity.getEntityLabel()}</xf:title>
@@ -64,13 +66,19 @@
                 </xf:if>
             </xf:foreach>
 
+			<xf:if is="{$macroTemplate} && {$macroName}">
+				<xf:macro template="{$macroTemplate}" name="{$macroName}"
+						  arg-columns="{$columns}"
+						  arg-entity="{$entity}" />
+			</xf:if>
         </div>
 
         <xf:hiddenval name="entity_id" value="{{ $entity.getEntityId() }}"/>
         <xf:submitrow sticky="true" icon="save"/>
     </div>
 </xf:form>]]></template>
-  <template type="admin" title="bdmedal_entity_list" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:title>{$phrases.entities|raw}</xf:title>
+  <template type="admin" title="bdmedal_entity_list" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:comment>2018-04-17T19:02:43+00:00</xf:comment>
+<xf:title>{$phrases.entities|raw}</xf:title>
 
 <xf:if is="{$links.add}">
     <xf:pageaction>
@@ -111,4 +119,13 @@
     <xf:else/>
     <div class="blockMessage">{{ phrase('no_items_have_been_created_yet') }}</div>
 </xf:if>]]></template>
+  <template type="admin" title="bdmedal_medal" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:macro name="entity_edit" arg-entity="!">
+    <xf:set var="$medal" value="{$entity}"/>
+    <xf:set var="$imageUrl" value="{$medal.getImageUrl('l')}"/>
+    <xf:uploadrow name="image" label="{{ phrase('upload_image') }}">
+        <xf:html>
+            <xf:if is="{$imageUrl}"><br/><img src="{$imageUrl}" style="max-height: 100px"/></xf:if>
+        </xf:html>
+    </xf:uploadrow>
+</xf:macro>]]></template>
 </templates>

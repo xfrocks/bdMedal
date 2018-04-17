@@ -38,7 +38,12 @@ class Awarded extends Entity
 
     public function getEntityLabel()
     {
-        return sprintf('%s / %s', $this->Medal->name, $this->username);
+        $medal = $this->getExistingRelation('Medal');
+        if ($medal) {
+            return sprintf('%s / %s', $medal->name, $this->username);
+        }
+
+        return '#' . $this->awarded_id;
     }
 
     public function rebuildMedal()

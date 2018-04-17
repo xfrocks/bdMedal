@@ -63,9 +63,10 @@ class Medal extends Entity
     {
         $medalId = $this->medal_id;
         $imageDate = $getExistingValue ? $this->getExistingValue('image_date') : $this->image_date;
+        $isSvg = $getExistingValue ? $this->getExistingValue('is_svg') : $this->is_svg;
         $code = strtolower($code);
 
-        if ($this->is_svg) {
+        if ($isSvg) {
             return sprintf('medal/%d_%d.svg', $medalId, $imageDate);
         }
 
