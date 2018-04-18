@@ -29,8 +29,6 @@ class Awarded extends Entity
                 return \XF::phrase('bdmedal_' . $columnName);
             case 'medal_id':
                 return \XF::phrase('bdmedal_medal_entity');
-            case 'username':
-                return \XF::phrase('user_name');
         }
 
         return null;
@@ -84,21 +82,6 @@ class Awarded extends Entity
         parent::_postDelete();
 
         $this->_autoRebuild();
-    }
-
-    protected function _preSave()
-    {
-        parent::_preSave();
-
-        if ($this->isChanged('username') && !$this->isChanged('user_id')) {
-            /** @var User $user */
-            $user = $this->em()->findOne('XF:User', ['username' => $this->username]);
-            if ($user) {
-                $this->user_id = $user->user_id;
-            } else {
-                $this->error(\XF::phrase('requested_user_not_found'), 'username');
-            }
-        }
     }
 
     public static function getStructure(Structure $structure)

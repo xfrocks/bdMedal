@@ -5,6 +5,8 @@
   <phrase title="admin_navigation.bdMedalCategories" version_id="2000000" version_string="2.0.0"><![CDATA[Categories]]></phrase>
   <phrase title="admin_navigation.bdMedalMedals" version_id="2000000" version_string="2.0.0"><![CDATA[Medals]]></phrase>
   <phrase title="admin_permission.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[[bd] Medal - Manage medals]]></phrase>
+  <phrase title="bdmedal_avoid_duplicated" version_id="2000000" version_string="2.0.0"><![CDATA[Avoid Duplicated]]></phrase>
+  <phrase title="bdmedal_avoid_duplicated_explain" version_id="2000000" version_string="2.0.0"><![CDATA[Enable this option to avoid awarding a medal to an user more than once. Any users who have been awarded the medal before will be silently ignored. You can control the default state of this option by editing the "Default to Avoid Duplicated" option in <a href="admin.php?options/groups/bdMedal/" target="_blank" tabindex="-1">[bd] Medal option page</a>.]]></phrase>
   <phrase title="bdmedal_award_reason" version_id="2000000" version_string="2.0.0"><![CDATA[Reason]]></phrase>
   <phrase title="bdmedal_awarded_add" version_id="2000000" version_string="2.0.0"><![CDATA[Award medal]]></phrase>
   <phrase title="bdmedal_awarded_count" version_id="2000000" version_string="2.0.0"><![CDATA[Awarded]]></phrase>
@@ -27,8 +29,10 @@
   <phrase title="bdmedal_medal_entity" version_id="2000000" version_string="2.0.0"><![CDATA[Medal]]></phrase>
   <phrase title="bdmedal_medals" version_id="2000000" version_string="2.0.0"><![CDATA[Medals]]></phrase>
   <phrase title="bdmedal_name" version_id="2000000" version_string="2.0.0"><![CDATA[Name]]></phrase>
+  <phrase title="option.bdMedal_defaultAvoidDuplicated" version_id="2000000" version_string="2.0.0"><![CDATA[Default to Avoid Duplicated]]></phrase>
   <phrase title="option.bdMedal_imageSizeM" version_id="2000000" version_string="2.0.0"><![CDATA[Image Medium]]></phrase>
   <phrase title="option.bdMedal_imageSizeS" version_id="2000000" version_string="2.0.0"><![CDATA[Image Small]]></phrase>
+  <phrase title="option_explain.bdMedal_defaultAvoidDuplicated" version_id="2000000" version_string="2.0.0"><![CDATA[Enable this option to turn on "Avoid Duplicated" option in manual medal award form in AdminCP.]]></phrase>
   <phrase title="option_explain.bdMedal_imageSizeM" version_id="2000000" version_string="2.0.0"><![CDATA[Normally, medal image will be store in 2 sizes: original size (code name "L") and tiny size (code name "T"). If you wish to use additional image size, you can specify the maximum width / height here. An image will be prepared with the code name "M" for all medals from now on (you will have to re-upload image for old medals). Leave it zero to disable this feature.]]></phrase>
   <phrase title="option_explain.bdMedal_imageSizeS" version_id="2000000" version_string="2.0.0"><![CDATA[Normally, medal image will be store in 2 sizes: original size (code name "L") and tiny size (code name "T"). If you wish to use additional image size, you can specify the maximum width / height here. An image will be prepared with the code name "S" for all medals from now on (you will have to re-upload image for old medals). Leave it zero to disable this feature.]]></phrase>
   <phrase title="option_group.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[[bd] Medal]]></phrase>

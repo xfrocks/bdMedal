@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <options>
+  <option option_id="bdMedal_defaultAvoidDuplicated" edit_format="onoff" data_type="unsigned_integer">
+    <default_value>1</default_value>
+    <relation group_id="bdMedal" display_order="100"/>
+  </option>
   <option option_id="bdMedal_imageSizeM" edit_format="spinbox" data_type="unsigned_integer">
     <default_value>0</default_value>
     <relation group_id="bdMedal" display_order="10"/>

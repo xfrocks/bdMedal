@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <templates>
+  <template type="admin" title="bdmedal_awarded" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:macro name="entity_edit" arg-entity="!">
+    <xf:set var="$awarded" value="{$entity}"/>
+
+    <xf:if is="$awarded.awarded_id > 0">
+        <xf:textboxrow label="{{ phrase('user_name') }}"
+                       name="username"
+                       value="{$awarded.username}"/>
+
+        <xf:else/>
+        <xf:tokeninputrow explain="{{ phrase('separate_names_with_comma') }}"
+                          href="{{ link_type('public', 'members/find') }}"
+                          label="{{ phrase('user_names') }}"
+                          name="usernames"/>
+
+        <xf:checkboxrow label="">
+            <xf:option name="avoid_duplicated"
+                       value="1"
+                       selected="{$xf.options.bdMedal_defaultAvoidDuplicated}">
+                {{ phrase('bdmedal_avoid_duplicated') }}
+            </xf:option>
+            <xf:explain>{{ phrase('bdmedal_avoid_duplicated_explain') }}</xf:explain>
+        </xf:checkboxrow>
+    </xf:if>
+</xf:macro>]]></template>
   <template type="admin" title="bdmedal_entity_delete" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:comment>2018-04-17T19:02:43+00:00</xf:comment>
 <xf:title>{{ phrase('confirm_action') }}</xf:title>
 
@@ -20,7 +44,7 @@
         <xf:submitrow rowtype="simple" icon="delete"/>
     </div>
 </xf:form>]]></template>
-  <template type="admin" title="bdmedal_entity_edit" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:comment>2018-04-18T04:38:01+00:00</xf:comment>
+  <template type="admin" title="bdmedal_entity_edit" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:comment>2018-04-18T08:34:53+00:00</xf:comment>
 <xf:if is="$entity.isInsert()">
     <xf:title>{$phrases.add|raw}</xf:title>
     <xf:else/>
@@ -66,8 +90,8 @@
                 </xf:if>
             </xf:foreach>
 
-			<xf:if is="{$macroTemplate} && {$macroName}">
-				<xf:macro template="{$macroTemplate}" name="{$macroName}"
+			<xf:if is="{$macroTemplateEntityEdit}">
+				<xf:macro template="{$macroTemplateEntityEdit}" name="entity_edit"
 						  arg-columns="{$columns}"
 						  arg-entity="{$entity}" />
 			</xf:if>

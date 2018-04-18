@@ -66,16 +66,6 @@ class Medal extends Entity
         return $this->view('Xfrocks\Medal:Medal\Image', 'bdmedal_medal_image', $viewParams);
     }
 
-    protected function entityAddEdit($entity)
-    {
-        $view = parent::entityAddEdit($entity);
-
-        $view->setParam('macroTemplate', 'bdmedal_medal_image');
-        $view->setParam('macroName', 'entity_edit');
-
-        return $view;
-    }
-
     protected function entitySaveProcess($entity)
     {
         $form = parent::entitySaveProcess($entity);
@@ -126,5 +116,12 @@ class Medal extends Entity
     protected function getShortName()
     {
         return 'Xfrocks\Medal:Medal';
+    }
+
+    protected function getViewReply($action, array $viewParams)
+    {
+        $viewParams['macroTemplateEntityEdit'] = 'bdmedal_medal_image';
+
+        return parent::getViewReply($action, $viewParams);
     }
 }
