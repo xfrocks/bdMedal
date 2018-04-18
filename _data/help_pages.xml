@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<help_pages>
+  <help_page page_id="medals" page_name="medals" display_order="9999" callback_class="Xfrocks\Medal\Help\Medal" callback_method="renderMedals" advanced_mode="1" active="1"/>
+</help_pages>

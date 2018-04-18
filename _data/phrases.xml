@@ -31,10 +31,14 @@
   <phrase title="bdmedal_medal_entity" version_id="2000000" version_string="2.0.0"><![CDATA[Medal]]></phrase>
   <phrase title="bdmedal_medals" version_id="2000000" version_string="2.0.0"><![CDATA[Medals]]></phrase>
   <phrase title="bdmedal_name" version_id="2000000" version_string="2.0.0"><![CDATA[Name]]></phrase>
+  <phrase title="bdmedal_no_medals_have_been_created_yet" version_id="2000000" version_string="2.0.0"><![CDATA[No medals have been created yet.]]></phrase>
+  <phrase title="bdmedal_no_users_have_been_awarded_medal_x_yet" version_id="2000000" version_string="2.0.0"><![CDATA[No users have been awarded medal {medal} yet.]]></phrase>
   <phrase title="bdmedal_user_x_not_awarded_y" version_id="2000000" version_string="2.0.0"><![CDATA[User {username} hasn't been awarded medal {medal}.]]></phrase>
   <phrase title="bdmedal_x_awarded_medal_y" version_id="2000000" version_string="2.0.0"><![CDATA[{name} awarded you with the medal {medal}.]]></phrase>
   <phrase title="bdmedal_x_have_been_awarded_medal_y" version_id="2000000" version_string="2.0.0"><![CDATA[{name} have been awarded with the medal {medal}.]]></phrase>
   <phrase title="bdmedal_you_have_been_awarded_medal_x" version_id="2000000" version_string="2.0.0"><![CDATA[<strong class="subject">You</strong> have been awarded a medal: {medal}]]></phrase>
+  <phrase title="help_page_desc.medals" version_id="2000000" version_string="2.0.0"><![CDATA[You can earn medals by being active in the community. This page shows a list of the medals that are available.]]></phrase>
+  <phrase title="help_page_title.medals" version_id="2000000" version_string="2.0.0"><![CDATA[Medals]]></phrase>
   <phrase title="option.bdMedal_defaultAvoidDuplicated" version_id="2000000" version_string="2.0.0"><![CDATA[Default to Avoid Duplicated]]></phrase>
   <phrase title="option.bdMedal_imageSizeM" version_id="2000000" version_string="2.0.0"><![CDATA[Image Medium]]></phrase>
   <phrase title="option.bdMedal_imageSizeS" version_id="2000000" version_string="2.0.0"><![CDATA[Image Small]]></phrase>

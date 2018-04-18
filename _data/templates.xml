@@ -1,5 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <templates>
+  <template type="public" title="_help_page_medals" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:if is="$medals is not empty">
+    <div class="block">
+        <div class="block-container">
+            <div class="block-body">
+                <xf:datalist data-xf-init="responsive-data-list">
+                    <xf:foreach loop="$categories" value="$category">
+                        <xf:if contentcheck="true">
+                            <xf:datarow rowclass="dataList-row--subSection dataList-row--noHover">
+                                <xf:cell colspan="3">{$category.name}</xf:cell>
+                            </xf:datarow>
+
+                            <xf:contentcheck>
+                                <xf:foreach loop="$medals" value="$medal">
+                                    <xf:if is="$medal.category_id === $category.category_id">
+                                        <xf:datarow rowclass="dataList-row--noHover">
+                                            <xf:cell class="dataList-cell--min dataList-cell--alt">
+                                                <xf:macro name="medal_image" arg-medal="{$medal}"/>
+                                            </xf:cell>
+                                            <xf:cell>
+                                                {$medal.name}
+                                                <xf:if is="$medal.description">
+                                                    <div class="dataList-subRow">{$medal.description}</div>
+                                                </xf:if>
+                                            </xf:cell>
+                                            <xf:cell class="dataList-cell--action">
+                                                <a href="{{ link('help/medals', null, {'medal_id': $medal.medal_id}) }}"
+                                                   data-xf-click="overlay">
+                                                    {{ phrase('bdmedal_awarded_count') }}:
+                                                    {$medal.user_count|number_short}
+                                                </a>
+                                            </xf:cell>
+                                        </xf:datarow>
+                                    </xf:if>
+                                </xf:foreach>
+                            </xf:contentcheck>
+                        </xf:if>
+                    </xf:foreach>
+                </xf:datalist>
+            </div>
+        </div>
+    </div>
+
+    <xf:elseif is="$medal"/>
+    <xf:h1>{$medal.name}</xf:h1>
+
+    <xf:if is="$awardeds is not empty">
+        <div class="block">
+            <div class="block-container">
+                <div class="block-body">
+                    <xf:datalist data-xf-init="responsive-data-list">
+                        <xf:foreach loop="$awardeds" value="$awarded">
+                            <xf:datarow rowclass="dataList-row--noHover">
+                                <xf:cell class="dataList-cell--min dataList-cell--image">
+                                    <xf:avatar user="{$awarded.User}" size="s"/>
+                                </xf:cell>
+                                <xf:cell>
+                                    <xf:username user="{$awarded.User}"/>
+                                    <span class="dataList-hint" dir="auto">
+                                        {{ date($awarded.award_date) }}
+                                    </span>
+                                    <xf:if is="$awarded.award_reason">
+                                        <div class="dataList-subRow">{$awarded.award_reason}</div>
+                                    </xf:if>
+                                </xf:cell>
+                            </xf:datarow>
+                        </xf:foreach>
+                    </xf:datalist>
+                    <div class="block-footer">
+                        <span class="block-footer-counter">{{ display_totals($awardeds, $total) }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <xf:pagenav page="{$page}" perpage="{$perPage}" total="{$total}"
+                        link="help/medals" params="{$pageNavParams}"
+                        wrapperclass="block-outer block-outer--after"/>
+        </div>
+
+        <xf:else/>
+        <div class="blockMessage">
+            {{ phrase('bdmedal_no_users_have_been_awarded_medal_x_yet', {'medal': $medal.name}) }}
+        </div>
+    </xf:if>
+
+    <xf:else/>
+    <div class="blockMessage">{{ phrase('bdmedal_no_medals_have_been_created_yet') }}</div>
+</xf:if>
+
+<xf:macro name="medal_image" arg-medal="!">
+    <xf:set var="$medalImageUrl" value="{$medal.getImageUrl('T')}"/>
+    <xf:if is="$medalImageUrl">
+        <div style="background: url('{$medalImageUrl}') center center;background-size:cover;height:22px;width:22px;">
+            &nbsp;
+        </div>
+    </xf:if>
+</xf:macro>]]></template>
   <template type="public" title="alert_medal_insert" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:if is="!$user">
     {{ phrase('bdmedal_you_have_been_awarded_medal_x', {
         'medal': $content.Medal.name
