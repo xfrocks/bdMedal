@@ -36,16 +36,6 @@ class Awarded extends Entity
         return null;
     }
 
-    public function getEntityLabel()
-    {
-        $medal = $this->getExistingRelation('Medal');
-        if ($medal) {
-            return sprintf('%s / %s', $medal->name, $this->username);
-        }
-
-        return '#' . $this->awarded_id;
-    }
-
     public function rebuildMedal()
     {
         $app = $this->app();

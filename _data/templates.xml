@@ -20,11 +20,11 @@
         <xf:submitrow rowtype="simple" icon="delete"/>
     </div>
 </xf:form>]]></template>
-  <template type="admin" title="bdmedal_entity_edit" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:comment>2018-04-17T19:02:43+00:00</xf:comment>
+  <template type="admin" title="bdmedal_entity_edit" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:comment>2018-04-18T02:48:12+00:00</xf:comment>
 <xf:if is="$entity.isInsert()">
     <xf:title>{$phrases.add|raw}</xf:title>
     <xf:else/>
-    <xf:title>{$phrases.edit|raw}: {$entity.getEntityLabel()}</xf:title>
+    <xf:title>{$phrases.edit|raw}: {$controller.getEntityLabel($entity)}</xf:title>
 </xf:if>
 
 <xf:pageaction if="$entity.isUpdate()">
@@ -77,7 +77,7 @@
         <xf:submitrow sticky="true" icon="save"/>
     </div>
 </xf:form>]]></template>
-  <template type="admin" title="bdmedal_entity_list" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:comment>2018-04-17T19:02:43+00:00</xf:comment>
+  <template type="admin" title="bdmedal_entity_list" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:comment>2018-04-18T02:44:51+00:00</xf:comment>
 <xf:title>{$phrases.entities|raw}</xf:title>
 
 <xf:if is="{$links.add}">
@@ -101,8 +101,10 @@
                         <xf:set var="$viewLink"
                                 value="{{ (empty($editLink) && $links.view) ? link($links.view, $entity) : '' }}"/>
                         <xf:datarow delete="{{ $links.delete ? link($links.delete, $entity) : '' }}"
+									explain="{$controller.getEntityExplain($entity)}"
+									hint="{$controller.getEntityHint($entity)}"
                                     href="{{ $editLink ?: $viewLink }}"
-                                    label="{$entity.getEntityLabel()}"
+                                    label="{$controller.getEntityLabel($entity)}"
                                     overlay="{{ !!$viewLink }}"/>
                     </xf:foreach>
                 </xf:datalist>
@@ -128,4 +130,99 @@
         </xf:html>
     </xf:uploadrow>
 </xf:macro>]]></template>
+  <template type="admin" title="bdmedal_medal_list" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('bdmedal_medal_entities') }}</xf:title>
+
+<xf:pageaction>
+    <xf:button href="{{ link('medals/add') }}">{{ phrase('bdmedal_medal_add') }}</xf:button>
+    <xf:button href="{{ link('medal-categories/add') }}">{{ phrase('bdmedal_category_add') }}</xf:button>
+</xf:pageaction>
+
+<xf:if is="count($categories) > 0">
+    <div class="block">
+        <div class="block-outer">
+            <xf:macro template="filter_macros" name="quick_filter" arg-key="medals"
+                      arg-class="block-outer-opposite"/>
+        </div>
+        <div class="block-container">
+            <div class="block-body">
+                <xf:datalist>
+                    <xf:foreach loop="$categories" value="$category">
+                        <tbody class="dataList-rowGroup">
+                        <xf:datarow rowtype="subsection">
+                            <xf:cell href="{{ link('medal-categories/edit', $category) }}"
+                                     colspan="3" overlay="true">
+                                {{ $category.name }}
+                            </xf:cell>
+                            <xf:delete href="{{ link('smilie-categories/delete', $smilieCategory) }}"/>
+                        </xf:datarow>
+
+                        <xf:if contentcheck="true">
+                            <xf:contentcheck>
+                                <xf:foreach loop="{$medals}" value="$medal">
+                                    <xf:if is="$medal.category_id === $category.category_id">
+                                        <xf:datarow>
+                                            <xf:cell href="{{ link('medals/edit', $medal) }}"
+                                                     class="dataList-cell--min">
+                                                <xf:set var="$medalImageUrl" value="{$medal.getImageUrl('l')}"/>
+                                                <xf:if is="$medalImageUrl">
+                                                    <div style="background: url('{$medalImageUrl}') center center;background-size:cover;height:22px;width:22px;">
+                                                        &nbsp;
+                                                    </div>
+                                                </xf:if>
+                                            </xf:cell>
+                                            <xf:cell href="{{ link('medals/edit', $medal) }}">
+                                                {$medal.name}
+                                                <span class="dataList-hint" dir="auto">
+                                                    {{ phrase('display_order') }}: {$medal.display_order},
+                                                    {{ phrase('bdmedal_awarded_count') }}: {$medal.user_count|number_short}
+                                                </span>
+                                                <xf:if is="$medal.description">
+                                                    <div class="dataList-subRow">{$medal.description}</div>
+                                                </xf:if>
+                                            </xf:cell>
+
+                                            <xf:action
+                                                    href="{{ link('awarded-medals', null, {'medal_id': $medal.medal_id}) }}"
+                                                    class="dataList-cell--responsiveMenuItem">{{
+                                                phrase('bdmedal_awarded_entities') }}
+                                            </xf:action>
+
+                                            <xf:popup label="&#8226;&#8226;&#8226;">
+                                                <div class="menu" data-menu="menu" aria-hidden="true"
+                                                     data-menu-builder="dataList">
+                                                    <div class="menu-content">
+                                                        <h3 class="menu-header">{$medal.name}</h3>
+                                                        <a href="{{ link('awarded-medals/add', null, {'medal_id': $medal.medal_id}) }}"
+                                                           class="menu-linkRow" data-xf-click="overlay">
+                                                            {{ phrase('bdmedal_awarded_add') }}
+                                                        </a>
+                                                        <a href="{{ link('medals/delete', $medal) }}"
+                                                           class="menu-linkRow" data-xf-click="overlay">
+                                                            {{ phrase('delete') }}
+                                                        </a>
+                                                        <div class="js-menuBuilderTarget u-showMediumBlock"></div>
+                                                    </div>
+                                                </div>
+                                            </xf:popup>
+                                        </xf:datarow>
+                                    </xf:if>
+                                </xf:foreach>
+                            </xf:contentcheck>
+
+                            <xf:else/>
+                            <xf:datarow rowclass="dataList-row--noHover dataList-row--note">
+                                <xf:cell colspan="4" class="dataList-cell--noSearch">
+                                    {{ phrase('no_items_have_been_created_yet') }}
+                                </xf:cell>
+                            </xf:datarow>
+                        </xf:if>
+                        </tbody>
+                    </xf:foreach>
+                </xf:datalist>
+            </div>
+        </div>
+    </div>
+    <xf:else/>
+    <div class="blockMessage">{{ phrase('no_items_have_been_created_yet') }}</div>
+</xf:if>]]></template>
 </templates>

@@ -6,6 +6,23 @@ use Xfrocks\Medal\Service\Medal\Image;
 
 class Medal extends Entity
 {
+    public function actionIndex()
+    {
+        $categories = $this->finder('Xfrocks\Medal:Category')
+            ->order('display_order')
+            ->fetch();
+        $medals = $this->finder('Xfrocks\Medal:Medal')
+            ->order('display_order')
+            ->fetch();
+
+        $viewParams = [
+            'categories' => $categories,
+            'medals' => $medals,
+        ];
+
+        return $this->view('Xfrocks\Medal:Medal\List', 'bdmedal_medal_list', $viewParams);
+    }
+
     protected function entityAddEdit($entity)
     {
         $view = parent::entityAddEdit($entity);

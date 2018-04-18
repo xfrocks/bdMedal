@@ -7,6 +7,7 @@
   <phrase title="admin_permission.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[[bd] Medal - Manage medals]]></phrase>
   <phrase title="bdmedal_award_reason" version_id="2000000" version_string="2.0.0"><![CDATA[Reason]]></phrase>
   <phrase title="bdmedal_awarded_add" version_id="2000000" version_string="2.0.0"><![CDATA[Award medal]]></phrase>
+  <phrase title="bdmedal_awarded_count" version_id="2000000" version_string="2.0.0"><![CDATA[Awarded]]></phrase>
   <phrase title="bdmedal_awarded_edit" version_id="2000000" version_string="2.0.0"><![CDATA[Edit awarded medal]]></phrase>
   <phrase title="bdmedal_awarded_entities" version_id="2000000" version_string="2.0.0"><![CDATA[Awarded medals]]></phrase>
   <phrase title="bdmedal_awarded_entity" version_id="2000000" version_string="2.0.0"><![CDATA[Awarded medal]]></phrase>
