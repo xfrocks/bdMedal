@@ -29,6 +29,41 @@ class Image extends AbstractService
         return $this->error;
     }
 
+    public function replaceImage($code)
+    {
+        if (!$this->fileName) {
+            throw new \LogicException('No source file');
+        }
+
+        $medal = $this->medal;
+        if (empty($medal) || !$medal->exists()) {
+            throw new \LogicException('Medal does not exist');
+        }
+
+        if ($medal->is_svg || $this->isSvg) {
+            throw new \InvalidArgumentException('Cannot replace SVG image');
+        }
+
+        $medal->image_date = \XF::$time;
+
+        $sizeMap = $medal->getImageSizeMap();
+        foreach ($sizeMap as $_code => $size) {
+            $existingFile = $medal->getImageAbstractedPath($_code, true);
+            $newFile = $medal->getImageAbstractedPath($_code);
+
+            if ($_code === $code) {
+                File::copyFileToAbstractedPath($this->fileName, $newFile);
+            } elseif ($newFile !== $existingFile) {
+                $tempFile = File::copyAbstractedPathToTempFile($existingFile);
+                File::copyFileToAbstractedPath($tempFile, $newFile);
+            }
+        }
+
+        if ($medal->hasChanges()) {
+            $medal->save();
+        }
+    }
+
     public function setImage($fileName)
     {
         if (!$this->validateImage($fileName, $isSvg, $error)) {
@@ -59,11 +94,12 @@ class Image extends AbstractService
         if (!$this->fileName) {
             throw new \LogicException('No source file');
         }
-        if (!$this->medal->exists()) {
+
+        $medal = $this->medal;
+        if (empty($medal) || !$medal->exists()) {
             throw new \LogicException('Medal does not exist');
         }
 
-        $medal = $this->medal;
         $medal->image_date = \XF::$time;
         $medal->is_svg = $this->isSvg;
         $sizeMap = $medal->getImageSizeMap();
@@ -100,8 +136,6 @@ class Image extends AbstractService
         }
 
         $medal->save();
-
-        return true;
     }
 
     public function validateImage($fileName, &$isSvg, &$error = null)

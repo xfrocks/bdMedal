@@ -30,6 +30,9 @@ class Medal extends Entity
         $sizeMap = $this->getImageSizeMap(true);
         foreach ($sizeMap as $code => $size) {
             $dataFile = $this->getImageAbstractedPath($code, true);
+            if (!is_string($dataFile)) {
+                continue;
+            }
             File::deleteFromAbstractedPath($dataFile);
         }
     }
@@ -56,18 +59,31 @@ class Medal extends Entity
 
     public function getImageAbstractedPath($code, $getExistingValue = false)
     {
-        return 'data://' . $this->getImagePath($code, $getExistingValue);
+        $path = $this->getImagePath($code, $getExistingValue);
+        if (empty($path)) {
+            return null;
+        }
+
+        return 'data://' . $path;
     }
 
     public function getImagePath($code, $getExistingValue = false)
     {
         $medalId = $this->medal_id;
         $imageDate = $getExistingValue ? $this->getExistingValue('image_date') : $this->image_date;
-        $isSvg = $getExistingValue ? $this->getExistingValue('is_svg') : $this->is_svg;
-        $code = strtolower($code);
+        if (!$imageDate) {
+            return null;
+        }
 
+        $isSvg = $getExistingValue ? $this->getExistingValue('is_svg') : $this->is_svg;
         if ($isSvg) {
             return sprintf('medal/%d_%d.svg', $medalId, $imageDate);
+        }
+
+        $code = strtolower($code);
+        $sizeMap = $this->getImageSizeMap($getExistingValue);
+        if (!isset($sizeMap[$code])) {
+            return null;
         }
 
         return sprintf('medal/%d_%d%s.jpg', $medalId, $imageDate, $code);
@@ -85,7 +101,7 @@ class Medal extends Entity
         if ($sizeMap === null) {
             $sizeMap = [
                 'l' => -1,
-                't' => 12,
+                't' => 22,
             ];
 
             $options = $this->app()->options();
@@ -107,11 +123,12 @@ class Medal extends Entity
     {
         $app = $this->app();
 
-        if (!$this->image_date) {
+        $path = $this->getImagePath($code);
+        if (empty($path)) {
             return null;
         }
 
-        return $app->applyExternalDataUrl($this->getImagePath($code), $canonical);
+        return $app->applyExternalDataUrl($path, $canonical);
     }
 
     protected function _postDelete()

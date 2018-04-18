@@ -2,18 +2,21 @@
 
 namespace Xfrocks\Medal\Admin\Controller;
 
+use \Xfrocks\Medal\Entity\Awarded as EntityAwarded;
+use \Xfrocks\Medal\Entity\Medal;
+
 class Awarded extends Entity
 {
     public function getEntityExplain($entity)
     {
-        /** @var \Xfrocks\Medal\Entity\Awarded $awarded */
+        /** @var EntityAwarded $awarded */
         $awarded = $entity;
         return $awarded->award_reason;
     }
 
     public function getEntityHint($entity)
     {
-        /** @var \Xfrocks\Medal\Entity\Awarded $awarded */
+        /** @var EntityAwarded $awarded */
         $awarded = $entity;
         return $awarded->username;
     }
@@ -24,9 +27,15 @@ class Awarded extends Entity
             return parent::getEntityLabel($entity);
         }
 
-        /** @var \Xfrocks\Medal\Entity\Awarded $awarded */
+        /** @var EntityAwarded $awarded */
         $awarded = $entity;
-        return $awarded->Medal->name;
+        /** @var Medal $medal */
+        $medal = $awarded->getExistingRelation('Medal');
+        if (!$medal) {
+            return $awarded->awarded_id;
+        }
+
+        return $medal->name;
     }
 
     protected function finderForList()
@@ -35,7 +44,7 @@ class Awarded extends Entity
 
         $medalId = $this->filter('medal_id', 'uint');
         if ($medalId > 0) {
-            /** @var \Xfrocks\Medal\Entity\Medal $medal */
+            /** @var Medal $medal */
             $medal = $this->assertRecordExists('Xfrocks\Medal:Medal', $medalId);
             $finder->where('medal_id', $medal->medal_id);
         }

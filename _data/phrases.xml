@@ -17,6 +17,10 @@
   <phrase title="bdmedal_category_entities" version_id="2000000" version_string="2.0.0"><![CDATA[Categories]]></phrase>
   <phrase title="bdmedal_category_entity" version_id="2000000" version_string="2.0.0"><![CDATA[Category]]></phrase>
   <phrase title="bdmedal_description" version_id="2000000" version_string="2.0.0"><![CDATA[Description]]></phrase>
+  <phrase title="bdmedal_image" version_id="2000000" version_string="2.0.0"><![CDATA[Image]]></phrase>
+  <phrase title="bdmedal_image_l" version_id="2000000" version_string="2.0.0"><![CDATA[Large image]]></phrase>
+  <phrase title="bdmedal_image_m" version_id="2000000" version_string="2.0.0"><![CDATA[Medium image]]></phrase>
+  <phrase title="bdmedal_image_s" version_id="2000000" version_string="2.0.0"><![CDATA[Small image]]></phrase>
   <phrase title="bdmedal_medal_add" version_id="2000000" version_string="2.0.0"><![CDATA[Add medal]]></phrase>
   <phrase title="bdmedal_medal_edit" version_id="2000000" version_string="2.0.0"><![CDATA[Edit medal]]></phrase>
   <phrase title="bdmedal_medal_entities" version_id="2000000" version_string="2.0.0"><![CDATA[Medals]]></phrase>
