@@ -5,6 +5,7 @@
   <phrase title="admin_navigation.bdMedalCategories" version_id="2000000" version_string="2.0.0"><![CDATA[Categories]]></phrase>
   <phrase title="admin_navigation.bdMedalMedals" version_id="2000000" version_string="2.0.0"><![CDATA[Medals]]></phrase>
   <phrase title="admin_permission.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[[bd] Medal - Manage medals]]></phrase>
+  <phrase title="alert_opt_out.medal_insert" version_id="2000000" version_string="2.0.0"><![CDATA[Awards you a new medal]]></phrase>
   <phrase title="bdmedal_avoid_duplicated" version_id="2000000" version_string="2.0.0"><![CDATA[Avoid Duplicated]]></phrase>
   <phrase title="bdmedal_avoid_duplicated_explain" version_id="2000000" version_string="2.0.0"><![CDATA[Enable this option to avoid awarding a medal to an user more than once. Any users who have been awarded the medal before will be silently ignored. You can control the default state of this option by editing the "Default to Avoid Duplicated" option in <a href="admin.php?options/groups/bdMedal/" target="_blank" tabindex="-1">[bd] Medal option page</a>.]]></phrase>
   <phrase title="bdmedal_award_reason" version_id="2000000" version_string="2.0.0"><![CDATA[Reason]]></phrase>
@@ -31,6 +32,9 @@
   <phrase title="bdmedal_medals" version_id="2000000" version_string="2.0.0"><![CDATA[Medals]]></phrase>
   <phrase title="bdmedal_name" version_id="2000000" version_string="2.0.0"><![CDATA[Name]]></phrase>
   <phrase title="bdmedal_user_x_not_awarded_y" version_id="2000000" version_string="2.0.0"><![CDATA[User {username} hasn't been awarded medal {medal}.]]></phrase>
+  <phrase title="bdmedal_x_awarded_medal_y" version_id="2000000" version_string="2.0.0"><![CDATA[{name} awarded you with the medal {medal}.]]></phrase>
+  <phrase title="bdmedal_x_have_been_awarded_medal_y" version_id="2000000" version_string="2.0.0"><![CDATA[{name} have been awarded with the medal {medal}.]]></phrase>
+  <phrase title="bdmedal_you_have_been_awarded_medal_x" version_id="2000000" version_string="2.0.0"><![CDATA[<strong class="subject">You</strong> have been awarded a medal: {medal}]]></phrase>
   <phrase title="option.bdMedal_defaultAvoidDuplicated" version_id="2000000" version_string="2.0.0"><![CDATA[Default to Avoid Duplicated]]></phrase>
   <phrase title="option.bdMedal_imageSizeM" version_id="2000000" version_string="2.0.0"><![CDATA[Image Medium]]></phrase>
   <phrase title="option.bdMedal_imageSizeS" version_id="2000000" version_string="2.0.0"><![CDATA[Image Small]]></phrase>

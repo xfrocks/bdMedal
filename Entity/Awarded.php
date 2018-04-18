@@ -5,6 +5,7 @@ namespace Xfrocks\Medal\Entity;
 use XF\Entity\User;
 use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
+use XF\Repository\UserAlert;
 
 /**
  * COLUMNS
@@ -22,6 +23,11 @@ use XF\Mvc\Entity\Structure;
  */
 class Awarded extends Entity
 {
+    public function canView()
+    {
+        return true;
+    }
+
     public function getEntityColumnLabel($columnName)
     {
         switch ($columnName) {
@@ -60,7 +66,23 @@ class Awarded extends Entity
         }
     }
 
-    protected function _autoRebuild()
+    protected function _postSave()
+    {
+        parent::_postSave();
+
+        $this->autoRebuild();
+
+        $this->sendAlert();
+    }
+
+    protected function _postDelete()
+    {
+        parent::_postDelete();
+
+        $this->autoRebuild();
+    }
+
+    protected function autoRebuild()
     {
         if ($this->getOption('rebuild_medal')) {
             $this->rebuildMedal();
@@ -70,18 +92,16 @@ class Awarded extends Entity
         }
     }
 
-    protected function _postSave()
+    protected function sendAlert()
     {
-        parent::_postSave();
+        if (!$this->isInsert()) {
+            return;
+        }
 
-        $this->_autoRebuild();
-    }
-
-    protected function _postDelete()
-    {
-        parent::_postDelete();
-
-        $this->_autoRebuild();
+        /** @var UserAlert $alertRepo */
+        $alertRepo = $this->repository('XF:UserAlert');
+        $visitor = \XF::visitor();
+        $alertRepo->alert($this->User, $visitor->user_id, $visitor->username, 'medal', $this->awarded_id, 'insert');
     }
 
     public static function getStructure(Structure $structure)
@@ -97,6 +117,14 @@ class Awarded extends Entity
             'award_date' => ['type' => self::UINT, 'default' => \XF::$time],
             'award_reason' => ['type' => self::STR],
             'adjusted_display_order' => ['type' => self::UINT, 'default' => 0],
+        ];
+
+        $structure->contentType = 'medal';
+        $structure->behaviors = [
+            'XF:NewsFeedPublishable' => [
+                'usernameField' => 'username',
+                'dateField' => 'award_date'
+            ]
         ];
 
         $structure->relations = [

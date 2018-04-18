@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<content_type_fields>
+  <field content_type="medal" field_name="alert_handler_class">Xfrocks\Medal\Alert\Awarded</field>
+  <field content_type="medal" field_name="entity">Xfrocks\Medal:Awarded</field>
+  <field content_type="medal" field_name="news_feed_handler_class">Xfrocks\Medal\NewsFeed\Awarded</field>
+</content_type_fields>
