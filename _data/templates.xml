@@ -23,6 +23,40 @@
             <xf:explain>{{ phrase('bdmedal_avoid_duplicated_explain') }}</xf:explain>
         </xf:checkboxrow>
     </xf:if>
+</xf:macro>
+
+<xf:macro name="entity_list_filters" arg-filters="!">
+    <xf:if is="{$filters.medal}">
+        <xf:set var="$tmpPageNavParams" value="{$filters.pageNavParams}"/>
+        <xf:set var="$tmpPageNavParams.medal_id" value=""/>
+        <xf:breadcrumb href="{{ link('awarded-medals', null, $tmpPageNavParams) }}">
+            {$filters.medal.name}
+        </xf:breadcrumb>
+    </xf:if>
+    <xf:if is="{$filters.user}">
+        <xf:set var="$tmpPageNavParams" value="{$filters.pageNavParams}"/>
+        <xf:set var="$tmpPageNavParams.user_id" value=""/>
+        <xf:breadcrumb href="{{ link('awarded-medals', null, $tmpPageNavParams) }}">
+            {$filters.user.username}
+        </xf:breadcrumb>
+    </xf:if>
+</xf:macro>
+
+<xf:macro name="entity_list_item_popup" arg-entity="!">
+    <xf:set var="$awarded" value="{$entity}"/>
+
+    <div class="menu" data-menu="menu" aria-hidden="true"
+         data-menu-builder="dataList">
+        <div class="menu-content">
+            <a href="{{ link('awarded-medals', null, {'medal_id': $awarded.medal_id}) }}" class="menu-linkRow">
+                {{ phrase('bdmedal_filter_by_medal') }}: {$awarded.Medal.name}
+            </a>
+            <a href="{{ link('awarded-medals', null, {'user_id': $awarded.user_id}) }}" class="menu-linkRow">
+                {{ phrase('filter_by_user') }}: {$awarded.username}
+            </a>
+            <div class="js-menuBuilderTarget u-showMediumBlock"></div>
+        </div>
+    </div>
 </xf:macro>]]></template>
   <template type="admin" title="bdmedal_entity_delete" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:comment>2018-04-17T19:02:43+00:00</xf:comment>
 <xf:title>{{ phrase('confirm_action') }}</xf:title>
@@ -101,13 +135,19 @@
         <xf:submitrow sticky="true" icon="save"/>
     </div>
 </xf:form>]]></template>
-  <template type="admin" title="bdmedal_entity_list" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:comment>2018-04-18T02:44:51+00:00</xf:comment>
+  <template type="admin" title="bdmedal_entity_list" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:comment>2018-04-18T09:03:02+00:00</xf:comment>
 <xf:title>{$phrases.entities|raw}</xf:title>
 
 <xf:if is="{$links.add}">
     <xf:pageaction>
         <xf:button href="{{ link($links.add) }}" icon="add">{$phrases.add|raw}</xf:button>
     </xf:pageaction>
+</xf:if>
+
+<xf:if is="$macroTemplateEntityListFilters">
+	<xf:macro template="{$macroTemplateEntityListFilters}"
+			  name="entity_list_filters"
+			  arg-filters="{$filters}" />
 </xf:if>
 
 <xf:if is="$entities is not empty">
@@ -124,12 +164,25 @@
                                 value="{{ $links.edit ? link($links.edit, $entity) : '' }}"/>
                         <xf:set var="$viewLink"
                                 value="{{ (empty($editLink) && $links.view) ? link($links.view, $entity) : '' }}"/>
+						<xf:set var="$popup">
+							<xf:if is="$macroTemplateEntityListItemPopup">
+								<xf:macro template="{$macroTemplateEntityListItemPopup}"
+										  name="entity_list_item_popup"
+										  arg-entity="{$entity}" />
+							</xf:if>
+						</xf:set>
                         <xf:datarow delete="{{ $links.delete ? link($links.delete, $entity) : '' }}"
 									explain="{$controller.getEntityExplain($entity)}"
 									hint="{$controller.getEntityHint($entity)}"
                                     href="{{ $editLink ?: $viewLink }}"
                                     label="{$controller.getEntityLabel($entity)}"
-                                    overlay="{{ !!$viewLink }}"/>
+                                    overlay="{{ !!$viewLink }}">
+							<xf:if is="trim($popup)">
+								<xf:popup label="&#8226;&#8226;&#8226;">
+									{$popup|raw}
+								</xf:popup>
+							</xf:if>
+						</xf:datarow>
                     </xf:foreach>
                 </xf:datalist>
                 <div class="block-footer">
@@ -139,12 +192,30 @@
         </div>
 
         <xf:pagenav page="{$page}" perpage="{$perPage}" total="{$total}"
-                    link="{$links.index}"
+                    link="{$links.index}" params="{$filters.pageNavParams}"
                     wrapperclass="block-outer block-outer--after"/>
     </div>
     <xf:else/>
     <div class="blockMessage">{{ phrase('no_items_have_been_created_yet') }}</div>
 </xf:if>]]></template>
+  <template type="admin" title="bdmedal_medal_filter_by_user" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('filter_by_user') }}: {$medal.name}</xf:title>
+<xf:h1>{{ phrase('filter_by_user') }}</xf:h1>
+
+<xf:breadcrumb href="{{ link('medals/edit', $medal) }}">{$medal.name}</xf:breadcrumb>
+
+<xf:form action="{{ link('medals/filter-by-user', $medal) }}" ajax="true" class="block">
+    <div class="block-container">
+
+        <div class="block-body">
+            <xf:tokeninputrow data-max-tokens="1"
+                              href="{{ link_type('public', 'members/find') }}"
+                              label="{{ phrase('user_name') }}"
+                              name="username"/>
+        </div>
+
+        <xf:submitrow sticky="true" icon="filter"/>
+    </div>
+</xf:form>]]></template>
   <template type="admin" title="bdmedal_medal_image" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('upload_image') }}: {$medal.name}</xf:title>
 <xf:h1>{{ phrase('bdmedal_image') }}</xf:h1>
 
@@ -279,6 +350,10 @@
                                                         <a href="{{ link('awarded-medals/add', null, {'medal_id': $medal.medal_id}) }}"
                                                            class="menu-linkRow" data-xf-click="overlay">
                                                             {{ phrase('bdmedal_awarded_add') }}
+                                                        </a>
+                                                        <a href="{{ link('medals/filter-by-user', $medal) }}"
+                                                           class="menu-linkRow" data-xf-click="overlay">
+                                                            {{ phrase('filter_by_user') }}
                                                         </a>
                                                         <a href="{{ link('medals/delete', $medal) }}"
                                                            class="menu-linkRow" data-xf-click="overlay">

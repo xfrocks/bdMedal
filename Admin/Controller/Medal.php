@@ -3,6 +3,7 @@
 namespace Xfrocks\Medal\Admin\Controller;
 
 use XF\Mvc\ParameterBag;
+use Xfrocks\Medal\Entity\Medal as EntityMedal;
 use Xfrocks\Medal\Service\Medal\Image;
 
 class Medal extends Entity
@@ -24,11 +25,48 @@ class Medal extends Entity
         return $this->view('Xfrocks\Medal:Medal\List', 'bdmedal_medal_list', $viewParams);
     }
 
+    public function actionFilterByUser(ParameterBag $params)
+    {
+        $entityId = $this->getEntityIdFromParams($params);
+        /** @var EntityMedal $medal */
+        $medal = $this->assertEntityExists($entityId);
+
+        if ($this->isPost()) {
+            $username = $this->filter('username', 'str');
+            /** @var \XF\Repository\User $userRepo */
+            $userRepo = $this->repository('XF:User');
+            $user = $userRepo->getUserByNameOrEmail($username);
+            if (empty($user)) {
+                return $this->error(\XF::phrase('requested_user_not_found'), 400);
+            }
+
+            $awardedCount = $this->finder('Xfrocks\Medal:Awarded')
+                ->where('medal_id', $medal->medal_id)
+                ->where('user_id', $user->user_id)
+                ->total();
+            if ($awardedCount === 0) {
+                return $this->message(\XF::phrase('bdmedal_user_x_not_awarded_y', [
+                    'username' => $user->username,
+                    'medal' => $medal->name,
+                ]));
+            }
+
+            return $this->redirect($this->buildLink('awarded-medals', null, [
+                'medal_id' => $medal->medal_id,
+                'user_id' => $user->user_id,
+            ]));
+        }
+
+        $viewParams = ['medal' => $medal];
+
+        return $this->view('Xfrocks\Medal:Medal\FilterByUser', 'bdmedal_medal_filter_by_user', $viewParams);
+    }
+
     public function actionImage(ParameterBag $params)
     {
         $entityId = $this->getEntityIdFromParams($params);
 
-        /** @var \Xfrocks\Medal\Entity\Medal $medal */
+        /** @var EntityMedal $medal */
         $medal = $this->assertEntityExists($entityId);
         if ($medal->is_svg || !$medal->image_date) {
             return $this->noPermission();
@@ -59,9 +97,7 @@ class Medal extends Entity
             return $this->redirect($this->buildLink('medals'));
         }
 
-        $viewParams = [
-            'medal' => $medal,
-        ];
+        $viewParams = ['medal' => $medal];
 
         return $this->view('Xfrocks\Medal:Medal\Image', 'bdmedal_medal_image', $viewParams);
     }

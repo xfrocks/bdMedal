@@ -3,7 +3,7 @@
 namespace Xfrocks\Medal\Admin\Controller;
 
 use XF\Entity\User;
-use XF\Mvc\Entity\ArrayCollection;
+use XF\Mvc\Entity\Finder;
 use XF\Mvc\FormAction;
 use \Xfrocks\Medal\Entity\Awarded as EntityAwarded;
 use \Xfrocks\Medal\Entity\Medal;
@@ -52,6 +52,34 @@ class Awarded extends Entity
         }
 
         return $view;
+    }
+
+    protected function entityListData()
+    {
+        list($finder, $filters) = parent::entityListData();
+
+        /** @var Finder $finder */
+        $finder = $finder->order('award_date', 'DESC');
+
+        $medalId = $this->filter('medal_id', 'uint');
+        if ($medalId > 0) {
+            /** @var Medal $medal */
+            $medal = $this->assertRecordExists('Xfrocks\Medal:Medal', $medalId);
+            $finder->where('medal_id', $medal->medal_id);
+            $filters['medal'] = $medal;
+            $filters['pageNavParams']['medal_id'] = $medal->medal_id;
+        }
+
+        $userId = $this->filter('user_id', 'uint');
+        if ($userId > 0) {
+            /** @var User $user */
+            $user = $this->assertRecordExists('XF:User', $userId);
+            $finder->where('user_id', $user->user_id);
+            $filters['user'] = $user;
+            $filters['pageNavParams']['user_id'] = $user->user_id;
+        }
+
+        return [$finder, $filters];
     }
 
     protected function entitySaveProcess($entity)
@@ -136,20 +164,6 @@ class Awarded extends Entity
         return $formSingle;
     }
 
-    protected function finderForList()
-    {
-        $finder = parent::finderForList()->order('award_date', 'DESC');
-
-        $medalId = $this->filter('medal_id', 'uint');
-        if ($medalId > 0) {
-            /** @var Medal $medal */
-            $medal = $this->assertRecordExists('Xfrocks\Medal:Medal', $medalId);
-            $finder->where('medal_id', $medal->medal_id);
-        }
-
-        return $finder;
-    }
-
     protected function getPrefixForPhrases()
     {
         return 'bdmedal_awarded';
@@ -168,6 +182,8 @@ class Awarded extends Entity
     protected function getViewReply($action, array $viewParams)
     {
         $viewParams['macroTemplateEntityEdit'] = 'bdmedal_awarded';
+        $viewParams['macroTemplateEntityListFilters'] = 'bdmedal_awarded';
+        $viewParams['macroTemplateEntityListItemPopup'] = 'bdmedal_awarded';
 
         return parent::getViewReply($action, $viewParams);
     }

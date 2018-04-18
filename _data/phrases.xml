@@ -19,6 +19,7 @@
   <phrase title="bdmedal_category_entities" version_id="2000000" version_string="2.0.0"><![CDATA[Categories]]></phrase>
   <phrase title="bdmedal_category_entity" version_id="2000000" version_string="2.0.0"><![CDATA[Category]]></phrase>
   <phrase title="bdmedal_description" version_id="2000000" version_string="2.0.0"><![CDATA[Description]]></phrase>
+  <phrase title="bdmedal_filter_by_medal" version_id="2000000" version_string="2.0.0"><![CDATA[Filter by medal]]></phrase>
   <phrase title="bdmedal_image" version_id="2000000" version_string="2.0.0"><![CDATA[Image]]></phrase>
   <phrase title="bdmedal_image_l" version_id="2000000" version_string="2.0.0"><![CDATA[Large image]]></phrase>
   <phrase title="bdmedal_image_m" version_id="2000000" version_string="2.0.0"><![CDATA[Medium image]]></phrase>
@@ -29,6 +30,7 @@
   <phrase title="bdmedal_medal_entity" version_id="2000000" version_string="2.0.0"><![CDATA[Medal]]></phrase>
   <phrase title="bdmedal_medals" version_id="2000000" version_string="2.0.0"><![CDATA[Medals]]></phrase>
   <phrase title="bdmedal_name" version_id="2000000" version_string="2.0.0"><![CDATA[Name]]></phrase>
+  <phrase title="bdmedal_user_x_not_awarded_y" version_id="2000000" version_string="2.0.0"><![CDATA[User {username} hasn't been awarded medal {medal}.]]></phrase>
   <phrase title="option.bdMedal_defaultAvoidDuplicated" version_id="2000000" version_string="2.0.0"><![CDATA[Default to Avoid Duplicated]]></phrase>
   <phrase title="option.bdMedal_imageSizeM" version_id="2000000" version_string="2.0.0"><![CDATA[Image Medium]]></phrase>
   <phrase title="option.bdMedal_imageSizeS" version_id="2000000" version_string="2.0.0"><![CDATA[Image Small]]></phrase>
