@@ -16,8 +16,8 @@ class User
     {
         $finder = $app->finder('Xfrocks\Medal:Awarded')
             ->where('user_id', $userId)
-            ->with('Medal', 'Medal.Category')
-            ->order('Medal.display_order');
+            ->with(['Medal', 'Medal.Category'], true)
+            ->order('award_date', 'DESC');
 
         $awardeds = $finder->fetch();
         $data = [];

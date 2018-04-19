@@ -3,8 +3,13 @@
 namespace Xfrocks\Medal\XF\Entity;
 
 use XF\Mvc\Entity\Structure;
+use Xfrocks\Medal\Entity\Awarded;
+use Xfrocks\Medal\Entity\Category;
+use Xfrocks\Medal\Entity\Medal;
 
 /**
+ * @property array medal_awardeds
+ * @property int medal_count
  * @property array xf_bdmedal_awarded_cached
  */
 class User extends XFCP_User
@@ -29,19 +34,54 @@ class User extends XFCP_User
     }
 
     /**
+     * @return array
+     */
+    public function getMedalAwardeds()
+    {
+        $awardeds = [];
+
+        if (is_array($this->xf_bdmedal_awarded_cached)) {
+            $em = $this->em();
+            $shortNameCategory = 'Xfrocks\Medal:Category';
+            $shortNameMedal = 'Xfrocks\Medal:Medal';
+
+            foreach ($this->xf_bdmedal_awarded_cached as $array) {
+                /** @var Category $category */
+                $category = $em->findCached($shortNameCategory, $array['category_id']);
+                if (empty($category)) {
+                    $category = $em->instantiateEntity($shortNameCategory, [
+                        'category_id' => $array['category_id'],
+                        'name' => $array['category_name'],
+                        'description' => $array['category_description'],
+                    ]);
+                }
+
+                /** @var Medal $medal */
+                $medal = $em->findCached($shortNameMedal, $array['medal_id']);
+                if (empty($medal)) {
+                    $medal = $em->instantiateEntity($shortNameMedal, $array, ['Category' => $category]);
+                }
+
+                /** @var Awarded $awarded */
+                $awarded = $em->instantiateEntity('Xfrocks\Medal:Awarded', $array, ['Medal' => $medal]);
+
+                $awardeds[$awarded->awarded_id] = $awarded;
+            }
+        }
+
+        return $awardeds;
+    }
+
+    /**
      * @return int
      */
     public function getMedalCount()
     {
-        return count($this->getMedals());
-    }
+        if (!is_array($this->xf_bdmedal_awarded_cached)) {
+            return 0;
+        }
 
-    /**
-     * @return array
-     */
-    public function getMedals()
-    {
-        return $this->xf_bdmedal_awarded_cached ?: [];
+        return count($this->xf_bdmedal_awarded_cached);
     }
 
     public static function getStructure(Structure $structure)
@@ -52,7 +92,7 @@ class User extends XFCP_User
             'type' => self::SERIALIZED_ARRAY
         ];
 
-        $structure->getters['medals'] = true;
+        $structure->getters['medal_awardeds'] = true;
         $structure->getters['medal_count'] = true;
 
         return $structure;

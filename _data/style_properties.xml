@@ -5,6 +5,20 @@
     "extra": "background-position: center center;\nbackground-size: cover;\nheight: 48px;\nwidth: 48px;"
 }</value>
   </style_property>
+  <style_property property_name="bdMedal_messageImage" group_name="bdMedal" title="Medal image in message" description="These are the styling rules for message user info block." property_type="css" display_order="20" css_components="extra">
+    <value>{
+    "extra": "background-position: center center;\nbackground-size: cover;\ndisplay: inline-block;\nheight: 24px;\nwidth: 24px;"
+}</value>
+  </style_property>
+  <style_property property_name="bdMedal_messageImageSize" group_name="bdMedal" title="Medal image size in message" description="The size of the medal images. By default, there is only 2 sizes available: L (original) and T (tiny, 22px). You can render medium and small images by configure the options. Be sure to double check here if medals do not show up in messages." property_type="value" value_type="string" value_group="message" display_order="20">
+    <value>"L"</value>
+  </style_property>
+  <style_property property_name="bdMedal_messageMax" group_name="bdMedal" title="Max medals" description="You can limit the maximum number of medals to display in messages here. If this property is set, only the latest X medals will show up." property_type="value" value_type="number" value_group="message" display_order="30">
+    <value>"0"</value>
+  </style_property>
+  <style_property property_name="bdMedal_messageShowDate" group_name="bdMedal" title="Show date" description="Show the awarded date in tooltip for each medal." property_type="value" value_type="boolean" value_group="message" display_order="10">
+    <value>1</value>
+  </style_property>
   <style_property property_name="bdMedal_showTab" group_name="bdMedal" title="Tab on profile page" property_type="value" value_type="boolean" value_group="member_view_tab" display_order="210">
     <value>1</value>
   </style_property>

@@ -117,7 +117,8 @@ class Image extends AbstractService
                 continue;
             }
 
-            $image->resizeShortEdge($size);
+            // resize at double the configured pixels for better rendering on HiDPI displays
+            $image->resizeShortEdge($size * 2);
 
             $newTempFile = File::getTempFile();
             if ($newTempFile && $image->save($newTempFile)) {

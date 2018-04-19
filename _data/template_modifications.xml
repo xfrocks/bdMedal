@@ -15,4 +15,12 @@
 <xf:macro template="bdmedal_member_view_macros" name="$1" arg-user="{$user}"/>
 ]]></replace>
   </modification>
+  <modification type="public" template="message_macros" modification_key="bdmedal_message_macros_user_info" description="Medals in message." execution_order="4294967295" enabled="1" action="preg_replace">
+    <find><![CDATA[#(<xf:if is="\$extras.custom_fields">.+?)(</xf:contentcheck>)#s
+]]></find>
+    <replace><![CDATA[$1<xf:macro template="bdmedal_message_macros" name="user_info" arg-user="{$user}"/>
+
+$2
+]]></replace>
+  </modification>
 </template_modifications>

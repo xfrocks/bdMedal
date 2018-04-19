@@ -91,32 +91,39 @@ class Medal extends Entity
 
     public function getImageSizeMap($getExistingValue = false)
     {
-        static $sizeMap = null;
-
+        $sizeMap = ['l' => $this->getImageSizePixels('L')];
         $isSvg = $getExistingValue ? $this->getExistingValue('is_svg') : $this->is_svg;
         if ($isSvg) {
-            return ['l' => -1];
+            return $sizeMap;
+        } else {
+            $sizeMap['t'] = $this->getImageSizePixels('T');
         }
 
-        if ($sizeMap === null) {
-            $sizeMap = [
-                'l' => -1,
-                't' => 22,
-            ];
+        $sizeM = $this->getImageSizePixels('M');
+        if ($sizeM > 0) {
+            $sizeMap['m'] = $sizeM;
+        }
 
-            $options = $this->app()->options();
-            $sizeM = $options->bdMedal_imageSizeM;
-            if ($sizeM > 0) {
-                $sizeMap['m'] = $sizeM;
-            }
-
-            $sizeS = $options->bdMedal_imageSizeS;
-            if ($sizeS > 0) {
-                $sizeMap['s'] = $sizeS;
-            }
+        $sizeS = $this->getImageSizePixels('S');
+        if ($sizeS > 0) {
+            $sizeMap['s'] = $sizeS;
         }
 
         return $sizeMap;
+    }
+
+    public function getImageSizePixels($code)
+    {
+        $code = strtoupper($code);
+        switch ($code) {
+            case 'L':
+                return -1;
+            case 'T':
+                return 22;
+        }
+
+        $optionId = 'bdMedal_imageSize' . $code;
+        return intval($this->app()->options()->offsetGet($optionId));
     }
 
     public function getImageUrl($code, $canonical = false)
