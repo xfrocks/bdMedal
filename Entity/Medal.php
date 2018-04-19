@@ -183,7 +183,7 @@ class Medal extends Entity
             'medal_id' => ['type' => self::UINT, 'autoIncrement' => true],
             'name' => ['type' => self::STR, 'maxLength' => 255, 'required' => true],
             'category_id' => ['type' => self::UINT, 'required' => true],
-            'description' => ['type' => self::STR],
+            'description' => ['type' => self::STR, 'html' => true],
             'display_order' => ['type' => self::UINT, 'default' => 10],
             'user_count' => ['type' => self::UINT, 'default' => 0],
             'last_award_date' => ['type' => self::UINT, 'default' => 0],

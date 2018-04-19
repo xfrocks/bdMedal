@@ -11,7 +11,7 @@
                                 <xf:cell colspan="3">
                                     {$category.name}
                                     <xf:if is="$category.description">
-                                        <div class="dataList-subRow">{$category.description}</div>
+                                        <div class="dataList-subRow">{$category.description|raw}</div>
                                     </xf:if>
                                 </xf:cell>
                             </xf:datarow>
@@ -27,7 +27,7 @@
                                             <xf:cell>
                                                 {$medal.name}
                                                 <xf:if is="$medal.description">
-                                                    <div class="dataList-subRow">{$medal.description}</div>
+                                                    <div class="dataList-subRow">{$medal.description|raw}</div>
                                                 </xf:if>
                                             </xf:cell>
                                             <xf:cell class="dataList-cell--action">
@@ -158,7 +158,8 @@
                               name="usernames"
                               value="{$input.usernames}"/>
 
-            <xf:textarearow label="{{ phrase('bdmedal_award_reason') }}"
+            <xf:textarearow hint="{{ phrase('you_may_use_html') }}"
+                            label="{{ phrase('bdmedal_award_reason') }}"
                             name="award_reason"
                             value="{$input.award_reason}"/>
 
@@ -195,7 +196,7 @@
         <xf:submitrow rowtype="simple" icon="delete"/>
     </div>
 </xf:form>]]></template>
-  <template type="admin" title="bdmedal_entity_edit" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:comment>2018-04-18T08:34:53+00:00</xf:comment>
+  <template type="admin" title="bdmedal_entity_edit" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:comment>2018-04-19T17:27:59+00:00</xf:comment>
 <xf:if is="$entity.isInsert()">
     <xf:title>{$phrases.add|raw}</xf:title>
     <xf:else/>
@@ -212,13 +213,19 @@
         <div class="block-body">
 
             <xf:foreach loop="$columns" key="$columnName" value="$column">
-				<xf:if is="{$column.tag} === 'number-box'">
-                    <xf:numberboxrow label="{$column.label}"
-									 min="{$column.tagOptions.min}"
-									 name="{$column.name}"
-									 value="{$column.value}"/>
+                <xf:if is="{$column.macroTemplate}">
+                    <xf:macro template="{$column.macroTemplate}" name="entity_edit_column"
+                              arg-column="{$column}"
+                              arg-columnName="{$columnName}"
+							  arg-entity="{$entity}"/>
 
-	                <xf:elseif is="{$column.tag} === 'select'" />
+                    <xf:elseif is="{$column.tag} === 'number-box'"/>
+                    <xf:numberboxrow label="{$column.label}"
+                                     min="{$column.tagOptions.min}"
+                                     name="{$column.name}"
+                                     value="{$column.value}"/>
+
+                    <xf:elseif is="{$column.tag} === 'select'"/>
                     <xf:selectrow label="{$column.label}"
                                   name="{$column.name}"
                                   value="{$column.value}">
@@ -230,7 +237,13 @@
                     </xf:selectrow>
 
                     <xf:elseif is="{$column.tag} === 'text-area'"/>
-                    <xf:textarearow label="{$column.label}"
+					<xf:set var="$hint">
+						<xf:if is="{$column._structureData.html}">
+							{{ phrase('you_may_use_html') }}
+						</xf:if>
+					</xf:set>
+                    <xf:textarearow hint="{{ trim($hint) }}"
+									label="{$column.label}"
                                     name="{$column.name}"
                                     value="{{ $entity.get($columnName) }}"/>
 
@@ -241,11 +254,11 @@
                 </xf:if>
             </xf:foreach>
 
-			<xf:if is="{$macroTemplateEntityEdit}">
-				<xf:macro template="{$macroTemplateEntityEdit}" name="entity_edit"
-						  arg-columns="{$columns}"
-						  arg-entity="{$entity}" />
-			</xf:if>
+            <xf:if is="{$macroTemplateEntityEdit}">
+                <xf:macro template="{$macroTemplateEntityEdit}" name="entity_edit"
+                          arg-columns="{$columns}"
+                          arg-entity="{$entity}"/>
+            </xf:if>
         </div>
 
         <xf:hiddenval name="entity_id" value="{{ $entity.getEntityId() }}"/>
@@ -487,7 +500,7 @@
                                                     {{ phrase('display_order') }}: {$medal.display_order}
                                                 </span>
                                                 <xf:if is="$medal.description">
-                                                    <div class="dataList-subRow">{$medal.description}</div>
+                                                    <div class="dataList-subRow">{$medal.description|raw}</div>
                                                 </xf:if>
                                             </xf:cell>
 
@@ -566,7 +579,7 @@
                             <xf:cell>
                                 <xf:username user="{$awarded.User}"/>
                                 <xf:if is="$awarded.award_reason">
-                                    <span class="dataList-hint">{$awarded.award_reason}</span>
+                                    <span class="dataList-hint">{$awarded.award_reason|raw}</span>
                                 </xf:if>
                             </xf:cell>
                             <xf:cell class="dataList-cell--min dataList-cell--alt">
@@ -697,7 +710,7 @@
                                 <xf:if contentcheck="true">
                                     <div class="dataList-subRow">
                                         <xf:contentcheck>
-                                            {{ $awarded.award_reason ? $awarded.award_reason : $medal.description}}
+                                            {{ ($awarded.award_reason ? $awarded.award_reason : $medal.description)|raw }}
                                         </xf:contentcheck>
                                     </div>
                                 </xf:if>
@@ -782,7 +795,7 @@
 
 <xf:if contentcheck="true">
     <div class="contentRow-snippet">
-        <xf:contentcheck>{$content.award_reason}</xf:contentcheck>
+        <xf:contentcheck>{$content.award_reason|raw}</xf:contentcheck>
     </div>
 </xf:if>
 

@@ -37,8 +37,10 @@ class Medal extends AbstractController
                 return $this->noPermission($error);
             }
 
+            $medalRepo = $this->getMedalRepo();
+
             if ($this->options()->bdMedal_defaultAvoidDuplicated &&
-                $this->getMedalRepo()->hasExistingAwarded($medal, $user)) {
+                $medalRepo->hasExistingAwarded($medal, $user)) {
                 $phraseParams = [
                     'name' => $user->username,
                     'medal' => $medal->name,
@@ -46,13 +48,8 @@ class Medal extends AbstractController
                 return $this->error(\XF::phrase('bdmedal_x_have_been_awarded_medal_y', $phraseParams));
             }
 
-            /** @var Awarded $awarded */
-            $awarded = $this->em()->create('Xfrocks\Medal:Awarded');
-            $awarded->medal_id = $medal->medal_id;
-            $awarded->setUser($user);
-            $awarded->award_reason = $input['award_reason'];
-
-            $awarded->save();
+            $safeAwardReason = htmlentities($input['award_reason']);
+            $medalRepo->award($medal, $user, ['award_reason' => $safeAwardReason]);
 
             return $this->redirect($this->buildLink('members', $user));
         }

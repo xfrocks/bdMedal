@@ -34,6 +34,11 @@ class Setup extends AbstractSetup
         }
     }
 
+    public function installStep2()
+    {
+        $this->app->jobManager()->enqueue('Xfrocks\Medal:DemoData');
+    }
+
     public function uninstallStep1()
     {
         $sm = $this->schemaManager();

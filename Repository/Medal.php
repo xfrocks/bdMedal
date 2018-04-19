@@ -5,10 +5,32 @@ namespace Xfrocks\Medal\Repository;
 use XF\Entity\User;
 use XF\Mvc\Entity\Finder;
 use XF\Mvc\Entity\Repository;
+use XF\PrintableException;
+use Xfrocks\Medal\Entity\Awarded;
 use Xfrocks\Medal\Entity\Medal as EntityMedal;
 
 class Medal extends Repository
 {
+    /**
+     * @param EntityMedal $medal
+     * @param User $user
+     * @param array $bulkSet
+     * @return Awarded
+     * @throws PrintableException
+     */
+    public function award($medal, $user, array $bulkSet = [])
+    {
+        /** @var Awarded $awarded */
+        $awarded = $this->em->create('Xfrocks\Medal:Awarded');
+        $awarded->medal_id = $medal->medal_id;
+        $awarded->setUser($user);
+        $awarded->bulkSet($bulkSet);
+
+        $awarded->save();
+
+        return $awarded;
+    }
+
     /**
      * @param int $userId
      * @return Finder

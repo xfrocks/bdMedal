@@ -55,7 +55,7 @@ class Category extends Entity
         $structure->columns = [
             'category_id' => ['type' => self::UINT, 'autoIncrement' => true],
             'name' => ['type' => self::STR, 'maxLength' => 255, 'required' => true],
-            'description' => ['type' => self::STR],
+            'description' => ['type' => self::STR, 'html' => true],
             'display_order' => ['type' => self::UINT, 'default' => 10],
         ];
 

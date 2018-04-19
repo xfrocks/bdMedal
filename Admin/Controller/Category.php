@@ -8,7 +8,7 @@ class Category extends Entity
     {
         /** @var \Xfrocks\Medal\Entity\Category $category */
         $category = $entity;
-        return $category->description;
+        return strip_tags($category->description);
     }
 
     protected function getPrefixForPhrases()

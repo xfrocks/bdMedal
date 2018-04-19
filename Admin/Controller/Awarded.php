@@ -30,26 +30,17 @@ class Awarded extends Entity
                 return $this->error(\XF::phrase('requested_user_not_found'));
             }
 
+            /** @var \Xfrocks\Medal\Repository\Medal $medalRepo */
+            $medalRepo = $this->repository('Xfrocks\Medal:Medal');
+
             /** @var User $user */
             foreach ($users as $user) {
-                if ($input['avoid_duplicated']) {
-                    /** @var \Xfrocks\Medal\Repository\Medal $medalRepo */
-                    $medalRepo = $this->repository('Xfrocks\Medal:Medal');
-                    if ($medalRepo->hasExistingAwarded($medal, $user)) {
-                        continue;
-                    }
+                if ($input['avoid_duplicated'] &&
+                    $medalRepo->hasExistingAwarded($medal, $user)) {
+                    continue;
                 }
 
-                /** @var EntityAwarded $awarded */
-                $awarded = $this->createEntity();
-                $awarded->medal_id = $medal->medal_id;
-                $awarded->setUser($user);
-                $awarded->award_reason = $input['award_reason'];
-
-                $awarded->preSave();
-                if (!$awarded->hasErrors()) {
-                    $awarded->save();
-                }
+                $medalRepo->award($medal, $user, ['award_reason' => $input['award_reason']]);
             }
 
             return $this->redirect($this->buildLink('awarded-medals'));
@@ -78,7 +69,7 @@ class Awarded extends Entity
             return $date;
         }
 
-        return sprintf('%s, %s', $date, $awarded->award_reason);
+        return sprintf('%s, %s', $date, strip_tags($awarded->award_reason));
     }
 
     public function getEntityHint($entity)

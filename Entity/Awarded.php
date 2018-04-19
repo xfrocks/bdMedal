@@ -134,7 +134,9 @@ class Awarded extends Entity
         /** @var UserAlert $alertRepo */
         $alertRepo = $this->repository('XF:UserAlert');
         $visitor = \XF::visitor();
-        $alertRepo->alert($this->User, $visitor->user_id, $visitor->username, 'medal', $this->awarded_id, 'insert');
+        $userId = intval($visitor->user_id);
+        $username = strval($visitor->username);
+        $alertRepo->alert($this->User, $userId, $username, 'medal', $this->awarded_id, 'insert');
     }
 
     public static function getStructure(Structure $structure)
@@ -148,7 +150,7 @@ class Awarded extends Entity
             'user_id' => ['type' => self::UINT, 'required' => true, 'writeOnce' => true],
             'username' => ['type' => self::STR, 'maxLength' => 50, 'required' => true, 'writeOnce' => true],
             'award_date' => ['type' => self::UINT, 'default' => \XF::$time],
-            'award_reason' => ['type' => self::STR],
+            'award_reason' => ['type' => self::STR, 'html' => true],
             'adjusted_display_order' => ['type' => self::UINT, 'default' => 0],
         ];
 
