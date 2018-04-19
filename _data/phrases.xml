@@ -31,11 +31,13 @@
   <phrase title="bdmedal_medal_entity" version_id="2000000" version_string="2.0.0"><![CDATA[Medal]]></phrase>
   <phrase title="bdmedal_medals" version_id="2000000" version_string="2.0.0"><![CDATA[Medals]]></phrase>
   <phrase title="bdmedal_name" version_id="2000000" version_string="2.0.0"><![CDATA[Name]]></phrase>
+  <phrase title="bdmedal_no_medals_have_been_awarded_yet" version_id="2000000" version_string="2.0.0"><![CDATA[No medals have been awarded yet.]]></phrase>
   <phrase title="bdmedal_no_medals_have_been_created_yet" version_id="2000000" version_string="2.0.0"><![CDATA[No medals have been created yet.]]></phrase>
   <phrase title="bdmedal_no_users_have_been_awarded_medal_x_yet" version_id="2000000" version_string="2.0.0"><![CDATA[No users have been awarded medal {medal} yet.]]></phrase>
   <phrase title="bdmedal_user_x_not_awarded_y" version_id="2000000" version_string="2.0.0"><![CDATA[User {username} hasn't been awarded medal {medal}.]]></phrase>
   <phrase title="bdmedal_x_awarded_medal_y" version_id="2000000" version_string="2.0.0"><![CDATA[{name} awarded you with the medal {medal}.]]></phrase>
   <phrase title="bdmedal_x_have_been_awarded_medal_y" version_id="2000000" version_string="2.0.0"><![CDATA[{name} have been awarded with the medal {medal}.]]></phrase>
+  <phrase title="bdmedal_you_cannot_award_medal_to_yourself" version_id="2000000" version_string="2.0.0"><![CDATA[You cannot award medal to yourself.]]></phrase>
   <phrase title="bdmedal_you_have_been_awarded_medal_x" version_id="2000000" version_string="2.0.0"><![CDATA[<strong class="subject">You</strong> have been awarded a medal: {medal}]]></phrase>
   <phrase title="help_page_desc.medals" version_id="2000000" version_string="2.0.0"><![CDATA[You can earn medals by being active in the community. This page shows a list of the medals that are available.]]></phrase>
   <phrase title="help_page_title.medals" version_id="2000000" version_string="2.0.0"><![CDATA[Medals]]></phrase>
@@ -50,8 +52,10 @@
   <phrase title="option_group.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[[bd] Medal]]></phrase>
   <phrase title="option_group_description.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[]]></phrase>
   <phrase title="permission.general_bdMedal_award" version_id="2000000" version_string="2.0.0"><![CDATA[Award medals]]></phrase>
-  <phrase title="style_prop.bdMedal_helpCellImage" version_id="2000000" version_string="2.0.0"><![CDATA[Image Cell on Help page]]></phrase>
-  <phrase title="style_prop_desc.bdMedal_helpCellImage" version_id="2000000" version_string="2.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop.bdMedal_medalListImage" version_id="2000000" version_string="2.0.0"><![CDATA[Medal image in list]]></phrase>
+  <phrase title="style_prop.bdMedal_showTab" version_id="2000000" version_string="2.0.0"><![CDATA[Tab on profile page]]></phrase>
+  <phrase title="style_prop_desc.bdMedal_medalListImage" version_id="2000000" version_string="2.0.0"><![CDATA[These are the styling rules for pages like help/medals, members/medals, etc.]]></phrase>
+  <phrase title="style_prop_desc.bdMedal_showTab" version_id="2000000" version_string="2.0.0"><![CDATA[]]></phrase>
   <phrase title="style_prop_group.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[[bd] Medal]]></phrase>
   <phrase title="style_prop_group_desc.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[]]></phrase>
 </phrases>

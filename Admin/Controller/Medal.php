@@ -40,11 +40,9 @@ class Medal extends Entity
                 return $this->error(\XF::phrase('requested_user_not_found'), 400);
             }
 
-            $awardedCount = $this->finder('Xfrocks\Medal:Awarded')
-                ->where('medal_id', $medal->medal_id)
-                ->where('user_id', $user->user_id)
-                ->total();
-            if ($awardedCount === 0) {
+            /** @var \Xfrocks\Medal\Repository\Medal $medalRepo */
+            $medalRepo = $this->repository('Xfrocks\Medal:Medal');
+            if (!$medalRepo->hasExistingAwarded($medal, $user)) {
                 return $this->message(\XF::phrase('bdmedal_user_x_not_awarded_y', [
                     'username' => $user->username,
                     'medal' => $medal->name,

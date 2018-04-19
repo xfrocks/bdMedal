@@ -33,11 +33,9 @@ class Awarded extends Entity
             /** @var User $user */
             foreach ($users as $user) {
                 if ($input['avoid_duplicated']) {
-                    $existing = $this->finder('Xfrocks\Medal:Awarded')
-                        ->where('medal_id', $medal->medal_id)
-                        ->where('user_id', $user->user_id)
-                        ->fetchOne();
-                    if (!empty($existing)) {
+                    /** @var \Xfrocks\Medal\Repository\Medal $medalRepo */
+                    $medalRepo = $this->repository('Xfrocks\Medal:Medal');
+                    if ($medalRepo->hasExistingAwarded($medal, $user)) {
                         continue;
                     }
                 }

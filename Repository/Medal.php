@@ -2,16 +2,15 @@
 
 namespace Xfrocks\Medal\Repository;
 
+use XF\Entity\User;
 use XF\Mvc\Entity\Repository;
 use Xfrocks\Medal\Entity\Medal as EntityMedal;
 
 class Medal extends Repository
 {
-    public function canAward()
-    {
-        return \XF::visitor()->hasPermission('general', 'bdMedal_award');
-    }
-
+    /**
+     * @return array
+     */
     public function getMedalTree()
     {
         $medals = $this->finder('Xfrocks\Medal:Medal')
@@ -33,6 +32,9 @@ class Medal extends Repository
         return $tree;
     }
 
+    /**
+     * @return array
+     */
     public function getMedalTreeForSelectRow()
     {
         $tree = $this->getMedalTree();
@@ -47,5 +49,18 @@ class Medal extends Repository
         }
 
         return $choices;
+    }
+
+    /**
+     * @param EntityMedal $medal
+     * @param User $user
+     * @return bool
+     */
+    public function hasExistingAwarded($medal, $user)
+    {
+        return $this->finder('Xfrocks\Medal:Awarded')
+                ->where('medal_id', $medal->medal_id)
+                ->where('user_id', $user->user_id)
+                ->total() > 0;
     }
 }

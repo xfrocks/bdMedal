@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style_properties>
-  <style_property property_name="bdMedal_helpCellImage" group_name="bdMedal" title="Image Cell on Help page" property_type="css" display_order="1010" css_components="extra">
+  <style_property property_name="bdMedal_medalListImage" group_name="bdMedal" title="Medal image in list" description="These are the styling rules for pages like help/medals, members/medals, etc." property_type="css" display_order="1010" css_components="extra">
     <value>{
     "extra": "background-position: center center;\nbackground-size: cover;\nheight: 48px;\nwidth: 48px;"
 }</value>
+  </style_property>
+  <style_property property_name="bdMedal_showTab" group_name="bdMedal" title="Tab on profile page" property_type="value" value_type="boolean" value_group="member_view_tab" display_order="210">
+    <value>1</value>
   </style_property>
 </style_properties>

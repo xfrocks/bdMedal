@@ -12,9 +12,10 @@ class Medal extends AbstractController
 {
     public function actionAward()
     {
-        $medalRepo = $this->getMedalRepo();
-        if (!$medalRepo->canAward()) {
-            return $this->noPermission();
+        /** @var \Xfrocks\Medal\XF\Entity\User $visitor */
+        $visitor = \XF::visitor();
+        if (!$visitor->canAward(null, $error)) {
+            return $this->noPermission($error);
         }
 
         $input = $this->filter([
@@ -32,6 +33,18 @@ class Medal extends AbstractController
             if (!$user) {
                 return $this->error(\XF::phrase('requested_user_not_found'));
             }
+            if (!$visitor->canAward($user, $error)) {
+                return $this->noPermission($error);
+            }
+
+            if ($this->options()->bdMedal_defaultAvoidDuplicated &&
+                $this->getMedalRepo()->hasExistingAwarded($medal, $user)) {
+                $phraseParams = [
+                    'name' => $user->username,
+                    'medal' => $medal->name,
+                ];
+                return $this->error(\XF::phrase('bdmedal_x_have_been_awarded_medal_y', $phraseParams));
+            }
 
             /** @var Awarded $awarded */
             $awarded = $this->em()->create('Xfrocks\Medal:Awarded');
@@ -44,7 +57,7 @@ class Medal extends AbstractController
             return $this->redirect($this->buildLink('members', $user));
         }
 
-        $medalTree = $medalRepo->getMedalTreeForSelectRow();
+        $medalTree = $this->getMedalRepo()->getMedalTreeForSelectRow();
 
         $viewParams = [
             'medalTree' => $medalTree,
