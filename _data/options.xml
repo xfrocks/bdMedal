@@ -16,4 +16,13 @@
     <default_value>50</default_value>
     <relation group_id="bdMedal" display_order="2010"/>
   </option>
+  <option option_id="bdMedal_positionInPost" edit_format="select" data_type="string">
+    <default_value>message_user_info_text_bottom</default_value>
+    <edit_format_params>manual = {{ phrase('bdmedal_position_manual') }}
+message_user_info_text_top = {{ phrase('bdmedal_position_message_user_info_text_top') }}
+message_user_info_text_bottom = {{ phrase('bdmedal_position_message_user_info_text_bottom') }}
+message_user_info_extra_top = {{ phrase('bdmedal_position_message_user_info_extra_top') }}
+message_user_info_extra_bottom = {{ phrase('bdmedal_position_message_user_info_extra_bottom') }}</edit_format_params>
+    <relation group_id="bdMedal" display_order="1100"/>
+  </option>
 </options>

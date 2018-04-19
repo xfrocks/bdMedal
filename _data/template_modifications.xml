@@ -15,12 +15,41 @@
 <xf:macro template="bdmedal_member_view_macros" name="$1" arg-user="{$user}"/>
 ]]></replace>
   </modification>
-  <modification type="public" template="message_macros" modification_key="bdmedal_message_macros_user_info" description="Medals in message." execution_order="4294967295" enabled="1" action="preg_replace">
-    <find><![CDATA[#(<xf:if is="\$extras.custom_fields">.+?)(</xf:contentcheck>)#s
-]]></find>
-    <replace><![CDATA[$1<xf:macro template="bdmedal_message_macros" name="user_info" arg-user="{$user}"/>
+  <modification type="public" template="message_macros" modification_key="bdmedal_message_user_info_extra_xxx" description="message_user_info_extra_(top|bottom)" execution_order="4294967295" enabled="1" action="preg_replace">
+    <find><![CDATA[#((\t+)<div class="message-userExtras">\s+<xf:contentcheck>)(.+?)(</xf:contentcheck>\n\2</div>)#s]]></find>
+    <replace><![CDATA[$1
 
-$2
+<xf:if is="$xf.options.bdMedal_positionInPost === 'message_user_info_extra_top'">
+	<xf:macro template="bdmedal_message_macros" name="user_medals"
+			  arg-position="message_user_info_extra_top"
+			  arg-user="{$user}"/>
+</xf:if>
+
+$3
+<xf:if is="$xf.options.bdMedal_positionInPost === 'message_user_info_extra_bottom'">
+	<xf:macro template="bdmedal_message_macros" name="user_medals"
+			  arg-position="message_user_info_extra_bottom"
+			  arg-user="{$user}"/>
+</xf:if>
+
+
+$2$4]]></replace>
+  </modification>
+  <modification type="public" template="message_macros" modification_key="message_user_info_text_x" description="message_user_info_text_(top|bottom)" execution_order="4294967295" enabled="1" action="preg_replace">
+    <find><![CDATA[#(\t+)<div class="message-userDetails">.+?\n\1</div>#s]]></find>
+    <replace><![CDATA[<xf:if is="$xf.options.bdMedal_positionInPost === 'message_user_info_text_top'">
+	<xf:macro template="bdmedal_message_macros" name="user_medals"
+			  arg-position="message_user_info_text_top"
+			  arg-user="{$user}"/>
+</xf:if>
+
+$0
+
+<xf:if is="$xf.options.bdMedal_positionInPost === 'message_user_info_text_bottom'">
+	<xf:macro template="bdmedal_message_macros" name="user_medals"
+			  arg-position="message_user_info_text_bottom"
+			  arg-user="{$user}"/>
+</xf:if>
 ]]></replace>
   </modification>
 </template_modifications>

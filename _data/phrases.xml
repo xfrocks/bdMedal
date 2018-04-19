@@ -37,6 +37,11 @@ Awarded on {date}]]></phrase>
   <phrase title="bdmedal_no_medals_have_been_awarded_yet" version_id="2000000" version_string="2.0.0"><![CDATA[No medals have been awarded yet.]]></phrase>
   <phrase title="bdmedal_no_medals_have_been_created_yet" version_id="2000000" version_string="2.0.0"><![CDATA[No medals have been created yet.]]></phrase>
   <phrase title="bdmedal_no_users_have_been_awarded_medal_x_yet" version_id="2000000" version_string="2.0.0"><![CDATA[No users have been awarded medal {medal} yet.]]></phrase>
+  <phrase title="bdmedal_position_manual" version_id="2000000" version_string="2.0.0"><![CDATA[Manual position]]></phrase>
+  <phrase title="bdmedal_position_message_user_info_extra_bottom" version_id="2000000" version_string="2.0.0"><![CDATA[Bottom of the User Extras section (containing register date, message count, etc.)]]></phrase>
+  <phrase title="bdmedal_position_message_user_info_extra_top" version_id="2000000" version_string="2.0.0"><![CDATA[Top of the User Extras section (containing register date, message count, etc.)]]></phrase>
+  <phrase title="bdmedal_position_message_user_info_text_bottom" version_id="2000000" version_string="2.0.0"><![CDATA[Below the User Details section (containing username and title)]]></phrase>
+  <phrase title="bdmedal_position_message_user_info_text_top" version_id="2000000" version_string="2.0.0"><![CDATA[Above the User Details section (containing username and title)]]></phrase>
   <phrase title="bdmedal_sort_medals" version_id="2000000" version_string="2.0.0"><![CDATA[Sort medals]]></phrase>
   <phrase title="bdmedal_user_x_not_awarded_y" version_id="2000000" version_string="2.0.0"><![CDATA[User {username} hasn't been awarded medal {medal}.]]></phrase>
   <phrase title="bdmedal_x_awarded_medal_y" version_id="2000000" version_string="2.0.0"><![CDATA[{name} awarded you with the medal {medal}.]]></phrase>
@@ -50,10 +55,12 @@ Awarded on {date}]]></phrase>
   <phrase title="option.bdMedal_imageSizeM" version_id="2000000" version_string="2.0.0"><![CDATA[Image Medium]]></phrase>
   <phrase title="option.bdMedal_imageSizeS" version_id="2000000" version_string="2.0.0"><![CDATA[Image Small]]></phrase>
   <phrase title="option.bdMedal_medalUsersPerPage" version_id="2000000" version_string="2.0.0"><![CDATA[Users per page]]></phrase>
+  <phrase title="option.bdMedal_positionInPost" version_id="2000000" version_string="2.0.0"><![CDATA[Position in message]]></phrase>
   <phrase title="option_explain.bdMedal_defaultAvoidDuplicated" version_id="2000000" version_string="2.0.0"><![CDATA[Enable this option to turn on "Avoid Duplicated" option in manual medal award form in AdminCP.]]></phrase>
   <phrase title="option_explain.bdMedal_imageSizeM" version_id="2000000" version_string="2.0.0"><![CDATA[Normally, medal image will be store in 2 sizes: original size (code name "L") and tiny size (code name "T"). If you wish to use additional image size, you can specify the maximum width / height here. An image will be prepared with the code name "M" for all medals from now on (you will have to re-upload image for old medals). Leave it zero to disable this feature.]]></phrase>
   <phrase title="option_explain.bdMedal_imageSizeS" version_id="2000000" version_string="2.0.0"><![CDATA[Normally, medal image will be store in 2 sizes: original size (code name "L") and tiny size (code name "T"). If you wish to use additional image size, you can specify the maximum width / height here. An image will be prepared with the code name "S" for all medals from now on (you will have to re-upload image for old medals). Leave it zero to disable this feature.]]></phrase>
   <phrase title="option_explain.bdMedal_medalUsersPerPage" version_id="2000000" version_string="2.0.0"><![CDATA[When there are more awarded users to display than this number, they will be separated into page 2, page 3 etc.]]></phrase>
+  <phrase title="option_explain.bdMedal_positionInPost" version_id="2000000" version_string="2.0.0"><![CDATA[Select the position you want the medals to show up in messages. If you want to display them elsewhere, please select the manual option and edit the template manually and use <span style="font-family: monospace">&lt;xf:macro template="bdmedal_message_macros" name="user_medals" arg-user="{$user}" /&gt;</span>. You may need to replace "$user" with "$post.User" or similar, depending on the position.]]></phrase>
   <phrase title="option_group.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[[bd] Medal]]></phrase>
   <phrase title="option_group_description.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[]]></phrase>
   <phrase title="permission.general_bdMedal_award" version_id="2000000" version_string="2.0.0"><![CDATA[Award medals]]></phrase>

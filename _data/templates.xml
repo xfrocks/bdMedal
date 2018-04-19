@@ -62,7 +62,7 @@
   .xf-bdMedal_medalListImage();
 }
 
-.bdMedal_messageUserInfo {
+.bdMedal_messageUserMedals {
   ul {
     list-style: none;
     margin: 0;
@@ -610,12 +610,12 @@
         </li>
     </xf:if>
 </xf:macro>]]></template>
-  <template type="public" title="bdmedal_message_macros" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:macro name="user_info" arg-user="!">
+  <template type="public" title="bdmedal_message_macros" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:macro name="user_medals" arg-position="manual" arg-user="!">
     <xf:set var="$imageSize" value="{{ property('bdMedal_messageImageSize') }}"/>
     <xf:set var="$max" value="{{ property('bdMedal_messageMax') }}"/>
     <xf:if is="$imageSize && $user.medal_count > 0">
         <xf:css src="bdmedal.less"/>
-        <div class="bdMedal_messageUserInfo">
+        <div class="bdMedal_messageUserMedals position-{$position|for_attr}">
             <ul>
                 <xf:set var="$renderedCount" value="0"/>
                 <xf:foreach loop="$user.medal_awardeds" i="$i" value="$awarded">
@@ -639,7 +639,7 @@
                                     {{ phrase('bdmedal_message_user_info_tooltip', {'medal': $medal.name}) }}
                                 </xf:if>
                             </xf:set>
-                            <li class="position-{$renderedCount} medal-{$medal.medal_id} size-{$imageSize|to_lower}{{ $medal.is_svg ? ' is-svg' : ''}}">
+                            <li class="medal-{$medal.medal_id} i{$renderedCount} size-{$imageSize|to_lower}{{ $medal.is_svg ? ' is-svg' : ''}}">
                                 <div class="image" style="{{ trim($imageStyle)|raw|for_attr }}">
                                     <a href="{{ link('members/medals', $user) }}"
                                        data-xf-click="overlay"
