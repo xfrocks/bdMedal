@@ -438,8 +438,14 @@
   <template type="admin" title="bdmedal_medal_list" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('bdmedal_medal_entities') }}</xf:title>
 
 <xf:pageaction>
-    <xf:button href="{{ link('medals/add') }}">{{ phrase('bdmedal_medal_add') }}</xf:button>
-    <xf:button href="{{ link('medal-categories/add') }}">{{ phrase('bdmedal_category_add') }}</xf:button>
+    <xf:button href="{{ link('medals/add') }}" data-xf-click="overlay">{{ phrase('bdmedal_medal_add') }}</xf:button>
+    <xf:button href="{{ link('medal-categories/add') }}" data-xf-click="overlay">
+        {{ phrase('bdmedal_category_add') }}
+    </xf:button>
+
+    <xf:if is="$xf.visitor.hasAdminPermission('rebuildCache')">
+        <xf:button href="{{ link('medals/rebuild') }}">{{ phrase('rebuild_caches') }}</xf:button>
+    </xf:if>
 </xf:pageaction>
 
 <xf:if is="count($categories) > 0">
@@ -458,7 +464,7 @@
                                      colspan="3" overlay="true">
                                 {{ $category.name }}
                             </xf:cell>
-                            <xf:delete href="{{ link('smilie-categories/delete', $smilieCategory) }}"/>
+                            <xf:delete href="{{ link('medal-categories/delete', $category) }}"/>
                         </xf:datarow>
 
                         <xf:if contentcheck="true">
@@ -662,6 +668,11 @@
         </div>
     </xf:if>
 </xf:macro>]]></template>
+  <template type="admin" title="bdmedal_rebuild" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('rebuild_caches') }}</xf:title>
+
+<xf:macro template="tools_rebuild" name="rebuild_job"
+	arg-header="{{ phrase('rebuild_user_caches') }}"
+	arg-job="Xfrocks\Medal:User" />]]></template>
   <template type="public" title="bdmedal_user_medals" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('bdmedal_awarded_medals') }}: {$user.username}</xf:title>
 <xf:h1>{{ phrase('bdmedal_awarded_medals') }}</xf:h1>
 

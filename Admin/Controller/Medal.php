@@ -100,6 +100,11 @@ class Medal extends Entity
         return $this->view('Xfrocks\Medal:Medal\Image', 'bdmedal_medal_image', $viewParams);
     }
 
+    public function actionRebuild()
+    {
+        return $this->view('Xfrocks\Medal:Rebuild', 'bdmedal_rebuild');
+    }
+
     protected function entitySaveProcess($entity)
     {
         $form = parent::entitySaveProcess($entity);
