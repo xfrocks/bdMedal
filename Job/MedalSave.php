@@ -2,9 +2,7 @@
 
 namespace Xfrocks\Medal\Job;
 
-use XF\Job\AbstractJob;
 use XF\Job\AbstractRebuildJob;
-use XF\Mvc\Entity\Finder;
 use Xfrocks\Medal\Entity\Awarded;
 
 class MedalSave extends AbstractRebuildJob

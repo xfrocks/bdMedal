@@ -4,7 +4,6 @@ namespace Xfrocks\Medal\Help;
 
 use XF\Mvc\Controller;
 use XF\Mvc\Reply\View;
-use Xfrocks\Medal\Entity\Medal as EntityMedal;
 
 class Medal
 {

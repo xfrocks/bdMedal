@@ -5,7 +5,6 @@ namespace Xfrocks\Medal\Pub\Controller;
 use XF\Mvc\Reply\Exception;
 use XF\Pub\Controller\AbstractController;
 use XF\Repository\User;
-use Xfrocks\Medal\Entity\Awarded;
 use Xfrocks\Medal\Entity\Medal as EntityMedal;
 
 class Medal extends AbstractController

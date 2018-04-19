@@ -3,7 +3,6 @@
 namespace Xfrocks\Medal\Job;
 
 use XF\Job\AbstractJob;
-use XF\Mvc\Entity\Finder;
 use Xfrocks\Medal\Entity\Awarded;
 
 class MedalDelete extends AbstractJob
