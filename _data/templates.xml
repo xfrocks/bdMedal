@@ -8,7 +8,12 @@
                     <xf:foreach loop="$categories" value="$category">
                         <xf:if contentcheck="true">
                             <xf:datarow rowclass="dataList-row--subSection dataList-row--noHover">
-                                <xf:cell colspan="3">{$category.name}</xf:cell>
+                                <xf:cell colspan="3">
+                                    {$category.name}
+                                    <xf:if is="$category.description">
+                                        <div class="dataList-subRow">{$category.description}</div>
+                                    </xf:if>
+                                </xf:cell>
                             </xf:datarow>
 
                             <xf:contentcheck>
