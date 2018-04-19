@@ -4,17 +4,83 @@ namespace Xfrocks\Medal\Admin\Controller;
 
 use XF\Entity\User;
 use XF\Mvc\Entity\Finder;
-use XF\Mvc\FormAction;
 use \Xfrocks\Medal\Entity\Awarded as EntityAwarded;
 use \Xfrocks\Medal\Entity\Medal;
 
 class Awarded extends Entity
 {
+    public function actionAdd()
+    {
+        $input = $this->filter([
+            'medal_id' => 'uint',
+            'usernames' => 'str',
+            'award_reason' => 'str',
+            'avoid_duplicated' => 'bool',
+        ]);
+
+        if ($this->isPost()) {
+            /** @var Medal $medal */
+            $medal = $this->assertRecordExists('Xfrocks\Medal:Medal', $input['medal_id']);
+
+            $userNames = preg_split('#\s*,\s*#', $input['usernames'], -1, PREG_SPLIT_NO_EMPTY);
+            /** @var \XF\Repository\User $userRepo */
+            $userRepo = $this->repository('XF:User');
+            $users = $userRepo->getUsersByNames($userNames, $notFound);
+            if (count($users) === 0 || !empty($notFound)) {
+                return $this->error(\XF::phrase('requested_user_not_found'));
+            }
+
+            /** @var User $user */
+            foreach ($users as $user) {
+                if ($input['avoid_duplicated']) {
+                    $existing = $this->finder('Xfrocks\Medal:Awarded')
+                        ->where('medal_id', $medal->medal_id)
+                        ->where('user_id', $user->user_id)
+                        ->fetchOne();
+                    if (!empty($existing)) {
+                        continue;
+                    }
+                }
+
+                /** @var EntityAwarded $awarded */
+                $awarded = $this->createEntity();
+                $awarded->medal_id = $medal->medal_id;
+                $awarded->setUser($user);
+                $awarded->award_reason = $input['award_reason'];
+
+                $awarded->preSave();
+                if (!$awarded->hasErrors()) {
+                    $awarded->save();
+                }
+            }
+
+            return $this->redirect($this->buildLink('awarded-medals'));
+        }
+
+        /** @var \Xfrocks\Medal\Repository\Medal $medalRepo */
+        $medalRepo = $this->repository('Xfrocks\Medal:Medal');
+
+        $medalTree = $medalRepo->getMedalTreeForSelectRow();
+
+        $viewParams = [
+            'medalTree' => $medalTree,
+            'input' => $input,
+        ];
+
+        return $this->view('Xfrocks\Medal:Awarded\Add', 'bdmedal_awarded_add', $viewParams);
+    }
+
     public function getEntityExplain($entity)
     {
         /** @var EntityAwarded $awarded */
         $awarded = $entity;
-        return $awarded->award_reason;
+
+        $date = \XF::language()->date($awarded->award_date);
+        if (empty($awarded->award_reason)) {
+            return $date;
+        }
+
+        return sprintf('%s, %s', $date, $awarded->award_reason);
     }
 
     public function getEntityHint($entity)
@@ -80,88 +146,6 @@ class Awarded extends Entity
         }
 
         return [$finder, $filters];
-    }
-
-    protected function entitySaveProcess($entity)
-    {
-        if (!$entity->exists()) {
-            $formMultiple = $this->formAction();
-            $input = $this->filter([
-                'values' => 'array',
-                'usernames' => 'str',
-                'avoid_duplicated' => 'bool',
-            ]);
-
-            $awardeds = [];
-
-            $formMultiple->setup(function (FormAction $form) use (&$awardeds, $input) {
-                $userNames = preg_split('#\s*,\s*#', $input['usernames'], -1, PREG_SPLIT_NO_EMPTY);
-                /** @var \XF\Repository\User $userRepo */
-                $userRepo = $this->repository('XF:User');
-                $users = $userRepo->getUsersByNames($userNames, $notFound);
-                if (count($users) === 0 || !empty($notFound)) {
-                    $form->logError(\XF::phrase('requested_user_not_found'));
-                    return;
-                }
-
-                /** @var User $user */
-                foreach ($users as $user) {
-                    /** @var EntityAwarded $awarded */
-                    $awarded = $this->createEntity();
-                    $awarded->bulkSet($input['values']);
-                    $awarded->user_id = $user->user_id;
-                    $awarded->username = $user->username;
-
-                    if ($input['avoid_duplicated']) {
-                        $existing = $this->finder('Xfrocks\Medal:Awarded')
-                            ->where('medal_id', $awarded->medal_id)
-                            ->where('user_id', $awarded->user_id)
-                            ->fetchOne();
-                        if (!empty($existing)) {
-                            continue;
-                        }
-                    }
-
-
-                    $awardeds[] = $awarded;
-                }
-            });
-
-            $formMultiple->validate(function (FormAction $form) use (&$awardeds) {
-                /** @var EntityAwarded $awarded */
-                foreach ($awardeds as $awarded) {
-                    $awarded->preSave();
-                    $form->logErrors($awarded->getErrors());
-                }
-            });
-
-            $formMultiple->apply(function (FormAction $form) use (&$awardeds) {
-                /** @var EntityAwarded $awarded */
-                foreach ($awardeds as $awarded) {
-                    $awarded->save(true, $form->isUsingTransaction() ? false : true);
-                }
-            });
-
-            return $formMultiple;
-        }
-
-        $formSingle = parent::entitySaveProcess($entity);
-
-        $username = $this->filter('username', 'str');
-        $formSingle->setup(function (FormAction $form) use ($entity, $username) {
-            /** @var \XF\Repository\User $userRepo */
-            $userRepo = $this->repository('XF:User');
-            $user = $userRepo->getUserByNameOrEmail($username);
-            if (empty($user)) {
-                $form->logError(\XF::phrase('requested_user_not_found'));
-                return;
-            }
-
-            $entity->user_id = $user->user_id;
-            $entity->username = $user->username;
-        });
-
-        return $formSingle;
     }
 
     protected function getPrefixForPhrases()

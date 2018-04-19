@@ -33,8 +33,6 @@ class Awarded extends Entity
         switch ($columnName) {
             case 'award_reason':
                 return \XF::phrase('bdmedal_' . $columnName);
-            case 'medal_id':
-                return \XF::phrase('bdmedal_medal_entity');
         }
 
         return null;
@@ -66,6 +64,15 @@ class Awarded extends Entity
         }
     }
 
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user_id = $user->user_id;
+        $this->username = $user->username;
+    }
+
     protected function _postSave()
     {
         parent::_postSave();
@@ -80,6 +87,19 @@ class Awarded extends Entity
         parent::_postDelete();
 
         $this->autoRebuild();
+    }
+
+    protected function _preSave()
+    {
+        parent::_preSave();
+
+        if ($this->isUpdate()) {
+            if ($this->isChanged('medal_id') ||
+                $this->isChanged('user_id') ||
+                $this->isChanged('username')) {
+                throw new \LogicException('Awarded medal cannot change its medal_id, user_id and username values.');
+            }
+        }
     }
 
     protected function autoRebuild()
@@ -111,9 +131,9 @@ class Awarded extends Entity
         $structure->primaryKey = 'awarded_id';
         $structure->columns = [
             'awarded_id' => ['type' => self::UINT, 'autoIncrement' => true],
-            'medal_id' => ['type' => self::UINT, 'required' => true],
-            'user_id' => ['type' => self::UINT, 'required' => true],
-            'username' => ['type' => self::STR, 'maxLength' => 50, 'required' => true],
+            'medal_id' => ['type' => self::UINT, 'required' => true, 'writeOnce' => true],
+            'user_id' => ['type' => self::UINT, 'required' => true, 'writeOnce' => true],
+            'username' => ['type' => self::STR, 'maxLength' => 50, 'required' => true, 'writeOnce' => true],
             'award_date' => ['type' => self::UINT, 'default' => \XF::$time],
             'award_reason' => ['type' => self::STR],
             'adjusted_display_order' => ['type' => self::UINT, 'default' => 0],

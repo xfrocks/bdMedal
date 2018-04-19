@@ -42,9 +42,16 @@
   <phrase title="option.bdMedal_defaultAvoidDuplicated" version_id="2000000" version_string="2.0.0"><![CDATA[Default to Avoid Duplicated]]></phrase>
   <phrase title="option.bdMedal_imageSizeM" version_id="2000000" version_string="2.0.0"><![CDATA[Image Medium]]></phrase>
   <phrase title="option.bdMedal_imageSizeS" version_id="2000000" version_string="2.0.0"><![CDATA[Image Small]]></phrase>
+  <phrase title="option.bdMedal_medalUsersPerPage" version_id="2000000" version_string="2.0.0"><![CDATA[Users per page]]></phrase>
   <phrase title="option_explain.bdMedal_defaultAvoidDuplicated" version_id="2000000" version_string="2.0.0"><![CDATA[Enable this option to turn on "Avoid Duplicated" option in manual medal award form in AdminCP.]]></phrase>
   <phrase title="option_explain.bdMedal_imageSizeM" version_id="2000000" version_string="2.0.0"><![CDATA[Normally, medal image will be store in 2 sizes: original size (code name "L") and tiny size (code name "T"). If you wish to use additional image size, you can specify the maximum width / height here. An image will be prepared with the code name "M" for all medals from now on (you will have to re-upload image for old medals). Leave it zero to disable this feature.]]></phrase>
   <phrase title="option_explain.bdMedal_imageSizeS" version_id="2000000" version_string="2.0.0"><![CDATA[Normally, medal image will be store in 2 sizes: original size (code name "L") and tiny size (code name "T"). If you wish to use additional image size, you can specify the maximum width / height here. An image will be prepared with the code name "S" for all medals from now on (you will have to re-upload image for old medals). Leave it zero to disable this feature.]]></phrase>
+  <phrase title="option_explain.bdMedal_medalUsersPerPage" version_id="2000000" version_string="2.0.0"><![CDATA[When there are more awarded users to display than this number, they will be separated into page 2, page 3 etc.]]></phrase>
   <phrase title="option_group.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[[bd] Medal]]></phrase>
   <phrase title="option_group_description.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[]]></phrase>
+  <phrase title="permission.general_bdMedal_award" version_id="2000000" version_string="2.0.0"><![CDATA[Award medals]]></phrase>
+  <phrase title="style_prop.bdMedal_helpCellImage" version_id="2000000" version_string="2.0.0"><![CDATA[Image Cell on Help page]]></phrase>
+  <phrase title="style_prop_desc.bdMedal_helpCellImage" version_id="2000000" version_string="2.0.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_group.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[[bd] Medal]]></phrase>
+  <phrase title="style_prop_group_desc.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[]]></phrase>
 </phrases>

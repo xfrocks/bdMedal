@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style_properties>
+  <style_property property_name="bdMedal_helpCellImage" group_name="bdMedal" title="Image Cell on Help page" property_type="css" display_order="1010" css_components="extra">
+    <value>{
+    "extra": "background-position: center center;\nbackground-size: cover;\nheight: 48px;\nwidth: 48px;"
+}</value>
+  </style_property>
+</style_properties>

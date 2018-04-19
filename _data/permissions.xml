@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+  <permission permission_group_id="general" permission_id="bdMedal_award" permission_type="flag" interface_group_id="generalModeratorPermissions" display_order="9999"/>
+</permissions>

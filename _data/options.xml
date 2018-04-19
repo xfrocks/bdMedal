@@ -12,4 +12,8 @@
     <default_value>0</default_value>
     <relation group_id="bdMedal" display_order="20"/>
   </option>
+  <option option_id="bdMedal_medalUsersPerPage" edit_format="spinbox" data_type="positive_integer">
+    <default_value>50</default_value>
+    <relation group_id="bdMedal" display_order="2010"/>
+  </option>
 </options>
