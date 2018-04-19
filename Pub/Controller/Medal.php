@@ -14,7 +14,7 @@ class Medal extends AbstractController
     {
         /** @var \Xfrocks\Medal\XF\Entity\User $visitor */
         $visitor = \XF::visitor();
-        if (!$visitor->canAward(null, $error)) {
+        if (!$visitor->canAwardMedal(null, $error)) {
             return $this->noPermission($error);
         }
 
@@ -33,7 +33,7 @@ class Medal extends AbstractController
             if (!$user) {
                 return $this->error(\XF::phrase('requested_user_not_found'));
             }
-            if (!$visitor->canAward($user, $error)) {
+            if (!$visitor->canAwardMedal($user, $error)) {
                 return $this->noPermission($error);
             }
 

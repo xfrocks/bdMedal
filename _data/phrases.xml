@@ -37,10 +37,12 @@ Awarded on {date}]]></phrase>
   <phrase title="bdmedal_no_medals_have_been_awarded_yet" version_id="2000000" version_string="2.0.0"><![CDATA[No medals have been awarded yet.]]></phrase>
   <phrase title="bdmedal_no_medals_have_been_created_yet" version_id="2000000" version_string="2.0.0"><![CDATA[No medals have been created yet.]]></phrase>
   <phrase title="bdmedal_no_users_have_been_awarded_medal_x_yet" version_id="2000000" version_string="2.0.0"><![CDATA[No users have been awarded medal {medal} yet.]]></phrase>
+  <phrase title="bdmedal_sort_medals" version_id="2000000" version_string="2.0.0"><![CDATA[Sort medals]]></phrase>
   <phrase title="bdmedal_user_x_not_awarded_y" version_id="2000000" version_string="2.0.0"><![CDATA[User {username} hasn't been awarded medal {medal}.]]></phrase>
   <phrase title="bdmedal_x_awarded_medal_y" version_id="2000000" version_string="2.0.0"><![CDATA[{name} awarded you with the medal {medal}.]]></phrase>
   <phrase title="bdmedal_x_have_been_awarded_medal_y" version_id="2000000" version_string="2.0.0"><![CDATA[{name} have been awarded with the medal {medal}.]]></phrase>
   <phrase title="bdmedal_you_cannot_award_medal_to_yourself" version_id="2000000" version_string="2.0.0"><![CDATA[You cannot award medal to yourself.]]></phrase>
+  <phrase title="bdmedal_you_cannot_sort_others" version_id="2000000" version_string="2.0.0"><![CDATA[You cannot sort another person's medals.]]></phrase>
   <phrase title="bdmedal_you_have_been_awarded_medal_x" version_id="2000000" version_string="2.0.0"><![CDATA[<strong class="subject">You</strong> have been awarded a medal: {medal}]]></phrase>
   <phrase title="help_page_desc.medals" version_id="2000000" version_string="2.0.0"><![CDATA[You can earn medals by being active in the community. This page shows a list of the medals that are available.]]></phrase>
   <phrase title="help_page_title.medals" version_id="2000000" version_string="2.0.0"><![CDATA[Medals]]></phrase>

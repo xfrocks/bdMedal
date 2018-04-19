@@ -14,14 +14,13 @@ class User
      */
     public static function rebuild($app, $userId)
     {
-        $finder = $app->finder('Xfrocks\Medal:Awarded')
-            ->where('user_id', $userId)
+        /** @var \Xfrocks\Medal\Repository\Medal $medalRepo */
+        $medalRepo = $app->repository('Xfrocks\Medal:Medal');
+        $awardeds = $medalRepo->findAwardedsForUser($userId)
             ->with(['Medal', 'Medal.Category'], true)
-            ->order('award_date', 'DESC');
+            ->fetch();
 
-        $awardeds = $finder->fetch();
         $data = [];
-
         /** @var Awarded $awarded */
         foreach ($awardeds as $awarded) {
             $data[] = $awarded->toArray(false) +

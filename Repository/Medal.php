@@ -3,11 +3,25 @@
 namespace Xfrocks\Medal\Repository;
 
 use XF\Entity\User;
+use XF\Mvc\Entity\Finder;
 use XF\Mvc\Entity\Repository;
 use Xfrocks\Medal\Entity\Medal as EntityMedal;
 
 class Medal extends Repository
 {
+    /**
+     * @param int $userId
+     * @return Finder
+     */
+    public function findAwardedsForUser($userId)
+    {
+        return $this->finder('Xfrocks\Medal:Awarded')
+            ->where('user_id', $userId)
+            ->order('adjusted_display_order', 'ASC')
+            ->order('award_date', 'DESC')
+            ->keyedBy('awarded_id');
+    }
+
     /**
      * @return array
      */

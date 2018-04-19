@@ -19,7 +19,7 @@ class User extends XFCP_User
      * @param null $error
      * @return bool
      */
-    public function canAward($user, &$error = null)
+    public function canAwardMedal($user, &$error = null)
     {
         if (!$this->hasPermission('general', 'bdMedal_award')) {
             return false;
@@ -27,6 +27,25 @@ class User extends XFCP_User
 
         if ($user !== null && $user->user_id === $this->user_id) {
             $error = \XF::phraseDeferred('bdmedal_you_cannot_award_medal_to_yourself');
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param \XF\Entity\User $user
+     * @param null $error
+     * @return bool
+     */
+    public function canSortMedals($user, &$error = null)
+    {
+        if ($this->is_admin && $this->hasAdminPermission('bdMedal')) {
+            return true;
+        }
+
+        if ($user->user_id !== $this->user_id) {
+            $error = \XF::phraseDeferred('bdmedal_you_cannot_sort_others');
             return false;
         }
 

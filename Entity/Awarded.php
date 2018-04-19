@@ -23,6 +23,17 @@ use XF\Repository\UserAlert;
  */
 class Awarded extends Entity
 {
+    public function __set($key, $value)
+    {
+        if ($key === 'parent_id') {
+            // Do no op for parent_id to support medal sorting
+            // TODO: find a better way to do this
+            return;
+        }
+
+        parent::__set($key, $value);
+    }
+
     public function canView()
     {
         return true;
@@ -31,6 +42,8 @@ class Awarded extends Entity
     public function getEntityColumnLabel($columnName)
     {
         switch ($columnName) {
+            case 'adjusted_display_order':
+                return \XF::phrase('display_order');
             case 'award_reason':
                 return \XF::phrase('bdmedal_' . $columnName);
         }
