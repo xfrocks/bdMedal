@@ -2,7 +2,7 @@
 <style_properties>
   <style_property property_name="bdMedal_medalListImage" group_name="bdMedal" title="Medal image in list" description="These are the styling rules for pages like help/medals, members/medals, etc." property_type="css" display_order="1010" css_components="extra">
     <value>{
-    "extra": "background-position: center center;\nbackground-size: cover;\nheight: 48px;\nwidth: 48px;"
+    "extra": "background-position: center center;\nbackground-size: cover;\nheight: 48px;\nmargin-left: @xf-paddingLarge;\nwidth: 48px;"
 }</value>
   </style_property>
   <style_property property_name="bdMedal_messageImage" group_name="bdMedal" title="Medal image in message" description="These are the styling rules for message user info block." property_type="css" display_order="20" css_components="extra">
