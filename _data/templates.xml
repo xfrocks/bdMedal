@@ -63,11 +63,15 @@
         'medal': $content.Medal.name
     }) }}
 </xf:if>]]></template>
-  <template type="public" title="bdmedal.less" version_id="2000000" version_string="2.0.0"><![CDATA[.bdMedal_medalListImage {
+  <template type="public" title="bdmedal.less" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[.bdMedal_medalListImage {
   .xf-bdMedal_medalListImage();
 }
 
 .bdMedal_messageUserMedals {
+  &.position-message_user_info_text_bottom {
+    margin-top: @xf-paddingSmall;
+  }
+
   ul {
     list-style: none;
     margin: 0;
