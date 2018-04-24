@@ -448,7 +448,7 @@
         <a href="{{ link('medals/image', $medal) }}" data-xf-click="overlay">{$img|raw}</a>
     </xf:if>
 </xf:macro>]]></template>
-  <template type="admin" title="bdmedal_medal_list" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('bdmedal_medal_entities') }}</xf:title>
+  <template type="admin" title="bdmedal_medal_list" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[<xf:title>{{ phrase('bdmedal_medal_entities') }}</xf:title>
 
 <xf:pageaction>
     <xf:button href="{{ link('medals/add') }}" data-xf-click="overlay">{{ phrase('bdmedal_medal_add') }}</xf:button>
@@ -500,7 +500,7 @@
                                                     {{ phrase('display_order') }}: {$medal.display_order}
                                                 </span>
                                                 <xf:if is="$medal.description">
-                                                    <div class="dataList-subRow">{$medal.description|raw}</div>
+                                                    <div class="dataList-subRow">{$medal.description|strip_tags}</div>
                                                 </xf:if>
                                             </xf:cell>
 
