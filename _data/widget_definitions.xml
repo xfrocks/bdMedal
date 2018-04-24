@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget_definitions>
+  <widget_definition definition_id="bdmedal_user_medals" definition_class="Xfrocks\Medal\Widget\UserMedals"/>
+</widget_definitions>

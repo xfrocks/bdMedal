@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <templates>
-  <template type="public" title="_help_page_medals" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:if is="$medals is not empty">
+  <template type="public" title="_help_page_medals" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[<xf:if is="$medals is not empty">
     <div class="block">
         <div class="block-container">
             <div class="block-body">
@@ -21,7 +21,7 @@
                                     <xf:if is="$medal.category_id === $category.category_id">
                                         <xf:datarow rowclass="dataList-row--noHover">
                                             <xf:cell class="dataList-cell--min dataList-cell--image">
-                                                <xf:macro template="bdmedal_medal_macro" name="image"
+                                                <xf:macro template="bdmedal_macros" name="image"
                                                           arg-medal="{$medal}"/>
                                             </xf:cell>
                                             <xf:cell>
@@ -63,7 +63,13 @@
         'medal': $content.Medal.name
     }) }}
 </xf:if>]]></template>
-  <template type="public" title="bdmedal.less" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[.bdMedal_medalListImage {
+  <template type="public" title="bdmedal.less" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[.bdMedal_medalImage {
+  background-position: center center;
+  background-size: cover;
+  display: inline-block;
+}
+
+.bdMedal_medalListImage {
   .xf-bdMedal_medalListImage();
 }
 
@@ -72,25 +78,31 @@
     margin-top: @xf-paddingSmall;
   }
 
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .bdMedal_medalImage {
+    .xf-bdMedal_messageImage();
+  }
+}
 
-    li {
-      display: inline-block;
-    }
+.bdMedal_widgetUserMedals {
+  .bdMedal_medalImage {
+    .xf-bdMedal_widgetImage();
+  }
+}
+
+ul.bdMedal_userMedals {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: inline-block;
   }
 
-  .image {
-    .xf-bdMedal_messageImage();
-
-    a, img {
-      display: inline-block;
-      height: 100%;
-      opacity: 0;
-      width: 100%;
-    }
+  a, img {
+    display: inline-block;
+    height: 100%;
+    opacity: 0;
+    width: 100%;
   }
 }
 ]]></template>
@@ -332,6 +344,65 @@
     <xf:else/>
     <div class="blockMessage">{{ phrase('no_items_have_been_created_yet') }}</div>
 </xf:if>]]></template>
+  <template type="public" title="bdmedal_macros" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[<xf:macro name="image" arg-medal="!">
+    <xf:css src="bdmedal.less"/>
+    <xf:set var="$medalImageUrl" value="{$medal.getImageUrl('L')}"/>
+    <xf:if is="$medalImageUrl">
+        <div class="bdMedal_medalImage bdMedal_medalListImage"
+             style="background-image: url('{$medalImageUrl}');">
+            &nbsp;
+        </div>
+    </xf:if>
+</xf:macro>
+
+<xf:macro name="user_medals" arg-imageSize="!" arg-max="0" arg-showDate="{{ false }}" arg-user="!">
+    <xf:if is="$imageSize && $user.medal_count > 0">
+        <xf:css src="bdmedal.less"/>
+        <ul class="bdMedal_userMedals">
+            <xf:set var="$renderedCount" value="0"/>
+            <xf:foreach loop="$user.medal_awardeds" i="$i" value="$awarded">
+                <xf:if is="!$max || $renderedCount < $max">
+                    <xf:set var="$medal" value="{$awarded.Medal}"/>
+                    <xf:set var="$medalImageUrl" value="{$medal.getImageUrl($imageSize)}"/>
+                    <xf:if is="$medalImageUrl">
+                        <xf:set var="$medalImageSizePixels" value="{$medal.getImageSizePixels($imageSize)}"/>
+                        <xf:set var="$imageStyle">
+                            background-image: url('{$medalImageUrl}');
+                            <xf:if is="$medalImageSizePixels > 0">
+                                height: {$medalImageSizePixels}px;
+                                width: {$medalImageSizePixels}px;
+                            </xf:if>
+                        </xf:set>
+                        <xf:set var="$medalTooltip">
+                            <xf:if is="$showDate">
+                                {{ phrase('bdmedal_medal_tooltip_with_date',
+                                {'medal': $medal.name, 'date': date($awarded.award_date)}) }}
+                                <xf:else/>
+                                {{ phrase('bdmedal_medal_tooltip_without_date', {'medal': $medal.name}) }}
+                            </xf:if>
+                        </xf:set>
+
+
+                        <li class="medal-{$medal.medal_id} i{$renderedCount} size-{$imageSize|to_lower}{{ $medal.is_svg ? ' is-svg' : ''}}">
+                            <div class="bdMedal_medalImage" style="{{ trim($imageStyle)|raw|for_attr }}">
+                                <a href="{{ link('members/medals', $user) }}"
+                                   data-xf-click="overlay"
+                                   data-xf-init="tooltip" data-html="true"
+                                   title="{{ trim($medalTooltip)|raw|for_attr }}">
+                                    <img src="{$medalImageUrl}" alt="{$medal.name}"/>
+                                </a>
+                            </div>
+                        </li>
+
+
+                        <xf:set var="$renderedCount" value="{{ $renderedCount + 1 }}"/>
+                    </xf:if>
+                </xf:if>
+            </xf:foreach>
+        </ul>
+    </xf:if>
+</xf:macro>
+]]></template>
   <template type="public" title="bdmedal_medal_award" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('bdmedal_awarded_add') }}</xf:title>
 
 <xf:breadcrumb href="{{ link('help/medals') }}">{{ phrase('help_page_title.medals') }}</xf:breadcrumb>
@@ -556,16 +627,6 @@
     <xf:else/>
     <div class="blockMessage">{{ phrase('bdmedal_no_medals_have_been_created_yet') }}</div>
 </xf:if>]]></template>
-  <template type="public" title="bdmedal_medal_macro" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:macro name="image" arg-medal="!">
-    <xf:css src="bdmedal.less"/>
-    <xf:set var="$medalImageUrl" value="{$medal.getImageUrl('L')}"/>
-    <xf:if is="$medalImageUrl">
-        <div class="bdMedal_medalListImage"
-             style="background-image: url('{$medalImageUrl}');">
-            &nbsp;
-        </div>
-    </xf:if>
-</xf:macro>]]></template>
   <template type="public" title="bdmedal_medal_users" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:title>{$medal.name}</xf:title>
 
 <xf:breadcrumb href="{{ link('help/medals') }}">{{ phrase('help_page_title.medals') }}</xf:breadcrumb>
@@ -652,53 +713,21 @@
         </li>
     </xf:if>
 </xf:macro>]]></template>
-  <template type="public" title="bdmedal_message_macros" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:macro name="user_medals" arg-position="manual" arg-user="!">
-    <xf:set var="$imageSize" value="{{ property('bdMedal_messageImageSize') }}"/>
-    <xf:set var="$max" value="{{ property('bdMedal_messageMax') }}"/>
-    <xf:if is="$imageSize && $user.medal_count > 0">
+  <template type="public" title="bdmedal_message_macros" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[<xf:macro name="user_medals" arg-position="manual" arg-user="!">
+    <xf:if contentcheck="true">
         <xf:css src="bdmedal.less"/>
         <div class="bdMedal_messageUserMedals position-{$position|for_attr}">
-            <ul>
-                <xf:set var="$renderedCount" value="0"/>
-                <xf:foreach loop="$user.medal_awardeds" i="$i" value="$awarded">
-                    <xf:if is="!$max || $renderedCount < $max">
-                        <xf:set var="$medal" value="{$awarded.Medal}"/>
-                        <xf:set var="$medalImageUrl" value="{$medal.getImageUrl($imageSize)}"/>
-                        <xf:if is="$medalImageUrl">
-                            <xf:set var="$medalImageSizePixels" value="{$medal.getImageSizePixels($imageSize)}"/>
-                            <xf:set var="$imageStyle">
-                                background-image: url('{$medalImageUrl}');
-                                <xf:if is="$medalImageSizePixels > 0">
-                                    height: {$medalImageSizePixels}px;
-                                    width: {$medalImageSizePixels}px;
-                                </xf:if>
-                            </xf:set>
-                            <xf:set var="$medalTooltip">
-                                <xf:if is="property('bdMedal_messageShowDate')">
-                                    {{ phrase('bdmedal_message_user_info_tooltip_with_date',
-                                    {'medal': $medal.name, 'date': date($awarded.award_date)}) }}
-                                    <xf:else/>
-                                    {{ phrase('bdmedal_message_user_info_tooltip', {'medal': $medal.name}) }}
-                                </xf:if>
-                            </xf:set>
-                            <li class="medal-{$medal.medal_id} i{$renderedCount} size-{$imageSize|to_lower}{{ $medal.is_svg ? ' is-svg' : ''}}">
-                                <div class="image" style="{{ trim($imageStyle)|raw|for_attr }}">
-                                    <a href="{{ link('members/medals', $user) }}"
-                                       data-xf-click="overlay"
-                                       data-xf-init="tooltip" data-html="true"
-                                       title="{{ trim($medalTooltip)|raw|for_attr }}">
-                                        <img src="{$medalImageUrl}" alt="{$medal.name}"/>
-                                    </a>
-                                </div>
-                            </li>
-                            <xf:set var="$renderedCount" value="{{ $renderedCount + 1 }}"/>
-                        </xf:if>
-                    </xf:if>
-                </xf:foreach>
-            </ul>
+            <xf:contentcheck>
+                <xf:macro template="bdmedal_macros" name="user_medals"
+                          arg-imageSize="{{ property('bdMedal_messageImageSize') }}"
+                          arg-max="{{ property('bdMedal_messageMax') }}"
+                          arg-showDate="{{ property('bdMedal_messageShowDate') }}"
+                          arg-user="{$user}"/>
+            </xf:contentcheck>
         </div>
     </xf:if>
-</xf:macro>]]></template>
+</xf:macro>
+]]></template>
   <template type="admin" title="bdmedal_rebuild" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('rebuild_caches') }}</xf:title>
 
 <xf:macro template="tools_rebuild" name="rebuild_job"
@@ -719,7 +748,7 @@
                         <xf:set var="$medal" value="{$awarded.Medal}"/>
                         <xf:datarow rowclass="dataList-row--noHover">
                             <xf:cell class="dataList-cell--min dataList-cell--image">
-                                <xf:macro template="bdmedal_medal_macro" name="image"
+                                <xf:macro template="bdmedal_macros" name="image"
                                           arg-medal="{$medal}"/>
                             </xf:cell>
                             <xf:cell>
@@ -798,6 +827,29 @@
         <xf:submitrow icon="save" rowtype="simple"/>
     </div>
 </xf:form>]]></template>
+  <template type="public" title="bdmedal_widget_user_medals" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[<xf:if contentcheck="true">
+    <xf:css src="bdmedal.less"/>
+    <div class="block" {{ widget_data($widget) }}>
+        <div class="block-container">
+            <h3 class="block-minorHeader">
+                <a href="{{ link('members/medals', $user) }}">
+                    {$title}
+                </a>
+            </h3>
+            <div class="block-body">
+                <div class="bdMedal_widgetUserMedals">
+                    <xf:contentcheck>
+                        <xf:macro template="bdmedal_macros" name="user_medals"
+                                  arg-imageSize="{{ property('bdMedal_widgetImageSize') }}"
+                                  arg-max="{{ property('bdMedal_widgetMax') }}"
+                                  arg-showDate="{{ property('bdMedal_widgetShowDate') }}"
+                                  arg-user="{$user}"/>
+                    </xf:contentcheck>
+                </div>
+            </div>
+        </div>
+    </div>
+</xf:if>]]></template>
   <template type="public" title="news_feed_item_medal_insert" version_id="2000000" version_string="2.0.0"><![CDATA[<div class="contentRow-title">
     <xf:if is="$user.user_id === $xf.visitor.user_id">
         {{ phrase('bdmedal_you_have_been_awarded_medal_x', {
@@ -829,4 +881,5 @@
 <div class="contentRow-minor">
     <xf:date time="{$newsFeed.event_date}"/>
 </div>]]></template>
+  <template type="admin" title="widget_def_options_bdmedal_user_medals" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[]]></template>
 </templates>
