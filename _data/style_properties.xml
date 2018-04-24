@@ -19,7 +19,10 @@
   <style_property property_name="bdMedal_messageShowDate" group_name="bdMedal" title="Show date" description="Show the awarded date in tooltip for each medal." property_type="value" value_type="boolean" value_group="message" display_order="10">
     <value>1</value>
   </style_property>
-  <style_property property_name="bdMedal_showTab" group_name="bdMedal" title="Tab on profile page" property_type="value" value_type="boolean" value_group="member_view_tab" display_order="210">
+  <style_property property_name="bdMedal_showStatPair" group_name="bdMedal" title="Medal count on profile page" property_type="value" value_type="boolean" value_group="member_view" display_order="220">
+    <value>1</value>
+  </style_property>
+  <style_property property_name="bdMedal_showTab" group_name="bdMedal" title="Tab on profile page" property_type="value" value_type="boolean" value_group="member_view" display_order="210">
     <value>1</value>
   </style_property>
 </style_properties>

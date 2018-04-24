@@ -8,6 +8,13 @@
 <xf:macro template="bdmedal_member_view_macros" name="moderator_menu_actions" arg-user="{$user}"/>
 ]]></replace>
   </modification>
+  <modification type="public" template="member_macros" modification_key="bdmedal_member_view_stat_pair" description="Medal count on profile page." execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<!--[XF:stat_pairs:below_trophies]-->]]></find>
+    <replace><![CDATA[$0
+
+<xf:macro template="bdmedal_member_view_macros" name="stat_pair" arg-user="{$user}"/>
+]]></replace>
+  </modification>
   <modification type="public" template="member_view" modification_key="bdmedal_member_view_tabs" description="Tab on profile page." execution_order="10" enabled="1" action="preg_replace">
     <find><![CDATA[/<!--\[XF:(tabs|tab_panes):after_recent_content\]-->/]]></find>
     <replace><![CDATA[$0

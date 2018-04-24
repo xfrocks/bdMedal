@@ -30,6 +30,7 @@
   <phrase title="bdmedal_medal_entities" version_id="2000000" version_string="2.0.0"><![CDATA[Medals]]></phrase>
   <phrase title="bdmedal_medal_entity" version_id="2000000" version_string="2.0.0"><![CDATA[Medal]]></phrase>
   <phrase title="bdmedal_medals" version_id="2000000" version_string="2.0.0"><![CDATA[Medals]]></phrase>
+  <phrase title="bdmedal_medals_awarded_to_x" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[Medals awarded to {name}]]></phrase>
   <phrase title="bdmedal_message_user_info_tooltip" version_id="2000000" version_string="2.0.0"><![CDATA[{medal}]]></phrase>
   <phrase title="bdmedal_message_user_info_tooltip_with_date" version_id="2000000" version_string="2.0.0"><![CDATA[{medal}<br/>
 Awarded on {date}]]></phrase>
@@ -69,12 +70,14 @@ Awarded on {date}]]></phrase>
   <phrase title="style_prop.bdMedal_messageImageSize" version_id="2000000" version_string="2.0.0"><![CDATA[Medal image size in message]]></phrase>
   <phrase title="style_prop.bdMedal_messageMax" version_id="2000000" version_string="2.0.0"><![CDATA[Max medals]]></phrase>
   <phrase title="style_prop.bdMedal_messageShowDate" version_id="2000000" version_string="2.0.0"><![CDATA[Show date]]></phrase>
+  <phrase title="style_prop.bdMedal_showStatPair" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[Medal count on profile page]]></phrase>
   <phrase title="style_prop.bdMedal_showTab" version_id="2000000" version_string="2.0.0"><![CDATA[Tab on profile page]]></phrase>
   <phrase title="style_prop_desc.bdMedal_medalListImage" version_id="2000000" version_string="2.0.0"><![CDATA[These are the styling rules for pages like help/medals, members/medals, etc.]]></phrase>
   <phrase title="style_prop_desc.bdMedal_messageImage" version_id="2000000" version_string="2.0.0"><![CDATA[These are the styling rules for message user info block.]]></phrase>
   <phrase title="style_prop_desc.bdMedal_messageImageSize" version_id="2000000" version_string="2.0.0"><![CDATA[The size of the medal images. By default, there is only 2 sizes available: L (original) and T (tiny, 22px). You can render medium and small images by configure the options. Be sure to double check here if medals do not show up in messages.]]></phrase>
   <phrase title="style_prop_desc.bdMedal_messageMax" version_id="2000000" version_string="2.0.0"><![CDATA[You can limit the maximum number of medals to display in messages here. If this property is set, only the latest X medals will show up.]]></phrase>
   <phrase title="style_prop_desc.bdMedal_messageShowDate" version_id="2000000" version_string="2.0.0"><![CDATA[Show the awarded date in tooltip for each medal.]]></phrase>
+  <phrase title="style_prop_desc.bdMedal_showStatPair" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[]]></phrase>
   <phrase title="style_prop_desc.bdMedal_showTab" version_id="2000000" version_string="2.0.0"><![CDATA[]]></phrase>
   <phrase title="style_prop_group.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[[bd] Medal]]></phrase>
   <phrase title="style_prop_group_desc.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[]]></phrase>

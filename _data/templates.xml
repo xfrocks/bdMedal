@@ -610,12 +610,26 @@
         {{ phrase('bdmedal_no_users_have_been_awarded_medal_x_yet', {'medal': $medal.name}) }}
     </div>
 </xf:if>]]></template>
-  <template type="public" title="bdmedal_member_view_macros" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:macro name="moderator_menu_actions" arg-user="!">
+  <template type="public" title="bdmedal_member_view_macros" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[<xf:macro name="moderator_menu_actions" arg-user="!">
     <xf:if is="$xf.visitor.canAwardMedal({$user})">
         <a href="{{ link('medals/award', null, {'username': $user.username}) }}" class="menu-linkRow"
            data-xf-click="overlay">
             {{ phrase('bdmedal_awarded_add') }}
         </a>
+    </xf:if>
+</xf:macro>
+
+<xf:macro name="stat_pair" arg-user="!">
+    <xf:if is="property('bdMedal_showStatPair')">
+        <dl class="pairs pairs--rows pairs--rows--centered fauxBlockLink">
+            <dt>{{ phrase('bdmedal_medal_entities') }}</dt>
+            <dd>
+                <a href="{{ link('members/medals', $user) }}" data-xf-click="overlay"
+                   class="fauxBlockLink-linkRow u-concealed">
+                    {$user.medal_count|number}
+                </a>
+            </dd>
+        </dl>
     </xf:if>
 </xf:macro>
 
@@ -690,7 +704,7 @@
 <xf:macro template="tools_rebuild" name="rebuild_job"
 	arg-header="{{ phrase('rebuild_user_caches') }}"
 	arg-job="Xfrocks\Medal:User" />]]></template>
-  <template type="public" title="bdmedal_user_medals" version_id="2000000" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('bdmedal_awarded_medals') }}: {$user.username}</xf:title>
+  <template type="public" title="bdmedal_user_medals" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[<xf:title>{{ phrase('bdmedal_medals_awarded_to_x', {'name': {$user.username}}) }}</xf:title>
 <xf:h1>{{ phrase('bdmedal_awarded_medals') }}</xf:h1>
 
 <xf:breadcrumb href="{{ link('help/medals') }}">{{ phrase('help_page_title.medals') }}</xf:breadcrumb>
