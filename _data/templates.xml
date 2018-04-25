@@ -579,7 +579,7 @@ ul.bdMedal_userMedals {
                                                      class="dataList-cell--min dataList-cell--image">
                                                 <xf:set var="$medalImageUrl" value="{$medal.getImageUrl('L')}"/>
                                                 <xf:if is="$medalImageUrl">
-                                                    <div style="background: url('{$medalImageUrl}') center center;background-size:cover;height:48px;width:48px;">
+                                                    <div style="background: url('{$medalImageUrl}') center center;background-size:cover;margin-left:10px;height:48px;width:48px;">
                                                         &nbsp;
                                                     </div>
                                                 </xf:if>
