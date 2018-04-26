@@ -2,13 +2,15 @@
     "legacy_addon_id": "bdMedal",
     "title": "[bd] Medal",
     "description": "",
-    "version_id": 2000010,
-    "version_string": "2.0.0 Alpha",
+    "version_id": 2000030,
+    "version_string": "2.0.0 Beta",
     "dev": "XFROCKS",
     "dev_url": "https://xfrocks.com",
     "faq_url": "",
-    "support_url": "",
-    "extra_urls": [],
+    "support_url": "https://github.com/xfrocks/bdMedal/issues",
+    "extra_urls": {
+        "GitHub": "https://github.com/xfrocks/bdMedal"
+    },
     "require": [],
     "icon": "icon.png"
 }
