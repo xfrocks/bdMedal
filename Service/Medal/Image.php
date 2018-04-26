@@ -24,6 +24,35 @@ class Image extends AbstractService
         $this->medal = $medal;
     }
 
+    public function generateMissingImages()
+    {
+        $medal = $this->medal;
+        if ($medal->is_svg) {
+            return;
+        }
+        $imagePathCodeL = $medal->getImageAbstractedPath('L');
+        if (empty($imagePathCodeL)) {
+            return;
+        }
+
+        $fs = $this->app->fs();
+        $tempFileCodeL = null;
+
+        foreach ($medal->getImageSizeMap() as $code => $size) {
+            $imagePath = $medal->getImageAbstractedPath($code);
+            if ($fs->has($imagePath)) {
+                continue;
+            }
+
+            if ($tempFileCodeL === null) {
+                $tempFileCodeL = File::copyAbstractedPathToTempFile($imagePathCodeL);
+            }
+
+            $tempFile = $this->loadImageFromFileAndResize($tempFileCodeL, $size);
+            File::copyFileToAbstractedPath($tempFile, $imagePath);
+        }
+    }
+
     public function getError()
     {
         return $this->error;
@@ -104,7 +133,6 @@ class Image extends AbstractService
         $medal->is_svg = $this->isSvg;
         $sizeMap = $medal->getImageSizeMap();
 
-        $imageManager = $this->app->imageManager();
         $outputFiles = ['l' => $this->fileName];
 
         foreach ($sizeMap as $code => $size) {
@@ -112,19 +140,10 @@ class Image extends AbstractService
                 continue;
             }
 
-            $image = $imageManager->imageFromFile($this->fileName);
-            if (!$image) {
-                continue;
-            }
-
-            // resize at double the configured pixels for better rendering on HiDPI displays
-            $image->resizeShortEdge($size * 2);
-
-            $newTempFile = File::getTempFile();
-            if ($newTempFile && $image->save($newTempFile)) {
+            $newTempFile = $this->loadImageFromFileAndResize($this->fileName, $size);
+            if (!empty($newTempFile)) {
                 $outputFiles[$code] = $newTempFile;
             }
-            unset($image);
         }
 
         if (count($outputFiles) != count($sizeMap)) {
@@ -178,5 +197,31 @@ class Image extends AbstractService
         }
 
         return true;
+    }
+
+    /**
+     * @param string $fileName
+     * @param int $size
+     * @return string|null
+     */
+    protected function loadImageFromFileAndResize($fileName, $size)
+    {
+        $imageManager = $this->app->imageManager();
+        $image = $imageManager->imageFromFile($fileName);
+        if (!$image) {
+            return null;
+        }
+
+        // resize at double the configured pixels for better rendering on HiDPI displays
+        $image->resizeShortEdge($size * 2);
+
+        $newTempFile = File::getTempFile();
+        $saved = false;
+        if (!empty($newTempFile)) {
+            $saved = $image->save($newTempFile);
+        }
+        unset($image);
+
+        return $saved ? $newTempFile : null;
     }
 }

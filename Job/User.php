@@ -10,12 +10,12 @@ class User extends AbstractRebuildJob
     {
         $db = $this->app->db();
 
-        return $db->fetchAllColumn($db->limit("
+        return $db->fetchAllColumn($db->limit('
             SELECT user_id
             FROM xf_user
             WHERE user_id > ?
             ORDER BY user_id
-        ", $batch), $start);
+        ', $batch), $start);
     }
 
     protected function rebuildById($id)
