@@ -1,9 +1,9 @@
 {
     "legacy_addon_id": "bdMedal",
     "title": "[bd] Medal",
-    "description": "",
-    "version_id": 2000030,
-    "version_string": "2.0.0 Beta",
+    "description": "Who doesn't love some shiny medal on their profile?",
+    "version_id": 2000070,
+    "version_string": "2.0.0",
     "dev": "XFROCKS",
     "dev_url": "https://xfrocks.com",
     "faq_url": "",
