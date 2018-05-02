@@ -1,50 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <templates>
-  <template type="public" title="_help_page_medals" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[<xf:if is="$medals is not empty">
+  <template type="public" title="_help_page_medals" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:if is="$medals is not empty">
     <div class="block">
         <div class="block-container">
-            <div class="block-body">
-                <xf:datalist data-xf-init="responsive-data-list">
-                    <xf:foreach loop="$categories" value="$category">
-                        <xf:if contentcheck="true">
-                            <xf:datarow rowclass="dataList-row--subSection dataList-row--noHover">
-                                <xf:cell colspan="3">
-                                    {$category.name}
-                                    <xf:if is="$category.description">
-                                        <div class="dataList-subRow">{$category.description|raw}</div>
-                                    </xf:if>
-                                </xf:cell>
-                            </xf:datarow>
+            <ol class="block-body">
+                <xf:foreach loop="$categories" value="$category">
+                    <xf:if contentcheck="true">
+                        <li class="block-row">
+                            <h2 class="block-textHeader">{$category.name}</h2>
+                            <xf:if is="$category.description">
+                                <div class="description">{$category.description|raw}</div>
+                            </xf:if>
+                        </li>
 
-                            <xf:contentcheck>
-                                <xf:foreach loop="$medals" value="$medal">
-                                    <xf:if is="$medal.category_id === $category.category_id">
-                                        <xf:datarow rowclass="dataList-row--noHover">
-                                            <xf:cell class="dataList-cell--min dataList-cell--image">
+                        <xf:contentcheck>
+                            <xf:foreach loop="$medals" value="$medal">
+                                <xf:if is="$medal.category_id === $category.category_id">
+                                    <li class="block-row block-row--separated">
+                                        <div class="contentRow">
+                                            <span class="contentRow-figure">
                                                 <xf:macro template="bdmedal_macros" name="image"
                                                           arg-medal="{$medal}"/>
-                                            </xf:cell>
-                                            <xf:cell>
-                                                {$medal.name}
-                                                <xf:if is="$medal.description">
-                                                    <div class="dataList-subRow">{$medal.description|raw}</div>
-                                                </xf:if>
-                                            </xf:cell>
-                                            <xf:cell class="dataList-cell--action">
-                                                <a href="{{ link('medals/users', null, {'medal_id': $medal.medal_id}) }}"
-                                                   data-xf-click="overlay">
-                                                    {{ phrase('bdmedal_awarded_count') }}:
-                                                    {$medal.user_count|number_short}
-                                                </a>
-                                            </xf:cell>
-                                        </xf:datarow>
-                                    </xf:if>
-                                </xf:foreach>
-                            </xf:contentcheck>
-                        </xf:if>
-                    </xf:foreach>
-                </xf:datalist>
-            </div>
+                                            </span>
+                                            <div class="contentRow-main">
+                                                <h3 class="contentRow-header">{$medal.name}</h3>
+                                                <div class="contentRow-minor">{$medal.description|raw}</div>
+
+                                                <div class="contentRow-extra">
+                                                    <a href="{{ link('medals/users', null, {'medal_id': $medal.medal_id}) }}"
+                                                       data-xf-click="overlay">
+                                                        {{ phrase('bdmedal_awarded_count') }}:
+                                                        {$medal.user_count|number_short}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </xf:if>
+                            </xf:foreach>
+                        </xf:contentcheck>
+                    </xf:if>
+                </xf:foreach>
+            </ol>
         </div>
     </div>
 
@@ -742,7 +739,7 @@ ul.bdMedal_userMedals {
 <xf:macro template="tools_rebuild" name="rebuild_job"
 	arg-header="{{ phrase('rebuild_user_caches') }}"
 	arg-job="Xfrocks\Medal:User" />]]></template>
-  <template type="public" title="bdmedal_user_medals" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[<xf:title>{{ phrase('bdmedal_medals_awarded_to_x', {'name': {$user.username}}) }}</xf:title>
+  <template type="public" title="bdmedal_user_medals" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('bdmedal_medals_awarded_to_x', {'name': {$user.username}}) }}</xf:title>
 <xf:h1>{{ phrase('bdmedal_awarded_medals') }}</xf:h1>
 
 <xf:breadcrumb href="{{ link('help/medals') }}">{{ phrase('help_page_title.medals') }}</xf:breadcrumb>
@@ -751,35 +748,26 @@ ul.bdMedal_userMedals {
 <xf:if is="$awardeds is not empty">
     <div class="block">
         <div class="block-container">
-            <div class="block-body">
-                <xf:datalist class="dataList--contained" data-xf-init="responsive-data-list">
-                    <xf:foreach loop="$awardeds" value="$awarded">
-                        <xf:set var="$medal" value="{$awarded.Medal}"/>
-                        <xf:datarow rowclass="dataList-row--noHover">
-                            <xf:cell class="dataList-cell--min dataList-cell--image">
+            <ol class="block-body">
+                <xf:foreach loop="$awardeds" value="$awarded">
+                    <xf:set var="$medal" value="{$awarded.Medal}"/>
+                    <li class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <span class="contentRow-figure">
                                 <xf:macro template="bdmedal_macros" name="image"
                                           arg-medal="{$medal}"/>
-                            </xf:cell>
-                            <xf:cell>
-                                {$medal.name}
-
-                                <xf:if contentcheck="true">
-                                    <div class="dataList-subRow">
-                                        <xf:contentcheck>
-                                            {{ ($awarded.award_reason ? $awarded.award_reason : $medal.description)|raw }}
-                                        </xf:contentcheck>
-                                    </div>
-                                </xf:if>
-                            </xf:cell>
-                            <xf:cell class="dataList-cell--min dataList-cell--alt">
-                                <span class="dataList-hint">
-                                    <xf:date time="{$awarded.award_date}"/>
-                                </span>
-                            </xf:cell>
-                        </xf:datarow>
-                    </xf:foreach>
-                </xf:datalist>
-            </div>
+                            </span>
+                            <div class="contentRow-main">
+                                <h3 class="contentRow-header">{$medal.name}</h3>
+                                <div class="contentRow-minor">
+                                    <xf:date time="{$awarded.award_date}"/>.
+                                    {{ ($awarded.award_reason ? $awarded.award_reason : $medal.description)|raw }}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </xf:foreach>
+            </ol>
 
             <xf:if contentcheck="true">
                 <div class="block-footer block-footer--split">
