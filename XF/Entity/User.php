@@ -61,10 +61,15 @@ class User extends XFCP_User
 
         if (is_array($this->xf_bdmedal_awarded_cached)) {
             $em = $this->em();
+            $shortNameAwarded = 'Xfrocks\Medal:Awarded';
             $shortNameCategory = 'Xfrocks\Medal:Category';
             $shortNameMedal = 'Xfrocks\Medal:Medal';
 
             foreach ($this->xf_bdmedal_awarded_cached as $array) {
+                if (empty($array['category_id'])) {
+                    \XF::logError(sprintf('category_id empty, #%d, array=%s', $this->user_id, json_encode($array)));
+                    continue;
+                }
                 /** @var Category $category */
                 $category = $em->findCached($shortNameCategory, $array['category_id']);
                 if (empty($category)) {
@@ -75,14 +80,25 @@ class User extends XFCP_User
                     ]);
                 }
 
+                if (empty($array['medal_id'])) {
+                    \XF::logError(sprintf('medal_id empty, #%d, array=%s', $this->user_id, json_encode($array)));
+                    continue;
+                }
                 /** @var Medal $medal */
                 $medal = $em->findCached($shortNameMedal, $array['medal_id']);
                 if (empty($medal)) {
                     $medal = $em->instantiateEntity($shortNameMedal, $array, ['Category' => $category]);
                 }
 
+                if (empty($array['awarded_id'])) {
+                    \XF::logError(sprintf('awarded_id empty, #%d, array=%s', $this->user_id, json_encode($array)));
+                    continue;
+                }
                 /** @var Awarded $awarded */
-                $awarded = $em->instantiateEntity('Xfrocks\Medal:Awarded', $array, ['Medal' => $medal]);
+                $awarded = $em->findCached($shortNameAwarded, $array['awarded_id']);
+                if (empty($awarded)) {
+                    $awarded = $em->instantiateEntity($shortNameAwarded, $array, ['Medal' => $medal]);
+                }
 
                 $awardeds[$awarded->awarded_id] = $awarded;
             }
