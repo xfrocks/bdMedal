@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style_properties>
+  <style_property property_name="bdMedal_medalImageM" group_name="bdMedal" title="Medal image size M" description="These are the styling rules for medium sized images." property_type="css" display_order="1050" css_components="extra">
+    <value>{
+    "extra": "height: xf-option('bdMedal_imageSizeM', px);\nwidth: xf-option('bdMedal_imageSizeM', px);"
+}</value>
+  </style_property>
+  <style_property property_name="bdMedal_medalImageS" group_name="bdMedal" title="Medal image size S" description="These are the styling rules for small sized images." property_type="css" display_order="1050" css_components="extra">
+    <value>{
+    "extra": "height: xf-option('bdMedal_imageSizeS', px);\nwidth: xf-option('bdMedal_imageSizeS', px);"
+}</value>
+  </style_property>
   <style_property property_name="bdMedal_medalListImage" group_name="bdMedal" title="Medal image in list" description="These are the styling rules for pages like help/medals, members/medals, etc." property_type="css" display_order="1010" css_components="extra">
     <value>{
     "extra": "height: 48px;\nwidth: 48px;"

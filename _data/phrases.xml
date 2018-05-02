@@ -65,6 +65,8 @@ Awarded on {date}]]></phrase>
   <phrase title="option_group.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[[bd] Medal]]></phrase>
   <phrase title="option_group_description.bdMedal" version_id="2000000" version_string="2.0.0"><![CDATA[]]></phrase>
   <phrase title="permission.general_bdMedal_award" version_id="2000000" version_string="2.0.0"><![CDATA[Award medals]]></phrase>
+  <phrase title="style_prop.bdMedal_medalImageM" version_id="2000170" version_string="2.0.1"><![CDATA[Medal image size M]]></phrase>
+  <phrase title="style_prop.bdMedal_medalImageS" version_id="2000170" version_string="2.0.1"><![CDATA[Medal image size S]]></phrase>
   <phrase title="style_prop.bdMedal_medalListImage" version_id="2000000" version_string="2.0.0"><![CDATA[Medal image in list]]></phrase>
   <phrase title="style_prop.bdMedal_messageImage" version_id="2000000" version_string="2.0.0"><![CDATA[Medal image in message]]></phrase>
   <phrase title="style_prop.bdMedal_messageImageSize" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[Medal image size]]></phrase>
@@ -76,6 +78,8 @@ Awarded on {date}]]></phrase>
   <phrase title="style_prop.bdMedal_widgetImageSize" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[Medal image size]]></phrase>
   <phrase title="style_prop.bdMedal_widgetMax" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[Max medals]]></phrase>
   <phrase title="style_prop.bdMedal_widgetShowDate" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[Show date]]></phrase>
+  <phrase title="style_prop_desc.bdMedal_medalImageM" version_id="2000170" version_string="2.0.1"><![CDATA[These are the styling rules for medium sized images.]]></phrase>
+  <phrase title="style_prop_desc.bdMedal_medalImageS" version_id="2000170" version_string="2.0.1"><![CDATA[These are the styling rules for small sized images.]]></phrase>
   <phrase title="style_prop_desc.bdMedal_medalListImage" version_id="2000000" version_string="2.0.0"><![CDATA[These are the styling rules for pages like help/medals, members/medals, etc.]]></phrase>
   <phrase title="style_prop_desc.bdMedal_messageImage" version_id="2000010" version_string="2.0.0 Alpha"><![CDATA[These are the styling rules for medals in message block.]]></phrase>
   <phrase title="style_prop_desc.bdMedal_messageImageSize" version_id="2000000" version_string="2.0.0"><![CDATA[The size of the medal images. By default, there is only 2 sizes available: L (original) and T (tiny, 22px). You can render medium and small images by configure the options. Be sure to double check here if medals do not show up in messages.]]></phrase>
