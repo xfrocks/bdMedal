@@ -1,10 +1,13 @@
 [bd] Medal System
 
-[INSTALLATION]
-1. Upload files and directories inside `upload` to your XenForo root
-2. Import the xml file via AdminCP
-3. Configure medals in AdminCP > Applications > Medal System
-4. Configure position to show medals (post) in AdminCP > Home > Options > Messages
-5. Import awards from Yet Another Awards System as needed: import users, threads, etc. as normal, there will be extra steps for you to import awards. Supports XenForo's core importer for vBulletin 3 and the unofficial vBulletin 4 importer.
+[FEATURE]
+1. Manage medals by categories, supports SVG images
+2. Award user in AdminCP or front-end
+3. Help page to see all medals
+4. Show off user medals in messages, profile page, etc.
 
-XenForo rocks!
+[INSTALLATION]
+1. Upload files and directories inside `upload` to XenForo's root directory. Select "Merge" for everything if you are asked
+2. Install the add-on via AdminCP
+3. Configure medals in AdminCP > Users > [bd] Medal
+4. Customize options and style properties as needed (this step is optional)

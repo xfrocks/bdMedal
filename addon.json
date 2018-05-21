@@ -2,15 +2,12 @@
     "legacy_addon_id": "bdMedal",
     "title": "[bd] Medal",
     "description": "Who doesn't love some shiny medal on their profile?",
-    "version_id": 2000270,
-    "version_string": "2.0.2",
+    "version_id": 2000370,
+    "version_string": "2.0.3",
     "dev": "XFROCKS",
-    "dev_url": "https://xfrocks.com",
+    "dev_url": "https://xfrocks.com/resources/37/",
     "faq_url": "",
-    "support_url": "https://github.com/xfrocks/bdMedal/issues",
-    "extra_urls": {
-        "GitHub": "https://github.com/xfrocks/bdMedal"
-    },
+    "support_url": "https://xfrocks.com/threads/630/",
     "require": [],
     "icon": "icon.png"
 }
