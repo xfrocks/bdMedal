@@ -11,3 +11,8 @@
 2. Install the add-on via AdminCP
 3. Configure medals in AdminCP > Users > [bd] Medal
 4. Customize options and style properties as needed (this step is optional)
+
+
+Demo sites:
+
+- https://www.wtf.com/help/medals/
