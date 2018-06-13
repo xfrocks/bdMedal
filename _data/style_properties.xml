@@ -29,10 +29,13 @@
   <style_property property_name="bdMedal_messageShowDate" group_name="bdMedal" title="Show date" description="Show the awarded date in tooltip for each medal in message block." property_type="value" value_type="boolean" value_group="message" display_order="10">
     <value>1</value>
   </style_property>
-  <style_property property_name="bdMedal_showStatPair" group_name="bdMedal" title="Medal count on profile page" property_type="value" value_type="boolean" value_group="member_view" display_order="220">
+  <style_property property_name="bdMedal_showStatPair" group_name="bdMedal" title="Medal count on profile page" property_type="value" value_type="boolean" value_group="template_modifications" display_order="220">
     <value>1</value>
   </style_property>
-  <style_property property_name="bdMedal_showTab" group_name="bdMedal" title="Tab on profile page" property_type="value" value_type="boolean" value_group="member_view" display_order="210">
+  <style_property property_name="bdMedal_showTab" group_name="bdMedal" title="Tab on profile page" property_type="value" value_type="boolean" value_group="template_modifications" display_order="210">
+    <value>1</value>
+  </style_property>
+  <style_property property_name="bdMedal_showVisitorMenuLink" group_name="bdMedal" title="Link in visitor menu" property_type="value" value_type="boolean" value_group="template_modifications" display_order="230">
     <value>1</value>
   </style_property>
   <style_property property_name="bdMedal_widgetImage" group_name="bdMedal" title="Medal image in widget" description="These are the styling rules for medals in widget." property_type="css" display_order="320" css_components="extra">

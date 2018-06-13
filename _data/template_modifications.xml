@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <template_modifications>
+  <modification type="public" template="account_visitor_menu" modification_key="bdmedal_account_visitor_menu" description="Link in visitor menu." execution_order="10" enabled="1" action="preg_replace">
+    <find><![CDATA[#(\n(\s+))<!--\[XF:account_links:bottom\]-->#
+]]></find>
+    <replace><![CDATA[$1<xf:if is="{{ property('bdMedal_showVisitorMenuLink') }}">
+$2	<li><a href="{{ link('members/medals', $xf.visitor) }}" class="menu-linkRow" data-xf-click="overlay">{{ phrase('bdmedal_medals') }}</a></li>
+$2</xf:if>
+$0]]></replace>
+  </modification>
   <modification type="public" template="member_macros" modification_key="bdmedal_member_view_moderator_menu_actions" description="Link in member's moderator menu." execution_order="10" enabled="1" action="str_replace">
     <find><![CDATA[<!--[XF:moderator_menu:bottom]-->
 ]]></find>
