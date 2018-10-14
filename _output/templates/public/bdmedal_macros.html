@@ -1,0 +1,49 @@
+<xf:macro name="image" arg-medal="!">
+    <xf:css src="bdmedal.less"/>
+    <xf:set var="$medalImageUrl" value="{$medal.getImageUrl('L')}"/>
+    <xf:if is="$medalImageUrl">
+        <div class="bdMedal_medalImage bdMedal_medalListImage"
+             style="background-image: url('{$medalImageUrl}');">
+            &nbsp;
+        </div>
+    </xf:if>
+</xf:macro>
+
+<xf:macro name="user_medals" arg-imageSize="!" arg-max="0" arg-showDate="{{ false }}" arg-user="!">
+    <xf:if is="$imageSize && $user.medal_count > 0">
+        <xf:css src="bdmedal.less"/>
+        <ul class="bdMedal_userMedals">
+            <xf:set var="$renderedCount" value="0"/>
+            <xf:foreach loop="$user.medal_awardeds" i="$i" value="$awarded">
+                <xf:if is="!$max || $renderedCount < $max">
+                    <xf:set var="$medal" value="{$awarded.Medal}"/>
+                    <xf:set var="$medalImageUrl" value="{$medal.getImageUrl($imageSize)}"/>
+                    <xf:if is="$medalImageUrl">
+                        <xf:set var="$medalTooltip">
+                            <xf:if is="$showDate">
+                                {{ phrase('bdmedal_medal_tooltip_with_date',
+                                {'medal': $medal.name, 'date': date($awarded.award_date)}) }}
+                                <xf:else/>
+                                {{ phrase('bdmedal_medal_tooltip_without_date', {'medal': $medal.name}) }}
+                            </xf:if>
+                        </xf:set>
+
+                        <li class="medal-{$medal.medal_id} i{$renderedCount}{{ $medal.is_svg ? ' is-svg' : ''}}">
+                            <div class="bdMedal_medalImage size-{$imageSize|to_lower}" style="background-image: url('{$medalImageUrl}');">
+                                <a href="{{ link('members/medals', $user) }}"
+                                   data-xf-click="overlay"
+                                   data-xf-init="tooltip" data-html="true"
+                                   title="{{ trim($medalTooltip)|raw|for_attr }}">
+                                    <img src="{$medalImageUrl}" alt="{$medal.name}"/>
+                                </a>
+                            </div>
+                        </li>
+
+
+                        <xf:set var="$renderedCount" value="{{ $renderedCount + 1 }}"/>
+                    </xf:if>
+                </xf:if>
+            </xf:foreach>
+        </ul>
+    </xf:if>
+</xf:macro>

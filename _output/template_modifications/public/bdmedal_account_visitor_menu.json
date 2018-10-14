@@ -1,0 +1,9 @@
+{
+    "template": "account_visitor_menu",
+    "description": "Link in visitor menu.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "#(\\n(\\s+))<!--\\[XF:account_links:bottom\\]-->#\n",
+    "replace": "$1<xf:if is=\"{{ property('bdMedal_showVisitorMenuLink') }}\">\n$2\t<li><a href=\"{{ link('members/medals', $xf.visitor) }}\" class=\"menu-linkRow\" data-xf-click=\"overlay\">{{ phrase('bdmedal_medals') }}</a></li>\n$2</xf:if>\n$0"
+}

@@ -1,0 +1,17 @@
+{
+    "group_name": "bdMedal",
+    "title": "Medal image size M",
+    "description": "These are the styling rules for medium sized images.",
+    "property_type": "css",
+    "css_components": [
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "extra": "height: xf-option('bdMedal_imageSizeM', px);\nwidth: xf-option('bdMedal_imageSizeM', px);"
+    },
+    "display_order": 1050
+}

@@ -1,0 +1,44 @@
+<xf:title>{$medal.name}</xf:title>
+
+<xf:breadcrumb href="{{ link('help/medals') }}">{{ phrase('help_page_title.medals') }}</xf:breadcrumb>
+
+<xf:if is="$awardeds is not empty">
+    <div class="block">
+        <div class="block-container">
+            <div class="block-body">
+                <xf:datalist class="dataList--contained" data-xf-init="responsive-data-list">
+                    <xf:foreach loop="$awardeds" value="$awarded">
+                        <xf:datarow rowclass="dataList-row--noHover">
+                            <xf:cell class="dataList-cell--min dataList-cell--image">
+                                <xf:avatar user="{$awarded.User}" size="s"/>
+                            </xf:cell>
+                            <xf:cell>
+                                <xf:username user="{$awarded.User}" notooltip="true" rich="true"/>
+                                <xf:if is="$awarded.award_reason">
+                                    <span class="dataList-hint">{$awarded.award_reason|raw}</span>
+                                </xf:if>
+                            </xf:cell>
+                            <xf:cell class="dataList-cell--min dataList-cell--alt">
+                                <span class="dataList-hint">
+                                    <xf:date time="{$awarded.award_date}"/>
+                                </span>
+                            </xf:cell>
+                        </xf:datarow>
+                    </xf:foreach>
+                </xf:datalist>
+                <div class="block-footer">
+                    <span class="block-footer-counter">{{ display_totals($awardeds, $total) }}</span>
+                </div>
+            </div>
+        </div>
+
+        <xf:pagenav page="{$page}" perpage="{$perPage}" total="{$total}"
+                    link="medals/users" params="{$pageNavParams}"
+                    wrapperclass="block-outer block-outer--after"/>
+    </div>
+
+    <xf:else/>
+    <div class="blockMessage">
+        {{ phrase('bdmedal_no_users_have_been_awarded_medal_x_yet', {'medal': $medal.name}) }}
+    </div>
+</xf:if>

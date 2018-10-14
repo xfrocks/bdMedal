@@ -1,0 +1,46 @@
+<xf:macro name="entity_edit" arg-entity="!">
+    <xf:set var="$awarded" value="{$entity}"/>
+
+    <xf:if is="$awarded.awarded_id > 0">
+        <xf:formrow label="{{ phrase('bdmedal_medal_entity') }}">
+            <a href="{{ link('medals/edit', $awarded.Medal) }}">{$awarded.Medal.name}</a>
+        </xf:formrow>
+        <xf:formrow label="{{ phrase('user_name') }}">
+            <a href="{{ link('users/edit', $awarded.User) }}">{$awarded.username}</a>
+        </xf:formrow>
+    </xf:if>
+</xf:macro>
+
+<xf:macro name="entity_list_filters" arg-filters="!">
+    <xf:if is="{$filters.medal}">
+        <xf:set var="$tmpPageNavParams" value="{$filters.pageNavParams}"/>
+        <xf:set var="$tmpPageNavParams.medal_id" value=""/>
+        <xf:breadcrumb href="{{ link('awarded-medals', null, $tmpPageNavParams) }}">
+            {$filters.medal.name}
+        </xf:breadcrumb>
+    </xf:if>
+    <xf:if is="{$filters.user}">
+        <xf:set var="$tmpPageNavParams" value="{$filters.pageNavParams}"/>
+        <xf:set var="$tmpPageNavParams.user_id" value=""/>
+        <xf:breadcrumb href="{{ link('awarded-medals', null, $tmpPageNavParams) }}">
+            {$filters.user.username}
+        </xf:breadcrumb>
+    </xf:if>
+</xf:macro>
+
+<xf:macro name="entity_list_item_popup" arg-entity="!">
+    <xf:set var="$awarded" value="{$entity}"/>
+
+    <div class="menu" data-menu="menu" aria-hidden="true"
+         data-menu-builder="dataList">
+        <div class="menu-content">
+            <a href="{{ link('awarded-medals', null, {'medal_id': $awarded.medal_id}) }}" class="menu-linkRow">
+                {{ phrase('bdmedal_filter_by_medal') }}: {$awarded.Medal.name}
+            </a>
+            <a href="{{ link('awarded-medals', null, {'user_id': $awarded.user_id}) }}" class="menu-linkRow">
+                {{ phrase('filter_by_user') }}: {$awarded.username}
+            </a>
+            <div class="js-menuBuilderTarget u-showMediumBlock"></div>
+        </div>
+    </div>
+</xf:macro>

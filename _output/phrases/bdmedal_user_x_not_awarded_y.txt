@@ -1,0 +1,1 @@
+User {username} hasn't been awarded medal {medal}.

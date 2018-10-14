@@ -1,0 +1,9 @@
+{
+    "template": "message_macros",
+    "description": "message_user_info_extra_(top|bottom)",
+    "execution_order": 4294967295,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "#((\\t+)<div class=\"message-userExtras\">\\s+<xf:contentcheck>)(.+?)(</xf:contentcheck>\\n\\2</div>)#s",
+    "replace": "$1\n\n<xf:if is=\"$xf.options.bdMedal_positionInPost === 'message_user_info_extra_top'\">\n\t<xf:macro template=\"bdmedal_message_macros\" name=\"user_medals\"\n\t\t\t  arg-position=\"message_user_info_extra_top\"\n\t\t\t  arg-user=\"{$user}\"/>\n</xf:if>\n\n$3\n<xf:if is=\"$xf.options.bdMedal_positionInPost === 'message_user_info_extra_bottom'\">\n\t<xf:macro template=\"bdmedal_message_macros\" name=\"user_medals\"\n\t\t\t  arg-position=\"message_user_info_extra_bottom\"\n\t\t\t  arg-user=\"{$user}\"/>\n</xf:if>\n\n\n$2$4"
+}

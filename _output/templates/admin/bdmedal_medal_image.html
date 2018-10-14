@@ -1,0 +1,69 @@
+<xf:title>{{ phrase('upload_image') }}: {$medal.name}</xf:title>
+<xf:h1>{{ phrase('bdmedal_image') }}</xf:h1>
+
+<xf:breadcrumb href="{{ link('medals/edit', $medal) }}">{$medal.name}</xf:breadcrumb>
+
+<xf:form action="{{ link('medals/image', $medal) }}" ajax="true" class="block">
+    <div class="block-container">
+
+        <div class="block-body">
+            <xf:set var="$imageUrlL" value="{$medal.getImageUrl('L')}"/>
+            <xf:if is="$imageUrlL">
+                <xf:uploadrow name="image_l" label="{{ phrase('bdmedal_image_l') }}">
+                    <xf:html>
+                        <br/>
+                        <xf:macro name="img" arg-imageUrl="{$imageUrlL}" arg-medal="{$medal}"/>
+                    </xf:html>
+                </xf:uploadrow>
+            </xf:if>
+
+            <xf:set var="$imageUrlM" value="{$medal.getImageUrl('M')}"/>
+            <xf:if is="$imageUrlM">
+                <xf:uploadrow name="image_m" label="{{ phrase('bdmedal_image_m') }}">
+                    <xf:html>
+                        <br/>
+                        <xf:macro name="img" arg-imageUrl="{$imageUrlM}" arg-medal="{$medal}"/>
+                    </xf:html>
+                </xf:uploadrow>
+            </xf:if>
+
+            <xf:set var="$imageUrlS" value="{$medal.getImageUrl('S')}"/>
+            <xf:if is="$imageUrlS">
+                <xf:uploadrow name="image_s" label="{{ phrase('bdmedal_image_s') }}">
+                    <xf:html>
+                        <br/>
+                        <xf:macro name="img" arg-imageUrl="{$imageUrlS}" arg-medal="{$medal}"/>
+                    </xf:html>
+                </xf:uploadrow>
+            </xf:if>
+        </div>
+
+        <xf:submitrow sticky="true" icon="save"/>
+    </div>
+</xf:form>
+
+<xf:macro name="entity_edit" arg-entity="!">
+    <xf:set var="$medal" value="{$entity}"/>
+    <xf:set var="$imageUrl" value="{$medal.getImageUrl('L')}"/>
+    <xf:if is="!$imageUrl">
+        <xf:uploadrow name="image" label="{{ phrase('upload_image') }}"/>
+
+        <xf:else/>
+        <xf:formrow label="{{ phrase('bdmedal_image') }}">
+            <xf:macro name="img" arg-imageUrl="{$imageUrl}" arg-medal="{$medal}" arg-renderLink="1"/>
+
+            <xf:checkbox label="">
+                <xf:option name="delete_image" value="1">{{ phrase('delete') }}</xf:option>
+            </xf:checkbox>
+        </xf:formrow>
+    </xf:if>
+</xf:macro>
+
+<xf:macro name="img" arg-imageUrl="!" arg-medal="!" arg-renderLink="">
+    <xf:set var="$img"><img src="{$imageUrl}" style="max-height: 100px"/></xf:set>
+    <xf:if is="!$renderLink || $medal.is_svg">
+        {$img|raw}
+        <xf:else/>
+        <a href="{{ link('medals/image', $medal) }}" data-xf-click="overlay">{$img|raw}</a>
+    </xf:if>
+</xf:macro>

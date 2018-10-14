@@ -1,0 +1,17 @@
+{
+    "group_name": "bdMedal",
+    "title": "Medal image in message",
+    "description": "These are the styling rules for medals in message block.",
+    "property_type": "css",
+    "css_components": [
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "extra": "height: 24px;\nwidth: 24px;"
+    },
+    "display_order": 20
+}

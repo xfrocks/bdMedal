@@ -1,0 +1,1 @@
+Normally, medal image will be store in 2 sizes: original size (code name "L") and tiny size (code name "T"). If you wish to use additional image size, you can specify the maximum width / height here. An image will be prepared with the code name "S" for all medals from now on (you will have to re-upload image for old medals). Leave it zero to disable this feature.

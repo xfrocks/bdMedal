@@ -1,0 +1,20 @@
+<xf:title>{{ phrase('filter_by_user') }}: {$medal.name}</xf:title>
+<xf:h1>{{ phrase('filter_by_user') }}</xf:h1>
+
+<xf:breadcrumb href="{{ link('medals/edit', $medal) }}">{$medal.name}</xf:breadcrumb>
+
+<xf:form action="{{ link('medals/filter-by-user', $medal) }}" ajax="true" class="block">
+    <div class="block-container">
+
+        <div class="block-body">
+            <xf:textboxrow data-autosubmit="true"
+                           data-single="true"
+                           data-xf-init="auto-complete"
+                           label="{{ phrase('user_name') }}"
+                           name="username"
+                           value="{$awarded.username}"/>
+        </div>
+
+        <xf:submitrow sticky="true" icon="filter"/>
+    </div>
+</xf:form>

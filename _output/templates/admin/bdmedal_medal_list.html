@@ -1,0 +1,100 @@
+<xf:title>{{ phrase('bdmedal_medal_entities') }}</xf:title>
+
+<xf:pageaction>
+    <xf:button href="{{ link('medals/add') }}" data-xf-click="overlay">{{ phrase('bdmedal_medal_add') }}</xf:button>
+    <xf:button href="{{ link('medal-categories/add') }}" data-xf-click="overlay">
+        {{ phrase('bdmedal_category_add') }}
+    </xf:button>
+
+    <xf:if is="$xf.visitor.hasAdminPermission('rebuildCache')">
+        <xf:button href="{{ link('medals/rebuild') }}">{{ phrase('rebuild_caches') }}</xf:button>
+    </xf:if>
+</xf:pageaction>
+
+<xf:if is="count($categories) > 0">
+    <div class="block">
+        <div class="block-outer">
+            <xf:macro template="filter_macros" name="quick_filter" arg-key="medals"
+                      arg-class="block-outer-opposite"/>
+        </div>
+        <div class="block-container">
+            <div class="block-body">
+                <xf:datalist>
+                    <xf:foreach loop="$categories" value="$category">
+                        <tbody class="dataList-rowGroup">
+                        <xf:datarow rowtype="subsection">
+                            <xf:cell href="{{ link('medal-categories/edit', $category) }}"
+                                     colspan="3" overlay="true">
+                                {{ $category.name }}
+                            </xf:cell>
+                            <xf:delete href="{{ link('medal-categories/delete', $category) }}"/>
+                        </xf:datarow>
+
+                        <xf:if contentcheck="true">
+                            <xf:contentcheck>
+                                <xf:foreach loop="$medals" value="$medal">
+                                    <xf:if is="$medal.category_id === $category.category_id">
+                                        <xf:datarow>
+                                            <xf:cell href="{{ link('medals/edit', $medal) }}"
+                                                     class="dataList-cell--min dataList-cell--image">
+                                                <xf:macro template="public:bdmedal_macros" name="image"
+                                                          arg-medal="{$medal}"/>
+                                            </xf:cell>
+                                            <xf:cell href="{{ link('medals/edit', $medal) }}">
+                                                {$medal.name}
+                                                <span class="dataList-hint">
+                                                    {{ phrase('display_order') }}: {$medal.display_order}
+                                                </span>
+                                                <xf:if is="$medal.description">
+                                                    <div class="dataList-subRow">{$medal.description|strip_tags}</div>
+                                                </xf:if>
+                                            </xf:cell>
+
+                                            <xf:action
+                                                    href="{{ link('awarded-medals', null, {'medal_id': $medal.medal_id}) }}"
+                                                    class="dataList-cell--responsiveMenuItem">{{
+                                                phrase('bdmedal_awarded_entities') }}
+                                            </xf:action>
+
+                                            <xf:popup label="&#8226;&#8226;&#8226;">
+                                                <div class="menu" data-menu="menu" aria-hidden="true"
+                                                     data-menu-builder="dataList">
+                                                    <div class="menu-content">
+                                                        <h3 class="menu-header">{$medal.name}</h3>
+                                                        <a href="{{ link('awarded-medals/add', null, {'medal_id': $medal.medal_id}) }}"
+                                                           class="menu-linkRow" data-xf-click="overlay">
+                                                            {{ phrase('bdmedal_awarded_add') }}
+                                                        </a>
+                                                        <a href="{{ link('medals/filter-by-user', $medal) }}"
+                                                           class="menu-linkRow" data-xf-click="overlay">
+                                                            {{ phrase('filter_by_user') }}
+                                                        </a>
+                                                        <a href="{{ link('medals/delete', $medal) }}"
+                                                           class="menu-linkRow" data-xf-click="overlay">
+                                                            {{ phrase('delete') }}
+                                                        </a>
+                                                        <div class="js-menuBuilderTarget u-showMediumBlock"></div>
+                                                    </div>
+                                                </div>
+                                            </xf:popup>
+                                        </xf:datarow>
+                                    </xf:if>
+                                </xf:foreach>
+                            </xf:contentcheck>
+
+                            <xf:else/>
+                            <xf:datarow rowclass="dataList-row--noHover dataList-row--note">
+                                <xf:cell colspan="4" class="dataList-cell--noSearch">
+                                    {{ phrase('bdmedal_no_medals_have_been_created_yet') }}
+                                </xf:cell>
+                            </xf:datarow>
+                        </xf:if>
+                        </tbody>
+                    </xf:foreach>
+                </xf:datalist>
+            </div>
+        </div>
+    </div>
+    <xf:else/>
+    <div class="blockMessage">{{ phrase('bdmedal_no_medals_have_been_created_yet') }}</div>
+</xf:if>

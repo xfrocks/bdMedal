@@ -1,0 +1,1 @@
+Enable this option to avoid awarding a medal to an user more than once. Any users who have been awarded the medal before will be silently ignored. You can control the default state of this option by editing the "Default to Avoid Duplicated" option in <a href="admin.php?options/groups/bdMedal/" target="_blank" tabindex="-1">[bd] Medal option page</a>.

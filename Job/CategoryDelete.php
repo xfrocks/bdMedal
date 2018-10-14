@@ -26,9 +26,6 @@ class CategoryDelete extends AbstractJob
 
         if ($this->data['total'] === null) {
             $this->data['total'] = $finder->total();
-            if (!$this->data['total']) {
-                return $this->complete();
-            }
         }
 
         $ids = $finder->pluckFrom('medal_id')->fetch(100);
@@ -41,9 +38,9 @@ class CategoryDelete extends AbstractJob
         foreach ($ids as $id) {
             $this->data['count']++;
 
-            /** @var Medal $medal */
+            /** @var Medal|null $medal */
             $medal = $this->app->find('Xfrocks\Medal:Medal', $id);
-            if (!$medal) {
+            if ($medal === null) {
                 continue;
             }
             $medal->delete(false);

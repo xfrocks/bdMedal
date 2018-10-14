@@ -27,9 +27,9 @@ class MedalSave extends AbstractRebuildJob
 
     protected function rebuildById($id)
     {
-        /** @var Awarded $awarded */
+        /** @var Awarded|null $awarded */
         $awarded = $this->app->em()->find('Xfrocks\Medal:Awarded', $id);
-        if ($awarded) {
+        if ($awarded !== null) {
             $awarded->rebuildUser();
         }
     }

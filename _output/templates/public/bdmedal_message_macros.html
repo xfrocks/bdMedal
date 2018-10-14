@@ -1,0 +1,14 @@
+<xf:macro name="user_medals" arg-position="manual" arg-user="!">
+    <xf:if contentcheck="true">
+        <xf:css src="bdmedal.less"/>
+        <div class="bdMedal_messageUserMedals position-{$position|for_attr}">
+            <xf:contentcheck>
+                <xf:macro template="bdmedal_macros" name="user_medals"
+                          arg-imageSize="{{ property('bdMedal_messageImageSize') }}"
+                          arg-max="{{ property('bdMedal_messageMax') }}"
+                          arg-showDate="{{ property('bdMedal_messageShowDate') }}"
+                          arg-user="{$user}"/>
+            </xf:contentcheck>
+        </div>
+    </xf:if>
+</xf:macro>

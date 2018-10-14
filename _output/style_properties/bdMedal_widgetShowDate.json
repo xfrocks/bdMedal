@@ -1,0 +1,13 @@
+{
+    "group_name": "bdMedal",
+    "title": "Show date",
+    "description": "Show the awarded date in tooltip for each medal in widget.",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "boolean",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "widget",
+    "property_value": 1,
+    "display_order": 310
+}

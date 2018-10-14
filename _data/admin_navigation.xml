@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<admin_navigation>
-  <admin_navigation_entry navigation_id="bdMedal" parent_navigation_id="users" display_order="9999" admin_permission_id="bdMedal" debug_only="0" hide_no_children="1"/>
-  <admin_navigation_entry navigation_id="bdMedalAwardeds" parent_navigation_id="bdMedal" display_order="9999" link="awarded-medals" admin_permission_id="bdMedal" debug_only="0" hide_no_children="0"/>
-  <admin_navigation_entry navigation_id="bdMedalCategories" parent_navigation_id="bdMedal" display_order="10" link="medal-categories" admin_permission_id="bdMedal" debug_only="0" hide_no_children="0"/>
-  <admin_navigation_entry navigation_id="bdMedalMedals" parent_navigation_id="bdMedal" display_order="20" link="medals" admin_permission_id="bdMedal" debug_only="0" hide_no_children="0"/>
-</admin_navigation>

@@ -1,0 +1,9 @@
+{
+    "parent_navigation_id": "users",
+    "display_order": 9999,
+    "link": "",
+    "icon": "",
+    "admin_permission_id": "bdMedal",
+    "debug_only": false,
+    "hide_no_children": true
+}

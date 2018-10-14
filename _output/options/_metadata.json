@@ -1,0 +1,17 @@
+{
+    "bdMedal_defaultAvoidDuplicated.json": {
+        "hash": "462c9e04f4e8ce2727a1a225d6fed65d"
+    },
+    "bdMedal_imageSizeM.json": {
+        "hash": "15c17c6f5747d05eb16452e344db2e56"
+    },
+    "bdMedal_imageSizeS.json": {
+        "hash": "feaa39cc04d745d16c95efa94fbad717"
+    },
+    "bdMedal_medalUsersPerPage.json": {
+        "hash": "a30306248d89a0f40593adad76bc625a"
+    },
+    "bdMedal_positionInPost.json": {
+        "hash": "19d63fca5d01134d14793e58be5adffd"
+    }
+}

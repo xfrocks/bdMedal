@@ -1,0 +1,13 @@
+{
+    "group_name": "bdMedal",
+    "title": "Medal image size",
+    "description": "The size of the medal images in widget.",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "string",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "widget",
+    "property_value": "L",
+    "display_order": 320
+}

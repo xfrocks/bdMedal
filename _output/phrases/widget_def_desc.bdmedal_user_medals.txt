@@ -1,0 +1,1 @@
+Displays the list of awarded medals to the specified {$context.user}. Must be used with "Member view: Sidebar" widget position or similar.

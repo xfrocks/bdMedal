@@ -1,0 +1,112 @@
+{
+    "admin/bdmedal_awarded.html": {
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "303f35a71202e298861be6e554642deb"
+    },
+    "admin/bdmedal_awarded_add.html": {
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "cc6d077839d776cc1ee2e183b7e8cf25"
+    },
+    "admin/bdmedal_entity_delete.html": {
+        "version_id": 2000470,
+        "version_string": "2.0.4",
+        "hash": "6b4d4c43aec7949d705dd36d09a53a34"
+    },
+    "admin/bdmedal_entity_edit.html": {
+        "version_id": 2000470,
+        "version_string": "2.0.4",
+        "hash": "de660feaf87fef084cf1385e462941e5"
+    },
+    "admin/bdmedal_entity_list.html": {
+        "version_id": 2000470,
+        "version_string": "2.0.4",
+        "hash": "fcaa4500cbacc33f1a01cf5a82bc0359"
+    },
+    "admin/bdmedal_medal_filter_by_user.html": {
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "18149cd58ca8f4e7618c918adb54d283"
+    },
+    "admin/bdmedal_medal_image.html": {
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "122b8fc785d4f7adceafe1c7270628b6"
+    },
+    "admin/bdmedal_medal_list.html": {
+        "version_id": 2000030,
+        "version_string": "2.0.0 Beta",
+        "hash": "ac86b471a3792f5f22536fe41a7197c0"
+    },
+    "admin/bdmedal_rebuild.html": {
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "91f47a064c45ec129aa88fe975647066"
+    },
+    "admin/widget_def_options_bdmedal_user_medals.html": {
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "public/_help_page_medals.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "9f1434f9e3a3502edf0993b91bd369a2"
+    },
+    "public/alert_medal_insert.html": {
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "dbd41f6f0dc067bace19f986ec3398a1"
+    },
+    "public/bdmedal.less": {
+        "version_id": 2000030,
+        "version_string": "2.0.0 Beta",
+        "hash": "b69f62bbe4e525c6b49253dd2564a01a"
+    },
+    "public/bdmedal_macros.html": {
+        "version_id": 2000030,
+        "version_string": "2.0.0 Beta",
+        "hash": "7868ef48c69db3c073fecb81c66bd60b"
+    },
+    "public/bdmedal_medal_award.html": {
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "99485d21b6a29e81c3de597f6c96fcd3"
+    },
+    "public/bdmedal_medal_users.html": {
+        "version_id": 2000030,
+        "version_string": "2.0.0 Beta",
+        "hash": "36b93c2d639925e82b3db8a1b2bf736a"
+    },
+    "public/bdmedal_member_view_macros.html": {
+        "version_id": 2000370,
+        "version_string": "2.0.3",
+        "hash": "6e33d163224e96db98d40a32804de728"
+    },
+    "public/bdmedal_message_macros.html": {
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "acea4f97a5f8484e695390469628593c"
+    },
+    "public/bdmedal_user_medals.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "7de92ed45931ee82bcc3e4ff3024c016"
+    },
+    "public/bdmedal_user_sort_medals.html": {
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "3f61e85de8628732cbc2da5b1b45ede5"
+    },
+    "public/bdmedal_widget_user_medals.html": {
+        "version_id": 2000030,
+        "version_string": "2.0.0 Beta",
+        "hash": "d8d3177c69bff49734de3d9ad82ec70e"
+    },
+    "public/news_feed_item_medal_insert.html": {
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "37b1ab722f66279859438d8697ed03ad"
+    }
+}

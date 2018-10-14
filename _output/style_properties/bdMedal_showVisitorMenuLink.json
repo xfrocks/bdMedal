@@ -1,0 +1,13 @@
+{
+    "group_name": "bdMedal",
+    "title": "Link in visitor menu",
+    "description": "",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "boolean",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "template_modifications",
+    "property_value": 1,
+    "display_order": 230
+}

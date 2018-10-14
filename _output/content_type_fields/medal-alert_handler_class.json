@@ -1,0 +1,5 @@
+{
+    "content_type": "medal",
+    "field_name": "alert_handler_class",
+    "field_value": "Xfrocks\\Medal\\Alert\\Awarded"
+}

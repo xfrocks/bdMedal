@@ -1,0 +1,1 @@
+You can limit the maximum number of medals to display in messages here. If this property is set, only the latest X medals will show up.

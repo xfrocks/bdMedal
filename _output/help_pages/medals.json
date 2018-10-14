@@ -1,0 +1,8 @@
+{
+    "page_name": "medals",
+    "display_order": 9999,
+    "callback_class": "Xfrocks\\Medal\\Help\\Medal",
+    "callback_method": "renderMedals",
+    "advanced_mode": true,
+    "active": true
+}

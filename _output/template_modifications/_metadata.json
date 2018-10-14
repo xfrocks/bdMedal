@@ -1,0 +1,20 @@
+{
+    "public/bdmedal_account_visitor_menu.json": {
+        "hash": "1f44b65503976fccbd47c2a0b566debc"
+    },
+    "public/bdmedal_member_view_moderator_menu_actions.json": {
+        "hash": "9158159c44447a88c258330c01c0b794"
+    },
+    "public/bdmedal_member_view_stat_pair.json": {
+        "hash": "04acdc72e28e6b7244307663f1a5509e"
+    },
+    "public/bdmedal_member_view_tabs.json": {
+        "hash": "c14a126e3fb7f073acb578cc7088fa75"
+    },
+    "public/bdmedal_message_user_info_extra_xxx.json": {
+        "hash": "f6dbd135ab539f060aae433a54e3ec30"
+    },
+    "public/message_user_info_text_x.json": {
+        "hash": "4e2491eb498fc667e10977f1acfcb997"
+    }
+}

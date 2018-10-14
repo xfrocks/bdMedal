@@ -1,0 +1,17 @@
+{
+    "group_name": "bdMedal",
+    "title": "Medal image in list",
+    "description": "These are the styling rules for pages like help/medals, members/medals, etc.",
+    "property_type": "css",
+    "css_components": [
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "extra": "height: 48px;\nwidth: 48px;"
+    },
+    "display_order": 1010
+}

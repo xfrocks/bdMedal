@@ -24,14 +24,14 @@ class Medal
             ->where('medal_id', $medal->medal_id)
             ->order('awarded_id', 'DESC');
 
-        /** @var Awarded $lastAwarded */
+        /** @var Awarded|null $lastAwarded */
         $lastAwarded = $finder->fetchOne();
         $count = $finder->total();
 
         $medal->user_count = $count;
-        $medal->last_award_date = $lastAwarded ? $lastAwarded->award_date : 0;
-        $medal->last_award_user_id = $lastAwarded ? $lastAwarded->user_id : 0;
-        $medal->last_award_username = $lastAwarded ? $lastAwarded->username : '';
+        $medal->last_award_date = $lastAwarded != null ? $lastAwarded->award_date : 0;
+        $medal->last_award_user_id = $lastAwarded != null ? $lastAwarded->user_id : 0;
+        $medal->last_award_username = $lastAwarded != null ? $lastAwarded->username : '';
         $medal->setOption('rebuild_users', false);
 
         $medal->save(false);

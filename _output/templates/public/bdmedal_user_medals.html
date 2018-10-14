@@ -1,0 +1,57 @@
+<xf:title>{{ phrase('bdmedal_medals_awarded_to_x', {'name': {$user.username}}) }}</xf:title>
+<xf:h1>{{ phrase('bdmedal_awarded_medals') }}</xf:h1>
+
+<xf:breadcrumb href="{{ link('help/medals') }}">{{ phrase('help_page_title.medals') }}</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('members', $user) }}">{$user.username}</xf:breadcrumb>
+
+<xf:if is="$awardeds is not empty">
+    <div class="block">
+        <div class="block-container">
+            <ol class="block-body">
+                <xf:foreach loop="$awardeds" value="$awarded">
+                    <xf:set var="$medal" value="{$awarded.Medal}"/>
+                    <li class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <span class="contentRow-figure">
+                                <xf:macro template="bdmedal_macros" name="image"
+                                          arg-medal="{$medal}"/>
+                            </span>
+                            <div class="contentRow-main">
+                                <h3 class="contentRow-header">{$medal.name}</h3>
+                                <div class="contentRow-minor">
+                                    <xf:date time="{$awarded.award_date}"/>.
+                                    {{ ($awarded.award_reason ? $awarded.award_reason : $medal.description)|raw }}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </xf:foreach>
+            </ol>
+
+            <xf:if contentcheck="true">
+                <div class="block-footer block-footer--split">
+                <span class="block-footer-controls">
+                    <xf:contentcheck>
+                        <xf:if is="{$xf.visitor.canAwardMedal($user)}">
+                            <xf:button href="{{ link('medals/award', null, {'username': $user.username}) }}"
+                                       data-xf-click="overlay">
+                                {{ phrase('bdmedal_awarded_add') }}
+                            </xf:button>
+                        </xf:if>
+                        <xf:if is="{$xf.visitor.canSortMedals($user)}">
+                            <xf:button href="{{ link('members/sort-medals', $user) }}" data-xf-click="overlay">
+                                {{ phrase('sort') }}
+                            </xf:button>
+                        </xf:if>
+                    </xf:contentcheck>
+				</span>
+                </div>
+            </xf:if>
+        </div>
+    </div>
+
+    <xf:else/>
+    <div class="blockMessage">
+        {{ phrase('bdmedal_no_medals_have_been_awarded_yet') }}
+    </div>
+</xf:if>

@@ -1,0 +1,1 @@
+{name} have been awarded with the medal {medal}.

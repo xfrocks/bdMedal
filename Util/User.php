@@ -23,8 +23,12 @@ class User
         $data = [];
         /** @var Awarded $awarded */
         foreach ($awardeds as $awarded) {
-            $data[] = $awarded->toArray(false) +
-                $awarded->Medal->toArray(false) +
+            /** @var array $awardedArray */
+            $awardedArray = $awarded->toArray(false);
+            /** @var array $medalArray */
+            $medalArray = $awarded->Medal->toArray(false);
+            $data[] = $awardedArray +
+                $medalArray +
                 [
                     'category_name' => $awarded->Medal->Category->name,
                     'category_description' => $awarded->Medal->Category->description,

@@ -1,0 +1,9 @@
+{
+    "template": "member_macros",
+    "description": "Link in member's moderator menu.",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<!--[XF:moderator_menu:bottom]-->\n",
+    "replace": "$0\n\n<xf:macro template=\"bdmedal_member_view_macros\" name=\"moderator_menu_actions\" arg-user=\"{$user}\"/>\n"
+}

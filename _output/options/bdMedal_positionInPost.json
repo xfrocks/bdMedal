@@ -1,0 +1,12 @@
+{
+    "edit_format": "select",
+    "edit_format_params": "manual = {{ phrase('bdmedal_position_manual') }}\nmessage_user_info_text_top = {{ phrase('bdmedal_position_message_user_info_text_top') }}\nmessage_user_info_text_bottom = {{ phrase('bdmedal_position_message_user_info_text_bottom') }}\nmessage_user_info_extra_top = {{ phrase('bdmedal_position_message_user_info_extra_top') }}\nmessage_user_info_extra_bottom = {{ phrase('bdmedal_position_message_user_info_extra_bottom') }}",
+    "data_type": "string",
+    "sub_options": [],
+    "validation_class": "",
+    "validation_method": "",
+    "default_value": "message_user_info_text_bottom",
+    "relations": {
+        "bdMedal": 1100
+    }
+}

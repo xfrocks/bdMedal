@@ -1,0 +1,1 @@
+Show the awarded date in tooltip for each medal in message block.

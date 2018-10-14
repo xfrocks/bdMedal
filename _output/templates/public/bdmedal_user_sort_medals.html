@@ -1,0 +1,28 @@
+<xf:title>{{ phrase('bdmedal_sort_medals') }}</xf:title>
+
+<xf:macro template="public:nestable_macros" name="setup"/>
+
+<xf:form action="{{ link('members/sort-medals', $user) }}" class="block" ajax="true">
+    <div class="block-container">
+        <div class="block-body">
+            <div class="nestable-container" data-xf-init="nestable" data-value-target=".js-sortData">
+                <ol class="nestable-list">
+                    <xf:foreach loop="{$awardeds}" value="$awarded" i="$i">
+                        <li class="nestable-item" data-id="{$awarded.awarded_id}">
+                            <div class="nestable-handle nestable-handle--full" aria-label="{{ phrase('drag_handle') }}">
+                                <i class="fa fa-bars" aria-hidden="true"></i>
+                            </div>
+                            <div class="nestable-content">
+                                {$awarded.Medal.name}
+                                ({{ date({$awarded.award_date}) }})
+                            </div>
+                        </li>
+                    </xf:foreach>
+                </ol>
+                <xf:hiddenval name="sort_data" value="" class="js-sortData"/>
+            </div>
+        </div>
+
+        <xf:submitrow icon="save" rowtype="simple"/>
+    </div>
+</xf:form>

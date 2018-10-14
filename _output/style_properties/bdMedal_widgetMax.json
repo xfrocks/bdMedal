@@ -1,0 +1,13 @@
+{
+    "group_name": "bdMedal",
+    "title": "Max medals",
+    "description": "The maximum number of medals to display in widget.",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "number",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "widget",
+    "property_value": "0",
+    "display_order": 330
+}

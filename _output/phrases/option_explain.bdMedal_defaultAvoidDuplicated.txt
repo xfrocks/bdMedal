@@ -1,0 +1,1 @@
+Enable this option to turn on "Avoid Duplicated" option in manual medal award form in AdminCP.

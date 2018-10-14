@@ -1,0 +1,40 @@
+<xf:title>{{ phrase('bdmedal_awarded_add') }}</xf:title>
+
+<xf:form action="{{ link('awarded-medals/add') }}" ajax="true" class="block">
+    <div class="block-container">
+
+        <div class="block-body">
+            <xf:selectrow label="{{ phrase('bdmedal_medal_entity') }}"
+                          name="medal_id"
+                          value="{$input.medal_id}">
+                <xf:foreach loop="$medalTree" key="$categoryName" value="$medals">
+                    <xf:optgroup label="{$categoryName}">
+                        <xf:options source="$medals"/>
+                    </xf:optgroup>
+                </xf:foreach>
+            </xf:selectrow>
+
+            <xf:tokeninputrow explain="{{ phrase('separate_names_with_comma') }}"
+                              href="{{ link_type('public', 'members/find') }}"
+                              label="{{ phrase('user_names') }}"
+                              name="usernames"
+                              value="{$input.usernames}"/>
+
+            <xf:textarearow hint="{{ phrase('you_may_use_html') }}"
+                            label="{{ phrase('bdmedal_award_reason') }}"
+                            name="award_reason"
+                            value="{$input.award_reason}"/>
+
+            <xf:checkboxrow label="">
+                <xf:option name="avoid_duplicated"
+                           value="1"
+                           selected="{$xf.options.bdMedal_defaultAvoidDuplicated}">
+                    {{ phrase('bdmedal_avoid_duplicated') }}
+                </xf:option>
+                <xf:explain>{{ phrase('bdmedal_avoid_duplicated_explain') }}</xf:explain>
+            </xf:checkboxrow>
+        </div>
+
+        <xf:submitrow sticky="true" icon="save"/>
+    </div>
+</xf:form>

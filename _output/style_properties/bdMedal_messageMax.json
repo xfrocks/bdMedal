@@ -1,0 +1,13 @@
+{
+    "group_name": "bdMedal",
+    "title": "Max medals",
+    "description": "You can limit the maximum number of medals to display in messages here. If this property is set, only the latest X medals will show up.",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "number",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "message",
+    "property_value": "0",
+    "display_order": 30
+}

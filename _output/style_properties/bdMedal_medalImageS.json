@@ -1,0 +1,17 @@
+{
+    "group_name": "bdMedal",
+    "title": "Medal image size S",
+    "description": "These are the styling rules for small sized images.",
+    "property_type": "css",
+    "css_components": [
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "extra": "height: xf-option('bdMedal_imageSizeS', px);\nwidth: xf-option('bdMedal_imageSizeS', px);"
+    },
+    "display_order": 1050
+}

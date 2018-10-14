@@ -1,0 +1,42 @@
+<xf:macro name="moderator_menu_actions" arg-user="!">
+    <xf:if is="$xf.visitor.canAwardMedal({$user})">
+        <a href="{{ link('medals/award', null, {'username': $user.username}) }}" class="menu-linkRow"
+           data-xf-click="overlay">
+            {{ phrase('bdmedal_awarded_add') }}
+        </a>
+    </xf:if>
+</xf:macro>
+
+<xf:macro name="stat_pair" arg-user="!">
+    <xf:if is="property('bdMedal_showStatPair')">
+        <dl class="pairs pairs--rows pairs--rows--centered fauxBlockLink">
+            <dt>{{ phrase('bdmedal_medal_entities') }}</dt>
+            <dd>
+                <a href="{{ link('members/medals', $user) }}" data-xf-click="overlay"
+                   class="fauxBlockLink-linkRow u-concealed">
+                    {$user.medal_count|number}
+                </a>
+            </dd>
+        </dl>
+    </xf:if>
+</xf:macro>
+
+<xf:macro name="tabs" arg-user="!">
+    <xf:if is="property('bdMedal_showTab') && $user.medal_count > 0">
+        <a class="tabs-tab"
+           href="{{ link('members/medals', $user) }}"
+           id="bdMedal"
+           rel="nofollow"
+           role="tab">
+            {{ phrase('bdmedal_awarded_medals') }}
+        </a>
+    </xf:if>
+</xf:macro>
+
+<xf:macro name="tab_panes" arg-user="!">
+    <xf:if is="property('bdMedal_showTab') && $user.medal_count > 0">
+        <li data-href="{{ link('members/medals', $user) }}" role="tabpanel" aria-labelledby="bdMedal">
+            <div class="blockMessage">{{ phrase('loading...') }}</div>
+        </li>
+    </xf:if>
+</xf:macro>

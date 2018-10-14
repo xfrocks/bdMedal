@@ -1,0 +1,1 @@
+The size of the medal images. By default, there is only 2 sizes available: L (original) and T (tiny, 22px). You can render medium and small images by configure the options. Be sure to double check here if medals do not show up in messages.

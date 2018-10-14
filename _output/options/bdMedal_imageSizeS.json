@@ -1,0 +1,12 @@
+{
+    "edit_format": "spinbox",
+    "edit_format_params": "",
+    "data_type": "unsigned_integer",
+    "sub_options": [],
+    "validation_class": "Xfrocks\\Medal\\Job\\MedalImage",
+    "validation_method": "enqueueSelf",
+    "default_value": "0",
+    "relations": {
+        "bdMedal": 20
+    }
+}

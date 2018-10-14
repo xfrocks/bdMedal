@@ -171,9 +171,12 @@ class Image extends AbstractService
 
         $imageInfo = filesize($fileName) ? @getimagesize($fileName) : false;
         if (!$imageInfo) {
+            $firstFive = '';
             $fh = fopen($fileName, 'r');
-            $firstFive = fread($fh, 5);
-            fclose($fh);
+            if ($fh !== false) {
+                $firstFive = fread($fh, 5);
+                fclose($fh);
+            }
             if ($firstFive === '<?xml' || $firstFive === '<svg ') {
                 $isSvg = true;
                 return true;

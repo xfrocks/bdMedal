@@ -1,0 +1,11 @@
+{
+    "route_type": "admin",
+    "route_prefix": "awarded-medals",
+    "sub_name": "",
+    "format": ":int<awarded_id>/",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Xfrocks\\Medal:Awarded",
+    "context": "bdMedalAwardeds",
+    "action_prefix": ""
+}

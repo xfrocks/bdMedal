@@ -1,0 +1,1 @@
+No users have been awarded medal {medal} yet.

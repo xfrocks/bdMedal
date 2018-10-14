@@ -1,0 +1,584 @@
+{
+    "admin_navigation.bdMedal.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "1d3200e525e261b2d062c392fa566001"
+    },
+    "admin_navigation.bdMedalAwardeds.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "66b17e3a09bd2866042ef19c28f83107"
+    },
+    "admin_navigation.bdMedalCategories.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "af1b98adf7f686b84cd0b443e022b7a0"
+    },
+    "admin_navigation.bdMedalMedals.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "941031fea78808381ceaeb1f0700ad6d"
+    },
+    "admin_permission.bdMedal.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "71fc962f3cd3f7b05dd870cdcbbd64f4"
+    },
+    "alert_opt_out.medal_insert.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "e1cf3cac86495e830dc9510b08016406"
+    },
+    "bdmedal_avoid_duplicated.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "157ddf4d054feade0099d3fc7c5e5e7e"
+    },
+    "bdmedal_avoid_duplicated_explain.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "8345d8ad1dfb6e5abc8b00f2df7166b4"
+    },
+    "bdmedal_award_reason.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "fffcb4d1e12c96b2f571f77ad25878b8"
+    },
+    "bdmedal_awarded_add.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "43ed59cdb5ad6ffca6b6ba93aac19074"
+    },
+    "bdmedal_awarded_count.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "a2bdb674dab6d06e67270af6c709a47f"
+    },
+    "bdmedal_awarded_edit.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "bbd307ea5994c7463e7f79ee23af7ffe"
+    },
+    "bdmedal_awarded_entities.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "6f4f89ff2d1bb02ebfd47ea06549513d"
+    },
+    "bdmedal_awarded_entity.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "a6bf890b44b3ca6a9e25a14c454790c7"
+    },
+    "bdmedal_awarded_medals.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "6f4f89ff2d1bb02ebfd47ea06549513d"
+    },
+    "bdmedal_category_add.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "3abd4b07c50c7ca7d319a77235f57c0d"
+    },
+    "bdmedal_category_edit.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "31b301a8c6227ac735de084114f6fc36"
+    },
+    "bdmedal_category_entities.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "af1b98adf7f686b84cd0b443e022b7a0"
+    },
+    "bdmedal_category_entity.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "3adbdb3ac060038aa0e6e6c138ef9873"
+    },
+    "bdmedal_description.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "b5a7adde1af5c87d7fd797b6245c2a39"
+    },
+    "bdmedal_filter_by_medal.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "6fe87036d7f48a0787b65e402122d189"
+    },
+    "bdmedal_image.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "be53a0541a6d36f6ecb879fa2c584b08"
+    },
+    "bdmedal_image_l.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "fa0c22294569f84fa11f1f0f6ff9c292"
+    },
+    "bdmedal_image_m.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "6f71cfaa60c5a7764b257c20327db506"
+    },
+    "bdmedal_image_s.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "92c6fb93bd8dfc53a11887fc4772b7b8"
+    },
+    "bdmedal_medal_add.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "97500f5dfc5b6f648268c42a1129e8da"
+    },
+    "bdmedal_medal_edit.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "b63b347347d7e8e1b153ccc791a4597c"
+    },
+    "bdmedal_medal_entities.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "941031fea78808381ceaeb1f0700ad6d"
+    },
+    "bdmedal_medal_entity.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "69d7f1d911f3e28651a2dee1a9c7fd34"
+    },
+    "bdmedal_medal_tooltip_with_date.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "f48cc11676a7c2c7a6514698434e4714"
+    },
+    "bdmedal_medal_tooltip_without_date.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "40d7c21ddb44f0b5d95fbd3eb26f16ac"
+    },
+    "bdmedal_medals.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "941031fea78808381ceaeb1f0700ad6d"
+    },
+    "bdmedal_medals_awarded_to_x.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "4e8199a6a29e9351f23c9267ea0e411e"
+    },
+    "bdmedal_name.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "49ee3087348e8d44e1feda1917443987"
+    },
+    "bdmedal_no_medals_have_been_awarded_yet.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "e798daf0cd87e0653df070309945629c"
+    },
+    "bdmedal_no_medals_have_been_created_yet.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "30d59f4dab0ec7f759117523c30ed857"
+    },
+    "bdmedal_no_users_have_been_awarded_medal_x_yet.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "7ff181f5690c3cb34cbaebbe660dfa31"
+    },
+    "bdmedal_parent_category.txt": {
+        "global_cache": false,
+        "version_id": 2000470,
+        "version_string": "2.0.4",
+        "hash": "52b68aaa602d202c340d9e4e9157f276"
+    },
+    "bdmedal_position_manual.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "f7d8c239b2853365bdff411788a9ecc6"
+    },
+    "bdmedal_position_message_user_info_extra_bottom.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "b0549a80a6c48043d9aa15a48013eebb"
+    },
+    "bdmedal_position_message_user_info_extra_top.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "4d0423d4dc3acd71d3ae0064bc98cf74"
+    },
+    "bdmedal_position_message_user_info_text_bottom.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "468b45800db931a11d24de057e8f3150"
+    },
+    "bdmedal_position_message_user_info_text_top.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "8065c065b247d4156e0fd6f711599169"
+    },
+    "bdmedal_sort_medals.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "0d5bb639f01125e03f0596611a687f44"
+    },
+    "bdmedal_user_x_not_awarded_y.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "17ab07d90731227dc76f94a9868371b1"
+    },
+    "bdmedal_x_awarded_medal_y.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "cedf0c03b7cabf31873412de2a37bf41"
+    },
+    "bdmedal_x_have_been_awarded_medal_y.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "a18aa3c123d437f71d30812aa05757ca"
+    },
+    "bdmedal_you_cannot_award_medal_to_yourself.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "5aae70c05b10e3cda840cd76174622a3"
+    },
+    "bdmedal_you_cannot_sort_others.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "437fc32d56f225e2fcb414c5ec29c0e3"
+    },
+    "bdmedal_you_have_been_awarded_medal_x.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "1219633540b93b6da95f7bee5ed4aafe"
+    },
+    "help_page_desc.medals.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "3eb198c5b91f298e8496a58592af6450"
+    },
+    "help_page_title.medals.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "941031fea78808381ceaeb1f0700ad6d"
+    },
+    "option.bdMedal_defaultAvoidDuplicated.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "c7139e2c13ed2b85791c9365bcf6e96e"
+    },
+    "option.bdMedal_imageSizeM.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "1dc7c54c33f2e445b25643542d659d1c"
+    },
+    "option.bdMedal_imageSizeS.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "a101cce7bd68c0e89d574b3da7240650"
+    },
+    "option.bdMedal_medalUsersPerPage.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "3bb71ad861ebda686481d2eaaff14f7a"
+    },
+    "option.bdMedal_positionInPost.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "076906bc49af2c6d07de556b55e564f8"
+    },
+    "option_explain.bdMedal_defaultAvoidDuplicated.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "f8fc99b752e97e42ff182c1b87e99d7d"
+    },
+    "option_explain.bdMedal_imageSizeM.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "d5ecf4b8b2907f4b2fc42d5fcef1932c"
+    },
+    "option_explain.bdMedal_imageSizeS.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "1351409932a8722432b305ad312d0bd1"
+    },
+    "option_explain.bdMedal_medalUsersPerPage.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "175db53b6689409a1866e5436d314eb4"
+    },
+    "option_explain.bdMedal_positionInPost.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "614a1acf0c9e5c5ce6e38cc39a1b38b8"
+    },
+    "option_group.bdMedal.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "1d3200e525e261b2d062c392fa566001"
+    },
+    "option_group_description.bdMedal.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "permission.general_bdMedal_award.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "76228fee7cc8d2993fe1a3800521f855"
+    },
+    "style_prop.bdMedal_medalImageM.txt": {
+        "global_cache": false,
+        "version_id": 2000170,
+        "version_string": "2.0.1",
+        "hash": "4654e13bec05b530323063da1b37d6f9"
+    },
+    "style_prop.bdMedal_medalImageS.txt": {
+        "global_cache": false,
+        "version_id": 2000170,
+        "version_string": "2.0.1",
+        "hash": "a4b532501c033bc90d4e496fd2558514"
+    },
+    "style_prop.bdMedal_medalListImage.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "624aca20854d7904df4f74f791dcbf2c"
+    },
+    "style_prop.bdMedal_messageImage.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "f47d26c94373ebc9a6cd75b84661aeb6"
+    },
+    "style_prop.bdMedal_messageImageSize.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "5df7b146073810620e9c8cae19e7038b"
+    },
+    "style_prop.bdMedal_messageMax.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "456822dedef6f837d290eaf33ffa49c7"
+    },
+    "style_prop.bdMedal_messageShowDate.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "8b3eefb87c2c3f87f2074f49e91acf4b"
+    },
+    "style_prop.bdMedal_showStatPair.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "89ef2f4d39442891a6a247e2b5d238c4"
+    },
+    "style_prop.bdMedal_showTab.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "6d08ae9ea3f1845ad9271e1c7b5a2f6b"
+    },
+    "style_prop.bdMedal_showVisitorMenuLink.txt": {
+        "global_cache": false,
+        "version_id": 2000370,
+        "version_string": "2.0.3",
+        "hash": "de10b7401ae93b43e3b0076dd0991d39"
+    },
+    "style_prop.bdMedal_widgetImage.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "8fdc2846cbb03ffdd313154864905c4a"
+    },
+    "style_prop.bdMedal_widgetImageSize.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "5df7b146073810620e9c8cae19e7038b"
+    },
+    "style_prop.bdMedal_widgetMax.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "456822dedef6f837d290eaf33ffa49c7"
+    },
+    "style_prop.bdMedal_widgetShowDate.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "8b3eefb87c2c3f87f2074f49e91acf4b"
+    },
+    "style_prop_desc.bdMedal_medalImageM.txt": {
+        "global_cache": false,
+        "version_id": 2000170,
+        "version_string": "2.0.1",
+        "hash": "d9ecbfbf9c39a658711c08a553690195"
+    },
+    "style_prop_desc.bdMedal_medalImageS.txt": {
+        "global_cache": false,
+        "version_id": 2000170,
+        "version_string": "2.0.1",
+        "hash": "0ac8e22d1196da362ef3483115347b53"
+    },
+    "style_prop_desc.bdMedal_medalListImage.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "d1573625aed165c30954389a118453d0"
+    },
+    "style_prop_desc.bdMedal_messageImage.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "03f2a1cb2e2a1acfd0bd5238ab19bb44"
+    },
+    "style_prop_desc.bdMedal_messageImageSize.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "9d608916b0f1646e0ec7c1fa8eb84408"
+    },
+    "style_prop_desc.bdMedal_messageMax.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "0c2fd3ba247a2851cad59f792fdf9951"
+    },
+    "style_prop_desc.bdMedal_messageShowDate.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "6b5e03bf545ece22009ef6f35c2b860d"
+    },
+    "style_prop_desc.bdMedal_showStatPair.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "style_prop_desc.bdMedal_showTab.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "style_prop_desc.bdMedal_showVisitorMenuLink.txt": {
+        "global_cache": false,
+        "version_id": 2000370,
+        "version_string": "2.0.3",
+        "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "style_prop_desc.bdMedal_widgetImage.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "f3988f8db7e5ca606acd7fbe2464278c"
+    },
+    "style_prop_desc.bdMedal_widgetImageSize.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "87b6cd62adadbd22606877e8b0f20eb7"
+    },
+    "style_prop_desc.bdMedal_widgetMax.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "46e8c440142c58e32b4ad3dd287c0864"
+    },
+    "style_prop_desc.bdMedal_widgetShowDate.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "0aa598d4f087596a0d23909f48517129"
+    },
+    "style_prop_group.bdMedal.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "1d3200e525e261b2d062c392fa566001"
+    },
+    "style_prop_group_desc.bdMedal.txt": {
+        "global_cache": false,
+        "version_id": 2000000,
+        "version_string": "2.0.0",
+        "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "widget_def.bdmedal_user_medals.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "a9bd36e2183b49bd5d6d8863ced2fbc5"
+    },
+    "widget_def_desc.bdmedal_user_medals.txt": {
+        "global_cache": false,
+        "version_id": 2000010,
+        "version_string": "2.0.0 Alpha",
+        "hash": "75528f7f57f628d20f2334f8b85b1b8a"
+    }
+}

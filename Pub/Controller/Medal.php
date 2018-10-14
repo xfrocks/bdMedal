@@ -28,8 +28,9 @@ class Medal extends AbstractController
 
             /** @var User $userRepo */
             $userRepo = $this->repository('XF:User');
+            /** @var \XF\Entity\User|null $user */
             $user = $userRepo->getUserByNameOrEmail($input['username']);
-            if (!$user) {
+            if ($user === null) {
                 return $this->error(\XF::phrase('requested_user_not_found'));
             }
             if (!$visitor->canAwardMedal($user, $error)) {
@@ -96,8 +97,9 @@ class Medal extends AbstractController
      */
     protected function assertMedalExists($medalId)
     {
-        /** @noinspection PhpIncompatibleReturnTypeInspection */
-        return $this->assertRecordExists('Xfrocks\Medal:Medal', $medalId);
+        /** @var EntityMedal $medal */
+        $medal = $this->assertRecordExists('Xfrocks\Medal:Medal', $medalId);
+        return $medal;
     }
 
     /**
@@ -105,7 +107,8 @@ class Medal extends AbstractController
      */
     protected function getMedalRepo()
     {
-        /** @noinspection PhpIncompatibleReturnTypeInspection */
-        return $this->repository('Xfrocks\Medal:Medal');
+        /** @var \Xfrocks\Medal\Repository\Medal $medalRepo */
+        $medalRepo = $this->repository('Xfrocks\Medal:Medal');
+        return $medalRepo;
     }
 }

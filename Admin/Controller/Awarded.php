@@ -3,7 +3,6 @@
 namespace Xfrocks\Medal\Admin\Controller;
 
 use XF\Entity\User;
-use XF\Mvc\Entity\Finder;
 use \Xfrocks\Medal\Entity\Awarded as EntityAwarded;
 use \Xfrocks\Medal\Entity\Medal;
 
@@ -22,10 +21,13 @@ class Awarded extends Entity
             /** @var Medal $medal */
             $medal = $this->assertRecordExists('Xfrocks\Medal:Medal', $input['medal_id']);
 
+            $users = [];
             $userNames = preg_split('#\s*,\s*#', $input['usernames'], -1, PREG_SPLIT_NO_EMPTY);
-            /** @var \XF\Repository\User $userRepo */
-            $userRepo = $this->repository('XF:User');
-            $users = $userRepo->getUsersByNames($userNames, $notFound);
+            if ($userNames !== false) {
+                /** @var \XF\Repository\User $userRepo */
+                $userRepo = $this->repository('XF:User');
+                $users = $userRepo->getUsersByNames($userNames, $notFound);
+            }
             if (count($users) === 0 || !empty($notFound)) {
                 return $this->error(\XF::phrase('requested_user_not_found'));
             }
@@ -81,15 +83,11 @@ class Awarded extends Entity
 
     public function getEntityLabel($entity)
     {
-        if (!$entity instanceof \Xfrocks\Medal\Entity\Awarded) {
-            return parent::getEntityLabel($entity);
-        }
-
         /** @var EntityAwarded $awarded */
         $awarded = $entity;
-        /** @var Medal $medal */
+        /** @var Medal|null $medal */
         $medal = $awarded->getExistingRelation('Medal');
-        if (!$medal) {
+        if ($medal === null) {
             return $awarded->awarded_id;
         }
 
@@ -107,34 +105,6 @@ class Awarded extends Entity
         }
 
         return $view;
-    }
-
-    protected function entityListData()
-    {
-        list($finder, $filters) = parent::entityListData();
-
-        /** @var Finder $finder */
-        $finder = $finder->order('award_date', 'DESC');
-
-        $medalId = $this->filter('medal_id', 'uint');
-        if ($medalId > 0) {
-            /** @var Medal $medal */
-            $medal = $this->assertRecordExists('Xfrocks\Medal:Medal', $medalId);
-            $finder->where('medal_id', $medal->medal_id);
-            $filters['medal'] = $medal;
-            $filters['pageNavParams']['medal_id'] = $medal->medal_id;
-        }
-
-        $userId = $this->filter('user_id', 'uint');
-        if ($userId > 0) {
-            /** @var User $user */
-            $user = $this->assertRecordExists('XF:User', $userId);
-            $finder->where('user_id', $user->user_id);
-            $filters['user'] = $user;
-            $filters['pageNavParams']['user_id'] = $user->user_id;
-        }
-
-        return [$finder, $filters];
     }
 
     protected function getPrefixForPhrases()

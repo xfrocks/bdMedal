@@ -1,0 +1,31 @@
+<xf:title>{{ phrase('bdmedal_awarded_add') }}</xf:title>
+
+<xf:breadcrumb href="{{ link('help/medals') }}">{{ phrase('help_page_title.medals') }}</xf:breadcrumb>
+
+<xf:form action="{{ link('medals/award') }}" class="block" ajax="true">
+    <div class="block-container">
+        <div class="block-body">
+            <xf:selectrow label="{{ phrase('bdmedal_medal_entity') }}"
+                          name="medal_id"
+                          value="{$input.medal_id}">
+                <xf:foreach loop="$medalTree" key="$categoryName" value="$medals">
+                    <xf:optgroup label="{$categoryName}">
+                        <xf:options source="$medals"/>
+                    </xf:optgroup>
+                </xf:foreach>
+            </xf:selectrow>
+
+            <xf:textboxrow data-single="true"
+                           data-xf-init="auto-complete"
+                           label="{{ phrase('user_name') }}"
+                           name="username"
+                           value="{$input.username}"/>
+
+            <xf:textarearow label="{{ phrase('bdmedal_award_reason') }}"
+                            name="award_reason"
+                            value="{$input.award_reason}"/>
+        </div>
+
+        <xf:submitrow icon="save"/>
+    </div>
+</xf:form>

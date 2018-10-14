@@ -1,0 +1,31 @@
+<div class="contentRow-title">
+    <xf:if is="$user.user_id === $xf.visitor.user_id">
+        {{ phrase('bdmedal_you_have_been_awarded_medal_x', {
+            'medal': $content.Medal.name
+        }) }}
+        <xf:else/>
+        {{ phrase('bdmedal_x_have_been_awarded_medal_y', {
+            'name': username_link($user, false, {'defaultname': $newsFeed.username}),
+            'medal': $content.Medal.name
+        }) }}
+    </xf:if>
+</div>
+
+<xf:if contentcheck="true">
+    <div class="contentRow-snippet">
+        <xf:contentcheck>{$content.award_reason|raw}</xf:contentcheck>
+    </div>
+</xf:if>
+
+<xf:set var="$imageUrl" value="{$content.Medal.getImageUrl('L')}"/>
+<xf:if is="$imageUrl">
+    <ul class="listPlain listInline listInline--block">
+        <li>
+            <a href="{$link}"><img src="{$imageUrl}" alt="{$content.Medal.name}"/></a>
+        </li>
+    </ul>
+</xf:if>
+
+<div class="contentRow-minor">
+    <xf:date time="{$newsFeed.event_date}"/>
+</div>

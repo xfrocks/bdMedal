@@ -1,0 +1,11 @@
+<xf:if is="!$user">
+    {{ phrase('bdmedal_you_have_been_awarded_medal_x', {
+        'medal': $content.Medal.name
+    }) }}
+
+    <xf:else/>
+    {{ phrase('bdmedal_x_awarded_medal_y', {
+        'name': username_link($user, false, {'defaultname': $alert.username}),
+        'medal': $content.Medal.name
+    }) }}
+</xf:if>

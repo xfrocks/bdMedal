@@ -1,0 +1,11 @@
+{
+    "route_type": "admin",
+    "route_prefix": "medal-categories",
+    "sub_name": "",
+    "format": ":int<category_id>/",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Xfrocks\\Medal:Category",
+    "context": "bdMedalCategories",
+    "action_prefix": ""
+}

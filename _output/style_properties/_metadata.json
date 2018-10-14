@@ -1,0 +1,44 @@
+{
+    "bdMedal_medalImageM.json": {
+        "hash": "bc01a2555d3143d63b7f79ba623a1f6b"
+    },
+    "bdMedal_medalImageS.json": {
+        "hash": "cbc32fc55d079846181cc6d70a4ab635"
+    },
+    "bdMedal_medalListImage.json": {
+        "hash": "37357430eface8657d67fa9cd901c655"
+    },
+    "bdMedal_messageImage.json": {
+        "hash": "3d3ffefb7b5ee7688d50d6503b8a06b1"
+    },
+    "bdMedal_messageImageSize.json": {
+        "hash": "0fb75085881b742d864a270b00d346d2"
+    },
+    "bdMedal_messageMax.json": {
+        "hash": "bbae83c8def30aca58ea19498719c961"
+    },
+    "bdMedal_messageShowDate.json": {
+        "hash": "637d99da1d6120e256d1d85dd72467c1"
+    },
+    "bdMedal_showStatPair.json": {
+        "hash": "f4a798399a7265c39a34413e73773552"
+    },
+    "bdMedal_showTab.json": {
+        "hash": "20639011cd96013208379fb33db45e7a"
+    },
+    "bdMedal_showVisitorMenuLink.json": {
+        "hash": "cee7547f5b2b01dcf209b099761a4755"
+    },
+    "bdMedal_widgetImage.json": {
+        "hash": "04e1d3844c59debf1a7e8814300244f5"
+    },
+    "bdMedal_widgetImageSize.json": {
+        "hash": "2c460ca6c99b18540183dab69d30228e"
+    },
+    "bdMedal_widgetMax.json": {
+        "hash": "de1a8035ddb79149bd57c9bf3ac8ac62"
+    },
+    "bdMedal_widgetShowDate.json": {
+        "hash": "011d805d361fc9caca0e2b86981ad107"
+    }
+}

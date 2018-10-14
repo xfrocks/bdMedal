@@ -1,0 +1,23 @@
+<xf:if contentcheck="true">
+    <xf:css src="bdmedal.less"/>
+    <div class="block" {{ widget_data($widget) }}>
+        <div class="block-container">
+            <h3 class="block-minorHeader">
+                <a href="{{ link('members/medals', $user) }}">
+                    {$title}
+                </a>
+            </h3>
+            <div class="block-body">
+                <div class="block-row bdMedal_widgetUserMedals">
+                    <xf:contentcheck>
+                        <xf:macro template="bdmedal_macros" name="user_medals"
+                                  arg-imageSize="{{ property('bdMedal_widgetImageSize') }}"
+                                  arg-max="{{ property('bdMedal_widgetMax') }}"
+                                  arg-showDate="{{ property('bdMedal_widgetShowDate') }}"
+                                  arg-user="{$user}"/>
+                    </xf:contentcheck>
+                </div>
+            </div>
+        </div>
+    </div>
+</xf:if>
