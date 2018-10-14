@@ -11,6 +11,11 @@ class Category extends Entity
         return strip_tags($category->description);
     }
 
+    protected function getPerPage()
+    {
+        return 9999;
+    }
+
     protected function getPrefixForPhrases()
     {
         return 'bdmedal_category';

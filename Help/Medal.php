@@ -10,7 +10,7 @@ class Medal
     public static function renderMedals(Controller $controller, View &$response)
     {
         $categories = $controller->finder('Xfrocks\Medal:Category')
-            ->order('display_order')
+            ->order('lft')
             ->fetch();
         $response->setParam('categories', $categories);
 

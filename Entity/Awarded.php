@@ -18,8 +18,8 @@ use XF\Repository\UserAlert;
  * @property int adjusted_display_order
  *
  * RELATIONS
- * @property Medal Medal
- * @property User User
+ * @property \Xfrocks\Medal\Entity\Medal Medal
+ * @property \XF\Entity\User User
  */
 class Awarded extends Entity
 {

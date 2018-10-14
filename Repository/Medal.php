@@ -50,8 +50,8 @@ class Medal extends Repository
     public function getMedalTree()
     {
         $medals = $this->finder('Xfrocks\Medal:Medal')
-            ->order('Category.display_order', 'ASC')
-            ->order('display_order', 'ASC')
+            ->order('Category.lft')
+            ->order('display_order')
             ->with('Category', true)
             ->fetch();
 

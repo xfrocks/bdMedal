@@ -21,7 +21,7 @@ use XF\Util\File;
  * @property bool is_svg
  *
  * RELATIONS
- * @property Category Category
+ * @property \Xfrocks\Medal\Entity\Category Category
  */
 class Medal extends Entity
 {

@@ -54,6 +54,27 @@ class Setup extends AbstractSetup
         }
     }
 
+    public function upgrade2010000Step1()
+    {
+        $sm = $this->schemaManager();
+
+        $sm->alterTable('xf_bdmedal_category', function (Alter $table) {
+            $table->addColumn('parent_id', 'int')->unsigned()->setDefault(0);
+            $table->addColumn('lft', 'int')->unsigned()->setDefault(0);
+            $table->addColumn('rgt', 'int')->unsigned()->setDefault(0);
+            $table->addColumn('depth', 'int')->unsigned()->setDefault(0);
+            $table->addColumn('breadcrumb_data', 'blob')->nullable();
+        });
+
+        $entityType = 'Xfrocks\Medal:Category';
+        \XF::runOnce('rebuildTree-' . $entityType, function () use ($entityType) {
+            $config = ['titleField' => 'name'];
+            /** @var \XF\Service\RebuildNestedSet $service */
+            $service = \XF::app()->service('XF:RebuildNestedSet', $entityType, $config);
+            $service->rebuildNestedSetInfo();
+        });
+    }
+
     private function getTables()
     {
         $tables = [];
@@ -63,6 +84,10 @@ class Setup extends AbstractSetup
             $table->addColumn('name', 'varchar')->length(255);
             $table->addColumn('description', 'text')->nullable();
             $table->addColumn('display_order', 'int')->unsigned()->setDefault(0);
+            $table->addColumn('parent_id', 'int')->unsigned()->setDefault(0);
+            $table->addColumn('lft', 'int')->unsigned()->setDefault(0);
+            $table->addColumn('rgt', 'int')->unsigned()->setDefault(0);
+            $table->addColumn('depth', 'int')->unsigned()->setDefault(0);
         };
 
         $tables['xf_bdmedal_medal'] = function (Create $table) {

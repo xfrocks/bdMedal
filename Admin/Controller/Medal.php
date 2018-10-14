@@ -11,7 +11,7 @@ class Medal extends Entity
     public function actionIndex()
     {
         $categories = $this->finder('Xfrocks\Medal:Category')
-            ->order('display_order')
+            ->order('lft')
             ->fetch();
         $medals = $this->finder('Xfrocks\Medal:Medal')
             ->order('display_order')
